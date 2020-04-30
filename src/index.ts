@@ -8,6 +8,6 @@ import { handleOption } from './handler';
   if (process.argv.length > 2) {
     // Check Command Argument
   }
-  const response: Answers<string> = await prompts(questions);
-  await handleOption(response.option);
+  const { option, data } = await prompts(questions);
+  await handleOption(option, data);
 })();

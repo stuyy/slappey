@@ -11,6 +11,29 @@ export const questions: Array<PromptObject> = [
       { title: 'Delete', description: 'Delete a command or event', value: 'del' },
     ],
   },
+  {
+    type: (prev) => (prev === 'new' ? 'text' : null),
+    name: 'data',
+    message: 'Enter the name for your project',
+  },
+  {
+    type: (prev) => (prev === 'gen' ? 'select' : null),
+    name: 'data',
+    message: 'What would you like to generate?',
+    choices: [
+      { title: 'Command', value: 'command', description: 'Generate a command?' },
+      { title: 'Event', value: 'event', description: 'Generate an event?' },
+    ],
+  },
+  {
+    type: (prev) => (prev === 'del' ? 'select' : null),
+    name: 'data',
+    message: 'What would you like to delete?',
+    choices: [
+      { title: 'Command', value: 'command', description: 'Delete a command?' },
+      { title: 'Event', value: 'event', description: 'Delete an event?' },
+    ],
+  },
 ];
 
 export const newProject: Array<PromptObject> = [
@@ -48,15 +71,6 @@ export const getCredentials: Array<PromptObject> = [
 
 export const templateGenerate: Array<PromptObject> = [
   {
-    type: 'select',
-    name: 'type',
-    message: 'What would you like to do?',
-    choices: [
-      { title: 'Command', value: 'command', description: 'Generate a command?' },
-      { title: 'Event', value: 'event', description: 'Generate an event?' },
-    ],
-  },
-  {
     type: 'text',
     name: 'name',
     message: 'Enter the name of the command',
@@ -65,5 +79,60 @@ export const templateGenerate: Array<PromptObject> = [
     type: 'text',
     name: 'category',
     message: 'Enter the category of the command',
+  },
+];
+
+export const eventGenerate: Array<PromptObject> = [
+  {
+    type: 'autocompleteMultiselect',
+    name: 'events',
+    message: 'Which event(s) would you like to generate?',
+    choices: [
+      { title: 'CHANNEL_CREATE', value: 'channelCreate' },
+      { title: 'CHANNEL_PINS_UPDATE', value: 'channelPinsUpdate' },
+      { title: 'CHANNEL_UPDATE', value: 'channelUpdate' },
+      { title: 'DEBUG', value: 'debug' },
+      { title: 'EMOJI_CREATE', value: 'emojiCreate' },
+      { title: 'EMOJI_DELETE', value: 'emojiDelete' },
+      { title: 'EMOJI_UPDATE', value: 'emojiUpdate' },
+      { title: 'ERROR', value: 'error' },
+      { title: 'GUILD_BAN_ADD', value: 'guildBanAdd' },
+      { title: 'GUILD_BAN_REMOVE', value: 'guildBanRemove' },
+      { title: 'GUILD_CREATE', value: 'guildCreate' },
+      { title: 'GUILD_DELETE', value: 'guildDelete' },
+      { title: 'GUILD_INTEGRATIONS_UPDATE', value: 'guildIntegrationsUpdate' },
+      { title: 'GUILD_MEMBER_ADD', value: 'guildMemberAdd' },
+      { title: 'GUILD_MEMBER_REMOVE', value: 'guildMemberRemove' },
+      { title: 'GUILD_MEMBERS_CHUNK', value: 'guildMembersChunk' },
+      { title: 'GUILD_MEMBERS_SPEAKING', value: 'guildMembersSpeaking' },
+      { title: 'GUILD_MEMBER_UPDATE', value: 'guildMemberUpdate' },
+      { title: 'GUILD_UNAVAILABLE', value: 'guildUnavailable' },
+      { title: 'GUILD_UPDATE', value: 'guildUpdate' },
+      { title: 'MESSAGE', value: 'message' },
+      { title: 'MESSAGE_DELETE', value: 'messageDelete' },
+      { title: 'MESSAGE_DELETE_BULK', value: 'messageDeleteBulk' },
+      { title: 'MESSAGE_REACTION_ADD', value: 'messageReactionAdd' },
+      { title: 'MESSAGE_REACTION_REMOVE', value: 'messageReactionRemove' },
+      { title: 'MESSAGE_REACTION_REMOVE_ALL', value: 'messageReactionRemoveAll' },
+      { title: 'MESSAGE_REACTION_REMOVE_EMOJI', value: 'messageReactionRemoveEmoji' },
+      { title: 'MESSAGE_UPDATE', value: 'messageUpdate' },
+      { title: 'PRESENCE_UPDATE', value: 'presenceUpdate' },
+      { title: 'RATE_LIMIT', value: 'rateLimit' },
+      { title: 'READY', value: 'ready' },
+      { title: 'ROLE_CREATE', value: 'roleCreate' },
+      { title: 'ROLE_DELETE', value: 'roleDelete' },
+      { title: 'ROLE_UPDATE', value: 'roleUpdate' },
+      { title: 'SHARD_DISCONNECT', value: 'shardDisconnect' },
+      { title: 'SHARD_ERROR', value: 'shardError' },
+      { title: 'SHARD_READY', value: 'shardReady' },
+      { title: 'SHARD_RECONNECTING', value: 'shardReconnecting' },
+      { title: 'SHARD_RESUME', value: 'shardResume' },
+      { title: 'TYPING_START', value: 'typingStart' },
+      { title: 'USER_UPDATE', value: 'userUpdate' },
+      { title: 'VOICE_STATE_UPDATE', value: 'voiceStateUpdate' },
+      { title: 'WARN', value: 'warn' },
+      { title: 'WEBHOOK_UPDATE', value: 'webhookUpdate' },
+    ],
+    hint: '- Space to select. Return to submit',
   },
 ];

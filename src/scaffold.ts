@@ -16,7 +16,6 @@ import {
   generateTemplates,
   modifyPackageJSONFile,
   createProjectDetailsFile,
-  getFile,
   createCommandFile,
 } from './filesystem';
 import { getEnvTemplate, getMainFile, getCommandTemplate } from './templates/templates';
@@ -58,7 +57,6 @@ export async function generateNewCommand(commandName: string, category: string) 
   const slappeyFile = path.join(dir, 'slappey.json');
   const fileExists = await exists(slappeyFile);
   if (fileExists) {
-    const { name, version } = await getFile(slappeyFile);
     // Check if commands folder has category.
     // if it exists, create it in there, if not, create folder.
     const commandsPath = path.join(dir, 'src', 'commands', category);
@@ -74,4 +72,22 @@ export async function generateNewCommand(commandName: string, category: string) 
     await createDirectory(commandsPath);
     return createCommandFile(commandsPath, commandName, category);
   } throw new Error('Not a slappey project');
+}
+
+async function generateNewEvent(events: Array<string>) {
+  // const slappeyFile = path.join(dir, 'slappey.json');
+  // const fileExists = await exists(slappeyFile);
+  // if (fileExists) {
+  //   const eventPath = path.join(dir, 'src', 'events', category);
+  //   const categoryExists = await exists(eventPath);
+  //   if (categoryExists) {
+  //     const eventFile = `${capitalize(eventPath)}Event.js`;
+  //     const eventFilePath = path.join(eventPath, eventFile);
+  //     const commandExists = await exists(eventFilePath);
+  //     if (!commandExists) return createCommandFile(eventPath, eventName, category);
+  //     throw new Error(`Event already exists. ${eventFile}`);
+  //   }
+  //   await createDirectory(eventPath);
+  //   return createCommandFile(eventPath, eventName, category);
+  // } throw new Error('Not a slappey project');
 }

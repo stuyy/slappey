@@ -88,6 +88,10 @@ export async function createCommandFile(filePath: string, name: string, category
   return fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category));
 }
 
+export async function createEventFile(filePath: string, name: string, category: string) {
+
+}
+
 export async function modifyPackageJSONFile(filePath: string) {
   const buffer = await fs.readFile(path.join(filePath, 'package.json'), 'utf8');
   const json = JSON.parse(buffer);

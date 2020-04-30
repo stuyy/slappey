@@ -1,4 +1,4 @@
-import { capitalize } from "../utils";
+import { capitalize } from '../utils';
 
 export function getEnvTemplate(token: string, prefix: string) {
   return `BOT_TOKEN=${token}\nPREFIX=${prefix}`;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
 import prompts from 'prompts';
 import { Constants, Type } from './constants';
@@ -5,25 +6,31 @@ import {
   createNewProject,
   generateNewCommand,
 } from './scaffold';
-import { versionSelect, templateGenerate, newProject } from './questions';
+import {
+  versionSelect,
+  templateGenerate,
+  newProject,
+  eventGenerate,
+} from './questions';
 
 export async function checkArguments(arg: string) {
 
 }
 
-export async function handleOption(option: string) {
+export async function handleOption(option: string, data: string) {
   if (option === Constants.NEW) {
-    const { name } = await prompts(newProject);
     const { version } = await prompts(versionSelect);
-    await createNewProject(name, version);
+    await createNewProject(data, version);
   } else if (option === Constants.GEN) {
-    const { type, name, category } = await prompts(templateGenerate);
-    if (type === Type.COMMAND) {
+    if (data === Type.COMMAND) {
+      const { name, category } = await prompts(templateGenerate);
       await generateNewCommand(name, category)
         .then(() => console.log('Created.'))
         .catch((err) => console.log(err));
-    } else if (type === Type.EVENT) {
+    } else if (data === Type.EVENT) {
       //
+      const { events } = await prompts(eventGenerate);
+      console.log(events);
     }
   } else if (option === Constants.DEL) {
     //
