@@ -3,7 +3,7 @@
 Slap together a Discord Bot project in seconds!
 
 
-![slappey-logo](https://i.imgur.com/A5GHp0J.png)
+![slappey-logo](https://i.imgur.com/q4ofLAo.png)
 
 
 ## What is Slappey?
