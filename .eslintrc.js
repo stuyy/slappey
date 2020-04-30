@@ -25,6 +25,7 @@ module.exports = {
     "no-plusplus": "off",
     "import/extensions": "off",
     "no-console": ["error"],
-    'import/prefer-default-export': "off",
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
   },
 };
