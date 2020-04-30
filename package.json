@@ -1,6 +1,6 @@
 {
   "name": "slappey",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./lib/index.js",
   "bin": {
@@ -25,9 +25,12 @@
   "homepage": "https://github.com/ansonfoong/slappey#readme",
   "dependencies": {
     "@types/prompts": "^2.0.6",
+    "chalk": "^4.0.0",
     "prompts": "^2.3.2"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/node": "^13.13.4",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "eslint": "^6.8.0",

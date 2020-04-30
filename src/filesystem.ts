@@ -88,8 +88,8 @@ export async function createCommandFile(filePath: string, name: string, category
   return fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category));
 }
 
-export async function createEventFile(filePath: string, name: string, category: string) {
-
+export async function createEventFile(filePath: string, template: string) {
+  return fs.writeFile(filePath, template);
 }
 
 export async function modifyPackageJSONFile(filePath: string) {
@@ -115,6 +115,7 @@ export async function initializeNPM(filePath: string) {
 export async function installDiscordJS(filePath: string, version?: string) {
   return execSync(`npm i discord.js@${version}`, {
     cwd: filePath,
+    stdio: 'inherit',
   });
 }
 

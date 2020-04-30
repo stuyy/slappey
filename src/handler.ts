@@ -5,6 +5,7 @@ import { Constants, Type } from './constants';
 import {
   createNewProject,
   generateNewCommand,
+  generateNewEvent,
 } from './scaffold';
 import {
   versionSelect,
@@ -12,10 +13,6 @@ import {
   newProject,
   eventGenerate,
 } from './questions';
-
-export async function checkArguments(arg: string) {
-
-}
 
 export async function handleOption(option: string, data: string) {
   if (option === Constants.NEW) {
@@ -31,6 +28,7 @@ export async function handleOption(option: string, data: string) {
       //
       const { events } = await prompts(eventGenerate);
       console.log(events);
+      await generateNewEvent(events);
     }
   } else if (option === Constants.DEL) {
     //

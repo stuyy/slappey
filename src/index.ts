@@ -5,9 +5,13 @@ import { questions } from './questions';
 import { handleOption } from './handler';
 
 (async () => {
-  if (process.argv.length > 2) {
+  const args = process.argv.slice(2);
+  if (args.length === 2) {
     // Check Command Argument
+    const [option, data] = args;
+    await handleOption(option, data);
+  } else {
+    const { option, data } = await prompts(questions);
+    await handleOption(option, data);
   }
-  const { option, data } = await prompts(questions);
-  await handleOption(option, data);
 })();
