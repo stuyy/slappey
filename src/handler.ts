@@ -10,7 +10,6 @@ import {
 import {
   versionSelect,
   templateGenerate,
-  newProject,
   eventGenerate,
 } from './questions';
 

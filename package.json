@@ -1,6 +1,6 @@
 {
   "name": "slappey",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "./lib/index.js",
   "bin": {
@@ -24,8 +24,10 @@
   },
   "homepage": "https://github.com/ansonfoong/slappey#readme",
   "dependencies": {
+    "@types/log-symbols": "^3.0.0",
     "@types/prompts": "^2.0.6",
     "chalk": "^4.0.0",
+    "log-symbols": "^4.0.0",
     "prompts": "^2.3.2"
   },
   "devDependencies": {

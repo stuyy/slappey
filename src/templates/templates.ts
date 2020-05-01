@@ -39,6 +39,9 @@ async function registerCommands(client, dir = '') {
       if (Command.prototype instanceof BaseCommand) {
         const cmd = new Command();
         client.commands.set(cmd.name, cmd);
+        cmd.aliases.forEach((alias) => {
+          client.commands.set(alias, cmd);
+        });
       }
     }
   }
@@ -123,15 +126,15 @@ module.exports = class MessageEvent extends BaseEvent {
 export function getTestCommand() {
   return `const BaseCommand = require('../../utils/structures/BaseCommand');
 
-  module.exports = class TestCommand extends BaseCommand {
-    constructor() {
-      super('test', 'testing', []);
-    }
-  
-    run(client, message, args) {
-      message.channel.send('Test command works');
-    }
-  }`;
+module.exports = class TestCommand extends BaseCommand {
+  constructor() {
+    super('test', 'testing', []);
+  }
+
+  run(client, message, args) {
+    message.channel.send('Test command works');
+  }
+}`;
 }
 
 export function getCommandTemplate(name: string, category: string) {

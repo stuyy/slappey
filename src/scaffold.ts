@@ -3,6 +3,7 @@
 import prompts from 'prompts';
 import path from 'path';
 import chalk from 'chalk';
+import symbols from 'log-symbols';
 import {
   getCredentials,
 } from './questions';
@@ -37,14 +38,14 @@ export async function createNewProject(name: string, version: string) {
     // Create the project.
     try {
       await createDirectory(filePath);
-      console.log(chalk.yellow.bgGreenBright.bold(`Generated ${filePath}`));
+      console.log(chalk.yellow.bold(`${symbols.success} Generated ${filePath}`));
       await createProjectDetailsFile(filePath, name, version);
       await initializeNPM(filePath);
-      console.log(chalk.yellow.bgGreenBright.bold('Initialized NPM'));
+      console.log(chalk.yellow.bold(`${symbols.success} Initialized NPM`));
       await installDiscordJS(filePath, version);
-      console.log(chalk.yellow.bgGreenBright.bold('Installing Discord.JS'));
+      console.log(chalk.yellow.bold(`${symbols.success} Installed Discord.JS`));
       await installDotenv(filePath);
-      console.log(chalk.yellow.bgGreenBright.bold('Installing dotenv'));
+      console.log(chalk.yellow.bold(`${symbols.success} Installed dotenv.`));
       await createSrcFolder(filePath);
       // Need to copy templates.
       const { token, prefix } = await prompts(getCredentials);
@@ -54,7 +55,8 @@ export async function createNewProject(name: string, version: string) {
       await createMainFile(filePath, main);
       await generateTemplates(filePath);
       await modifyPackageJSONFile(filePath);
-      console.log(chalk.yellow.bgGreenBright.bold('Success'));
+      console.log(chalk.yellow.bold(`${symbols.success} Success!`));
+      console.log(`Type ${chalk.red.bold(`cd ./${name} and then npm run start`)}`);
       return true;
     } catch (err) {
       await deleteDirectory(filePath);
@@ -87,7 +89,6 @@ export async function generateNewCommand(commandName: string, category: string) 
 }
 
 export async function generateNewEvent(eventsArray: Array<string>) {
-
   const eventsPath = path.join(dir, 'src', 'events');
   try {
     const fileExists = await exists(eventsPath);
@@ -102,25 +103,4 @@ export async function generateNewEvent(eventsArray: Array<string>) {
   } catch (err) {
     console.log(err);
   }
-  // const keys = Object.keys(eventTemplates);
-  // keys.forEach((key: string) => {
-  //   if (events.some((value: string) => value === key)) {
-  //     console.log(events[key]);
-  //   }
-  // });
-  // const slappeyFile = path.join(dir, 'slappey.json');
-  // const fileExists = await exists(slappeyFile);
-  // if (fileExists) {
-  //   const eventPath = path.join(dir, 'src', 'events', category);
-  //   const categoryExists = await exists(eventPath);
-  //   if (categoryExists) {
-  //     const eventFile = `${capitalize(eventPath)}Event.js`;
-  //     const eventFilePath = path.join(eventPath, eventFile);
-  //     const commandExists = await exists(eventFilePath);
-  //     if (!commandExists) return createCommandFile(eventPath, eventName, category);
-  //     throw new Error(`Event already exists. ${eventFile}`);
-  //   }
-  //   await createDirectory(eventPath);
-  //   return createCommandFile(eventPath, eventName, category);
-  // } throw new Error('Not a slappey project');
 }

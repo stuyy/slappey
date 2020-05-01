@@ -115,12 +115,13 @@ export async function initializeNPM(filePath: string) {
 export async function installDiscordJS(filePath: string, version?: string) {
   return execSync(`npm i discord.js@${version}`, {
     cwd: filePath,
-    stdio: 'inherit',
+    stdio: 'ignore',
   });
 }
 
 export async function installDotenv(filePath: string) {
   return execSync('npm i dotenv', {
     cwd: filePath,
+    stdio: 'ignore',
   });
 }
