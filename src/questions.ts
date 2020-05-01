@@ -8,7 +8,6 @@ export const questions: Array<PromptObject> = [
     choices: [
       { title: 'New', description: 'Create a new Discord.JS Project', value: 'new' },
       { title: 'Generate', description: 'Generate a command or event', value: 'gen' },
-      { title: 'Delete', description: 'Delete a command or event', value: 'del' },
     ],
   },
   {
@@ -23,15 +22,6 @@ export const questions: Array<PromptObject> = [
     choices: [
       { title: 'Command', value: 'command', description: 'Generate a command?' },
       { title: 'Event', value: 'event', description: 'Generate an event?' },
-    ],
-  },
-  {
-    type: (prev) => (prev === 'del' ? 'select' : null),
-    name: 'data',
-    message: 'What would you like to delete?',
-    choices: [
-      { title: 'Command', value: 'command', description: 'Delete a command?' },
-      { title: 'Event', value: 'event', description: 'Delete an event?' },
     ],
   },
 ];
