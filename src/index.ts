@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable import/no-unresolved */
-import prompts, { Answers } from 'prompts';
+import prompts from 'prompts';
 import { questions } from './questions';
 import { handleOption } from './handler';
 

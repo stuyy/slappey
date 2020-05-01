@@ -24,12 +24,9 @@ export async function handleOption(option: string, data: string) {
         .then(() => console.log('Created.'))
         .catch((err) => console.log(err));
     } else if (data === Type.EVENT) {
-      //
       const { events } = await prompts(eventGenerate);
       console.log(events);
       await generateNewEvent(events);
     }
-  } else if (option === Constants.DEL) {
-    //
   }
 }

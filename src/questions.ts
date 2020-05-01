@@ -1,4 +1,5 @@
 import { PromptObject } from 'prompts';
+import symbols from 'log-symbols';
 
 export const questions: Array<PromptObject> = [
   {
@@ -14,6 +15,7 @@ export const questions: Array<PromptObject> = [
     type: (prev) => (prev === 'new' ? 'text' : null),
     name: 'data',
     message: 'Enter the name for your project',
+    validate: (value: string) => (value.length === 0 ? `${symbols.warning} Project name cannot be empty!` : true),
   },
   {
     type: (prev) => (prev === 'gen' ? 'select' : null),
@@ -23,14 +25,6 @@ export const questions: Array<PromptObject> = [
       { title: 'Command', value: 'command', description: 'Generate a command?' },
       { title: 'Event', value: 'event', description: 'Generate an event?' },
     ],
-  },
-];
-
-export const newProject: Array<PromptObject> = [
-  {
-    type: 'text',
-    name: 'name',
-    message: 'Enter a name for your project',
   },
 ];
 
@@ -48,14 +42,16 @@ export const versionSelect: Array<PromptObject> = [
 
 export const getCredentials: Array<PromptObject> = [
   {
-    type: 'invisible',
+    type: 'password',
     name: 'token',
     message: 'Enter your token',
+    validate: (value: string) => (value.length === 0 ? 'Cannot be empty' : true),
   },
   {
     type: 'text',
     name: 'prefix',
     message: 'Enter your prefix',
+    validate: (value: string) => (value.length === 0 ? 'Cannot be empty' : true),
   },
 ];
 
