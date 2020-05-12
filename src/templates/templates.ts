@@ -111,6 +111,7 @@ module.exports = class MessageEvent extends BaseEvent {
   
   async run(client, message) {
     if (message.author.bot) return;
+    if (!message.content.startsWith(client.prefix)) return;
     const [cmdName, ...cmdArgs] = message.content
       .slice(client.prefix.length)
       .trim()
