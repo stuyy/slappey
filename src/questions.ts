@@ -40,6 +40,18 @@ export const versionSelect: Array<PromptObject> = [
   },
 ];
 
+export const updateChoice: Array<PromptObject> = [
+  {
+    type: 'select',
+    name: 'update',
+    message: 'Yes or No',
+    choices: [
+      { title: 'Yes', value: 'yes' },
+      { title: 'No', value: 'no' },
+    ],
+  },
+];
+
 export const getCredentials: Array<PromptObject> = [
   {
     type: 'password',

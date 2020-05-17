@@ -1,7 +1,7 @@
 import { capitalize } from '../utils';
 
 export function getEnvTemplate(token: string, prefix: string) {
-  return `BOT_TOKEN=${token}\nPREFIX=${prefix}`;
+  return `DISCORD_BOT_TOKEN=${token}\nDISCORD_BOT_PREFIX=${prefix}`;
 }
 
 export function getMainFile() {
@@ -13,10 +13,10 @@ const client = new Client();
 (async () => {
   client.commands = new Map();
   client.events = new Map();
-  client.prefix = process.env.PREFIX;
+  client.prefix = process.env.DISCORD_BOT_PREFIX;
   await registerCommands(client, '../commands');
   await registerEvents(client, '../events');
-  await client.login(process.env.BOT_TOKEN);
+  await client.login(process.env.DISCORD_BOT_TOKEN);
 })();\n
 `;
 }

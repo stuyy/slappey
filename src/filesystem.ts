@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import { execSync } from 'child_process';
 import path from 'path';
+import prompts from 'prompts';
 import {
   getRegistryFile,
   getBaseCommand,
@@ -10,6 +11,9 @@ import {
   getTestCommand,
   getCommandTemplate,
 } from './templates/templates';
+import {
+  updateChoice,
+} from './questions';
 import { capitalize } from './utils';
 
 const dir = process.cwd();
