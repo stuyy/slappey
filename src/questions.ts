@@ -75,6 +75,7 @@ export const eventGenerate: Array<PromptObject> = [
     message: 'Which event(s) would you like to generate?',
     choices: [
       { title: 'CHANNEL_CREATE', value: 'channelCreate' },
+      { title: 'CHANNEL_DELETE', value: 'channelDelete' },
       { title: 'CHANNEL_PINS_UPDATE', value: 'channelPinsUpdate' },
       { title: 'CHANNEL_UPDATE', value: 'channelUpdate' },
       { title: 'DEBUG', value: 'debug' },
