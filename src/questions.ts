@@ -40,6 +40,18 @@ export const versionSelect: Array<PromptObject> = [
   },
 ];
 
+export const languageSelect: Array<PromptObject> = [
+  {
+    type: 'select',
+    name: 'language',
+    message: 'Select a language',
+    choices: [
+      { title: 'TypeScript', value: 'ts' },
+      { title: 'JavaScript', value: 'js' },
+    ],
+  },
+];
+
 export const updateChoice: Array<PromptObject> = [
   {
     type: 'select',

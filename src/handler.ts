@@ -11,12 +11,13 @@ import {
   versionSelect,
   templateGenerate,
   eventGenerate,
+  languageSelect,
 } from './questions';
 
 export async function handleOption(option: string, data: string) {
   if (option === Constants.NEW) {
-    const { version } = await prompts(versionSelect);
-    await createNewProject(data, version);
+    const { language } = await prompts(languageSelect);
+    await createNewProject(data, language);
   } else if (option === Constants.GEN) {
     if (data === Type.COMMAND) {
       const { name, category } = await prompts(templateGenerate);

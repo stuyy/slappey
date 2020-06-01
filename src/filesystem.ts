@@ -1,7 +1,6 @@
 import { promises as fs } from 'fs';
 import { execSync } from 'child_process';
 import path from 'path';
-import prompts from 'prompts';
 import {
   getRegistryFile,
   getBaseCommand,
@@ -10,10 +9,14 @@ import {
   getMessageEvent,
   getTestCommand,
   getCommandTemplate,
+  getRegistryFileTS,
+  getBaseCommandTS,
+  getBaseEventTS,
+  getReadyEventTS,
+  getMessageEventTS,
+  getTestCommandTS,
+  getTypescriptBotFile,
 } from './templates/templates';
-import {
-  updateChoice,
-} from './questions';
 import { capitalize } from './utils';
 
 const dir = process.cwd();
@@ -59,8 +62,8 @@ export async function createEnvironmentFile(filePath: string, data: string) {
   }
 }
 
-export async function createMainFile(filePath: string, data: string) {
-  return fs.writeFile(path.join(filePath, 'src', 'bot.js'), data);
+export async function createMainFile(filePath: string, data: string, language: string) {
+  return language === 'ts' ? fs.writeFile(path.join(filePath, 'src', 'bot.ts'), data) : fs.writeFile(path.join(filePath, 'src', 'bot.js'), data);
 }
 
 export async function getFile(filePath: string) {
@@ -88,6 +91,27 @@ export async function generateTemplates(filePath: string) {
   }
 }
 
+export async function generateTSTemplates(filePath: string) {
+  try {
+    await fs.mkdir(path.join(filePath, 'src', 'utils'));
+    await fs.mkdir(path.join(filePath, 'src', 'utils', 'structures'));
+    await fs.writeFile(path.join(filePath, 'src', 'utils', 'registry.ts'), getRegistryFileTS());
+    await fs.writeFile(path.join(filePath, 'src', 'utils', 'structures', 'BaseCommand.ts'), getBaseCommandTS());
+    await fs.writeFile(path.join(filePath, 'src', 'utils', 'structures', 'BaseEvent.ts'), getBaseEventTS());
+    await fs.mkdir(path.join(filePath, 'src', 'commands'));
+    await fs.mkdir(path.join(filePath, 'src', 'events'));
+    await fs.mkdir(path.join(filePath, 'src', 'client'));
+    await fs.writeFile(path.join(filePath, 'src', 'client', 'client.ts'), getTypescriptBotFile());
+    await fs.mkdir(path.join(filePath, 'src', 'commands', 'test'));
+    await fs.mkdir(path.join(filePath, 'src', 'events', 'ready'));
+    await fs.mkdir(path.join(filePath, 'src', 'events', 'message'));
+    await fs.writeFile(path.join(filePath, 'src', 'events', 'ready', 'ready.ts'), getReadyEventTS());
+    await fs.writeFile(path.join(filePath, 'src', 'events', 'message', 'message.ts'), getMessageEventTS());
+    await fs.writeFile(path.join(filePath, 'src', 'commands', 'test', 'TestCommand.ts'), getTestCommandTS());
+  } catch (err) {
+    throw new Error(err);
+  }
+}
 export async function createCommandFile(filePath: string, name: string, category: string) {
   return fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category));
 }
@@ -116,8 +140,8 @@ export async function initializeNPM(filePath: string) {
   });
 }
 
-export async function installDiscordJS(filePath: string, version?: string) {
-  return execSync(`npm i discord.js@${version}`, {
+export async function installDiscordJS(filePath: string) {
+  return execSync('npm i discord.js@latest', {
     cwd: filePath,
     stdio: 'ignore',
   });

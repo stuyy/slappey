@@ -18,12 +18,12 @@ import {
   createMainFile,
   deleteDirectory,
   generateTemplates,
+  generateTSTemplates,
   modifyPackageJSONFile,
-  createProjectDetailsFile,
   createCommandFile,
   createEventFile,
 } from './filesystem';
-import { getEnvTemplate, getMainFile } from './templates/templates';
+import { getEnvTemplate, getMainFile, getMainFileTS } from './templates/templates';
 import { capitalize } from './utils';
 import eventTemplates from './templates/events';
 
@@ -31,18 +31,17 @@ const events: any = eventTemplates;
 
 const dir = process.cwd();
 
-export async function createNewProject(name: string, version: string) {
+export async function createNewProject(name: string, language: string) {
   const filePath = path.join(dir, name);
   const dirExists = await exists(filePath);
   if (!dirExists) {
-    // Create the project.
     try {
       await createDirectory(filePath);
       console.log(chalk.yellow.bold(`${symbols.success} Generated ${filePath}`));
-      await createProjectDetailsFile(filePath, name, version);
+      // await createProjectDetailsFile(filePath, name);
       await initializeNPM(filePath);
       console.log(chalk.yellow.bold(`${symbols.success} Initialized NPM`));
-      await installDiscordJS(filePath, version);
+      await installDiscordJS(filePath);
       console.log(chalk.yellow.bold(`${symbols.success} Installed Discord.JS`));
       await installDotenv(filePath);
       console.log(chalk.yellow.bold(`${symbols.success} Installed dotenv.`));
@@ -51,9 +50,9 @@ export async function createNewProject(name: string, version: string) {
       const { token, prefix } = await prompts(getCredentials);
       const env = getEnvTemplate(token, prefix);
       await createEnvironmentFile(filePath, env);
-      const main = getMainFile();
-      await createMainFile(filePath, main);
-      await generateTemplates(filePath);
+      const main = language === 'js' ? getMainFile() : getMainFileTS();
+      await createMainFile(filePath, main, language);
+      const templates = language === 'js' ? await generateTemplates(filePath) : await generateTSTemplates(filePath);
       await modifyPackageJSONFile(filePath);
       console.log(chalk.yellow.bold(`${symbols.success} Success!`));
       console.log(`Type ${chalk.red.bold(`cd ./${name} and then npm run start`)}`);
@@ -63,9 +62,10 @@ export async function createNewProject(name: string, version: string) {
       return err;
     }
   } else {
-    throw new Error('Cannot create file');
+    throw new Error(`File/Folder with name: ${name} already exists. Cannot create file.`);
   }
 }
+
 
 export async function generateNewCommand(commandName: string, category: string) {
   const slappeyFile = path.join(dir, 'slappey.json');

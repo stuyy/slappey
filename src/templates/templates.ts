@@ -21,6 +21,87 @@ const client = new Client();
 `;
 }
 
+export function getMainFileTS() {
+  return `import { config } from 'dotenv';
+config();
+import { registerCommands, registerEvents } from './utils/registry';
+import DiscordClient from './client/client';
+const client = new DiscordClient({});
+
+(async () => {
+  client.prefix = process.env.DISCORD_BOT_PREFIX || client.prefix;
+  await registerCommands(client, '../commands');
+  await registerEvents(client, '../events');
+  await client.login(process.env.DISCORD_BOT_TOKEN);
+})();\n
+`;
+}
+
+export function getTypescriptBotFile() {
+  return `import { Client, ClientOptions, Collection } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import BaseCommand from '../utils/structures/BaseCommand';
+
+export default class DiscordClient extends Client {
+
+  private _commands = new Collection<string, BaseCommand>();
+  private _events = new Collection<string, BaseEvent>();
+  private _prefix: string = '!';
+
+  constructor(options?: ClientOptions) {
+    super(options);
+  }
+
+  get commands(): Collection<string, BaseCommand> { return this._commands; }
+  get events(): Collection<string, BaseEvent> { return this._events; }
+  get prefix(): string { return this._prefix; }
+
+  set prefix(prefix: string) { this._prefix = prefix; }
+
+}
+`;
+}
+
+export function getRegistryFileTS() {
+  return `
+import path from 'path';
+import { promises as fs } from 'fs';
+import DiscordClient from '../client/client';
+
+export async function registerCommands(client: DiscordClient, dir: string = '') {
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
+    if (file.endsWith('.js') || file.endsWith('.ts')) {
+      const { default: Command } = await import(path.join(dir, file));
+      const command = new Command();
+      client.commands.set(command.getName(), command);
+      command.getAliases().forEach((alias: string) => {
+        client.commands.set(alias, command);
+      });
+    }
+  }
+}
+
+export async function registerEvents(client: DiscordClient, dir: string = '') {
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerEvents(client, path.join(dir, file));
+    if (file.endsWith('.js') || file.endsWith('.ts')) {
+      const { default: Event } = await import(path.join(dir, file));
+      const event = new Event();
+      client.events.set(event.getName(), event);
+      client.on(event.getName(), event.run.bind(event, client));
+    }
+  }
+}
+`;
+}
+
 export function getRegistryFile() {
   return `
 const path = require('path');
@@ -80,12 +161,41 @@ export function getBaseCommand() {
 }`;
 }
 
+export function getBaseCommandTS() {
+  return `
+import { Message } from 'discord.js';
+import DiscordClient from '../../client/client';
+
+export default abstract class BaseCommand {
+  constructor(private name: string, private category: string, private aliases: Array<string>) {}
+
+  getName(): string { return this.name; }
+  getCategory(): string { return this.category; }
+  getAliases(): Array<string> { return this.aliases; }
+
+  abstract async run(client: DiscordClient, message: Message, args: Array<string> | null): Promise<void>;
+}`;
+}
+
 export function getBaseEvent() {
   return `module.exports = class BaseEvent {
   constructor(name) {
     this.name = name;
   }
 }`;
+}
+
+export function getBaseEventTS() {
+  return `
+import DiscordClient from '../../client/client';
+
+export default abstract class BaseEvent {
+  constructor(private name: string) { }
+
+  getName(): string { return this.name; }
+  abstract run(client: DiscordClient, ...args: any): void;
+}
+`;
 }
 
 export function getReadyEvent() {
@@ -97,6 +207,20 @@ module.exports = class ReadyEvent extends BaseEvent {
   }
   async run (client) {
     console.log(client.user.tag + ' has logged in.');
+  }
+}`;
+}
+
+export function getReadyEventTS() {
+  return `import BaseEvent from '../../utils/structures/BaseEvent';
+import DiscordClient from '../../client/client';
+
+export default class ReadyEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  async run (client: DiscordClient) {
+    console.log('Bot has logged in.');
   }
 }`;
 }
@@ -125,6 +249,32 @@ module.exports = class MessageEvent extends BaseEvent {
 }`;
 }
 
+export function getMessageEventTS() {
+  return `import BaseEvent from '../../utils/structures/BaseEvent';
+import { Message } from 'discord.js';
+import DiscordClient from '../../client/client';
+
+export default class MessageEvent extends BaseEvent {
+  constructor() {
+    super('message');
+  }
+
+  async run(client: DiscordClient, message: Message) {
+    if (message.author.bot) return;
+    if (message.content.startsWith(client.prefix)) {
+      const [cmdName, ...cmdArgs] = message.content
+        .slice(client.prefix.length)
+        .trim()
+        .split(/\\s+/);
+      const command = client.commands.get(cmdName);
+      if (command) {
+        command.run(client, message, cmdArgs);
+      }
+    }
+  }
+}`;
+}
+
 export function getTestCommand() {
   return `const BaseCommand = require('../../utils/structures/BaseCommand');
 
@@ -133,7 +283,23 @@ module.exports = class TestCommand extends BaseCommand {
     super('test', 'testing', []);
   }
 
-  run(client, message, args) {
+  async run(client, message, args) {
+    message.channel.send('Test command works');
+  }
+}`;
+}
+
+export function getTestCommandTS() {
+  return `import BaseCommand from '../../utils/structures/BaseCommand';
+import DiscordClient from '../../client/client';
+import { Message } from 'discord.js';
+
+export default class TestCommand extends BaseCommand {
+  constructor() {
+    super('test', 'testing', []);
+  }
+
+  async run(client: DiscordClient, message: Message, args: Array<string>) {
     message.channel.send('Test command works');
   }
 }`;
