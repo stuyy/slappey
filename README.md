@@ -38,7 +38,15 @@ Install slappey by running `npm install -g slappey` on your terminal or Windows 
 
 ## Will Slappey support TypeScript?
 
-- Soon
+- ~~Soon~~
+
+Slappey now supports TypeScript as of 6/1/2020!
+
+You must have TypeScript installed. However, if you don't, during the installation process, if you selected TypeScript, Slappey will ask you if you would like to install TypeScript, ts-node, and setup a basic tsconfig.json file. If you enter n (no), you will have to install these manually.
+
+ts-node is a TypeScript interpreter for Node.JS, the dev script uses it along with nodemon, so be sure you have nodemon installed.
+
+Otherwise, if you have TypeScript installed, you can skip this part and just run `npm run build` and then `npm run start`
 
 ## Will Slappey support Python?
 

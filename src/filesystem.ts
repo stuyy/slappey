@@ -16,6 +16,8 @@ import {
   getMessageEventTS,
   getTestCommandTS,
   getTypescriptBotFile,
+  getCommandTemplateTS,
+  TSCONFIG,
 } from './templates/templates';
 import { capitalize } from './utils';
 
@@ -30,10 +32,11 @@ export async function exists(filePath: string): Promise<boolean> {
   }
 }
 
-export function createProjectDetailsFile(filePath: string, name: string, version: string) {
+
+export function createProjectDetailsFile(filePath: string, name: string, language: string) {
   const slappey = {
     name,
-    version,
+    language,
   };
   return fs.writeFile(path.join(filePath, 'slappey.json'), JSON.stringify(slappey, null, 2));
 }
@@ -71,6 +74,7 @@ export async function getFile(filePath: string) {
   const json = JSON.parse(text);
   return json;
 }
+
 export async function generateTemplates(filePath: string) {
   try {
     await fs.mkdir(path.join(filePath, 'src', 'utils'));
@@ -112,19 +116,28 @@ export async function generateTSTemplates(filePath: string) {
     throw new Error(err);
   }
 }
-export async function createCommandFile(filePath: string, name: string, category: string) {
-  return fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category));
+
+export async function createCommandFile(
+  filePath: string,
+  name: string,
+  category: string,
+  language: string,
+) {
+  return language === 'js'
+    ? fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category))
+    : fs.writeFile(path.join(filePath, `${capitalize(name)}Command.ts`), getCommandTemplateTS(name, category));
 }
 
 export async function createEventFile(filePath: string, template: string) {
   return fs.writeFile(filePath, template);
 }
 
-export async function modifyPackageJSONFile(filePath: string) {
+export async function modifyPackageJSONFile(filePath: string, language: string) {
   const buffer = await fs.readFile(path.join(filePath, 'package.json'), 'utf8');
   const json = JSON.parse(buffer);
-  json.scripts.dev = 'nodemon ./src/bot.js';
-  json.scripts.start = 'node ./src/bot.js';
+  json.scripts.dev = language === 'js' ? 'nodemon ./src/bot.js' : 'nodemon --exec ts-node src/bot.ts';
+  json.scripts.start = language === 'js' ? 'node ./src/bot.js' : 'node ./build/bot.js';
+  if (language === 'ts') json.scripts.build = 'tsc --build';
   return fs.writeFile(path.join(filePath, 'package.json'), JSON.stringify(json, null, 2));
 }
 
@@ -145,6 +158,24 @@ export async function installDiscordJS(filePath: string) {
     cwd: filePath,
     stdio: 'ignore',
   });
+}
+
+export async function installTypescript(filePath: string) {
+  return execSync('npm i -D typescript', {
+    cwd: filePath,
+    stdio: 'ignore',
+  });
+}
+
+export async function installTSNode(filePath: string) {
+  return execSync('npm i -D ts-node', {
+    cwd: filePath,
+    stdio: 'ignore',
+  });
+}
+
+export async function setupTSConfigTemplate(filePath: string) {
+  return fs.writeFile(path.join(filePath, 'tsconfig.json'), TSCONFIG);
 }
 
 export async function installDotenv(filePath: string) {

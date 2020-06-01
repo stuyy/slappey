@@ -8,7 +8,6 @@ import {
   generateNewEvent,
 } from './scaffold';
 import {
-  versionSelect,
   templateGenerate,
   eventGenerate,
   languageSelect,
@@ -26,7 +25,6 @@ export async function handleOption(option: string, data: string) {
         .catch((err) => console.log(err));
     } else if (data === Type.EVENT) {
       const { events } = await prompts(eventGenerate);
-      console.log(events);
       await generateNewEvent(events);
     }
   }

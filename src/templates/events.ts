@@ -45,16 +45,16 @@ module.exports = class ChannelUpdateEvent extends BaseEvent {
   }
 }`,
   debug: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-debug
-  const BaseEvent = require('../utils/structures/BaseEvent');
-  module.exports = class ChannelPinsUpdateEvent extends BaseEvent {
-    constructor() {
-      super('channelPinsUpdate');
-    }
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ChannelPinsUpdateEvent extends BaseEvent {
+  constructor() {
+    super('channelPinsUpdate');
+  }
+  
+  async run(client, info) {
     
-    async run(client, info) {
-      
-    }
-  }`,
+  }
+}`,
   emojiCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiCreate
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class EmojiCreateEvent extends BaseEvent {
@@ -423,7 +423,7 @@ module.exports = class RoleUpdateEvent extends BaseEvent {
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class ShardDisconnectEvent extends BaseEvent {
   constructor() {
-    super('ready');
+    super('shardDisconnect');
   }
   
   async run(client, message) {
@@ -448,7 +448,7 @@ module.exports = class EmojiDeleteEvent extends BaseEvent {
     super('shardReady');
   }
   
-  async run(client, number, unavailableGuilds) {
+  async run(client, id, unavailableGuilds) {
     
   }
 }`,

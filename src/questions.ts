@@ -92,6 +92,13 @@ export const templateGenerate: Array<PromptObject> = [
   },
 ];
 
+export const setupTypescript: PromptObject = {
+  type: 'confirm',
+  name: 'value',
+  message: "Install TypeScript, ts-node, and setup tsconfig.json? You'll have to do this later if you skip this.",
+  initial: true,
+};
+
 export const eventGenerate: Array<PromptObject> = [
   {
     type: 'autocompleteMultiselect',
