@@ -152,5 +152,6 @@ export const eventGenerate: Array<PromptObject> = [
       { title: 'WEBHOOK_UPDATE', value: 'webhookUpdate' },
     ],
     hint: '- Space to select. Return to submit',
+    min: 1,
   },
 ];
