@@ -90,6 +90,12 @@ export const templateGenerate: Array<PromptObject> = [
     name: 'category',
     message: 'Enter the category of the command',
   },
+  {
+    type: 'list',
+    name: 'aliases',
+    message: 'Enter the command arguments, separated by commas',
+    format: (aliases: Array<string>) => (!aliases.includes('') ? `[${aliases.map((alias: string) => `'${alias}'`).join(', ')}]` : '[]'),
+  },
 ];
 
 export const setupTypescript: PromptObject = {

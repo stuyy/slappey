@@ -19,8 +19,8 @@ export async function handleOption(option: string, data: string) {
     await createNewProject(data, language);
   } else if (option === Constants.GEN) {
     if (data === Type.COMMAND) {
-      const { name, category } = await prompts(templateGenerate);
-      await generateNewCommand(name, category)
+      const { name, category, aliases } = await prompts(templateGenerate);
+      await generateNewCommand(name, category, aliases)
         .then(() => console.log('Created.'))
         .catch((err) => console.log(err));
     } else if (data === Type.EVENT) {

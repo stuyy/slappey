@@ -305,12 +305,12 @@ export default class TestCommand extends BaseCommand {
 }`;
 }
 
-export function getCommandTemplate(name: string, category: string) {
+export function getCommandTemplate(name: string, category: string, aliases: Array<string>) {
   return `const BaseCommand = require('../../utils/structures/BaseCommand');
 
 module.exports = class ${capitalize(name)}Command extends BaseCommand {
   constructor() {
-    super('${name}', '${category}', []);
+    super('${name}', '${category}', ${aliases});
   }
 
   run(client, message, args) {
@@ -319,14 +319,14 @@ module.exports = class ${capitalize(name)}Command extends BaseCommand {
 }`;
 }
 
-export function getCommandTemplateTS(name: string, category: string) {
+export function getCommandTemplateTS(name: string, category: string, aliases: Array<string>) {
   return `import { Message } from 'discord.js';
 import BaseCommand from '../../utils/structures/BaseCommand';
 import DiscordClient from '../../client/client';
 
 export default class ${capitalize(name)}Command extends BaseCommand {
   constructor() {
-    super('${name}', '${category}', []);
+    super('${name}', '${category}', ${aliases});
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {

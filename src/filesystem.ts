@@ -121,11 +121,12 @@ export async function createCommandFile(
   filePath: string,
   name: string,
   category: string,
+  aliases: Array<string>,
   language: string,
 ) {
   return language === 'js'
-    ? fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category))
-    : fs.writeFile(path.join(filePath, `${capitalize(name)}Command.ts`), getCommandTemplateTS(name, category));
+    ? fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category, aliases))
+    : fs.writeFile(path.join(filePath, `${capitalize(name)}Command.ts`), getCommandTemplateTS(name, category, aliases));
 }
 
 export async function createEventFile(filePath: string, template: string) {

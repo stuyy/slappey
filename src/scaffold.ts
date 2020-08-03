@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 import prompts from 'prompts';
@@ -89,7 +90,7 @@ export async function createNewProject(name: string, language: string) {
 }
 
 
-export async function generateNewCommand(commandName: string, category: string) {
+export async function generateNewCommand(commandName: string, category: string, aliases: Array<string>) {
   const slappeyFile = path.join(dir, 'slappey.json');
   const fileExists = await exists(slappeyFile);
   if (fileExists) {
@@ -104,11 +105,11 @@ export async function generateNewCommand(commandName: string, category: string) 
       const commandFile = language === 'js' ? `${capitalize(commandName)}Command.js` : `${capitalize(commandName)}Command.ts`;
       const commandFilePath = path.join(commandsPath, commandFile);
       const commandExists = await exists(commandFilePath);
-      if (!commandExists) return createCommandFile(commandsPath, commandName, category, language);
+      if (!commandExists) return createCommandFile(commandsPath, commandName, category, aliases, language);
       throw new Error(`Command already exists. ${commandFile}`);
     }
     await createDirectory(commandsPath);
-    return createCommandFile(commandsPath, commandName, category, language);
+    return createCommandFile(commandsPath, commandName, category, aliases, language);
   } throw new Error('Not a slappey project');
 }
 
