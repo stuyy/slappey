@@ -1,9 +1,10 @@
+# Remaking this project.. use at own risk..
+
 # Slappey
 
 Slap together a Discord Bot project in seconds!
 
 ![slappey-logo](https://i.imgur.com/q4ofLAo.png)
-
 
 ## What is Slappey?
 
@@ -35,7 +36,6 @@ Install slappey by running `npm install -g slappey` on your terminal or Windows 
 
 - To select event(s), press space bar and use the up and down arrow keys to navigate. Hit enter when you're done and your event files will be generated in the `src/events` folder.
 
-
 ## Will Slappey support TypeScript?
 
 - ~~Soon~~
@@ -51,4 +51,3 @@ Otherwise, if you have TypeScript installed, you can skip this part and just run
 ## Will Slappey support Python?
 
 - Soon
-
