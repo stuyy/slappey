@@ -123,14 +123,14 @@ export async function generateAkairoTemplatesTS(filePath: string) {
   await fs.mkdir(path.join(filePath, "src"), "events");
 
   await fs.mkdir(path.join(filePath, "src", "commands", "test"));
-  await fs.mkdir(path.join(filePath, "src", "events", "Client"));
+  await fs.mkdir(path.join(filePath, "src", "events"));
 
   await fs.writeFile(
     path.join(filePath, "src", "commands", "test"),
     getTestCommandAkairoTS()
   );
   await fs.writeFile(
-    path.join(filePath, "src", "events", "Client"),
+    path.join(filePath, "src", "events"),
     getReadyEventAkairoTS()
   );
 }

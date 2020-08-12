@@ -130,7 +130,6 @@ export function getReadyEventAkairo() {
             super('ready', {
                 emitter: 'client',
                 event: 'ready',
-                category: 'Client'
             })
         }
 
@@ -152,7 +151,6 @@ export function getReadyEventAkairoTS() {
             super('ready', {
                 emitter: 'client',
                 event: 'ready',
-                category: 'Client'
             })
         }
 

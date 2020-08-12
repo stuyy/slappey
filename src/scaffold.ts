@@ -41,6 +41,8 @@ import {
 import { capitalize } from "./utils";
 import eventTemplates from "./templates/events";
 import eventTemplatesTS from "./templates/tsevents";
+import eventTemplatesAkairo from "./templates/akairo/events";
+import eventTemplatesAkairoTS from "./templates/akairo/tsevents";
 import {
   getMainFileAkairo,
   getMainFileAkairoTS,
@@ -48,6 +50,8 @@ import {
 
 const events: any = eventTemplates;
 const eventsTS: any = eventTemplatesTS;
+const eventsAkairo: any = eventTemplatesAkairo;
+const eventsAkairoTS: any = eventTemplatesAkairoTS;
 
 const dir = process.cwd();
 
@@ -282,7 +286,6 @@ export async function generateNewCommand(
   throw new Error("Not a slappey project");
 }
 
-
 export async function generateNewEvent(eventsArray: Array<string>) {
   const slappeyFile = path.join(dir, "slappey.json");
   const slappeyFileExists = await exists(slappeyFile);
@@ -292,10 +295,28 @@ export async function generateNewEvent(eventsArray: Array<string>) {
       const { language } = await getFile(slappeyFile);
       const fileExists = await exists(eventsPath);
       if (!fileExists) await createDirectory(eventsPath);
+
+      if (language.startsWith("akairo-")) {
+        let mainLanguage = language.slice(7);
+        const js = mainLanguage === "js";
+
+        for (const event of eventsArray) {
+          const eventsFilePath = js
+            ? path.join(eventsPath, `${capitalize(event)}Event.js`)
+            : path.join(eventsPath, `${capitalize(event)}Event.ts`);
+          const eventsFileExists = await exists(eventsFilePath);
+          // eslint-disable-next-line max-len
+          if (!eventsFileExists)
+            await createEventFile(
+              eventsFilePath,
+              js ? eventsAkairo[event] : eventsAkairoTS[event]
+            );
+          console.log(`${symbols.success} Created ${eventsFilePath}`);
+        }
+      }
       const js = language === "js";
       // eslint-disable-next-line no-restricted-syntax
       for (const event of eventsArray) {
-        
         const eventsFilePath = js
           ? path.join(eventsPath, `${capitalize(event)}Event.js`)
           : path.join(eventsPath, `${capitalize(event)}Event.ts`);
