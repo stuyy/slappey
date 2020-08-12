@@ -4,7 +4,7 @@
   "description": "",
   "main": "./lib/index.js",
   "bin": {
-    "akairo": "./lib/index.js"
+    "slappey": "./lib/index.js"
   },
   "scripts": {
     "build": "tsc",

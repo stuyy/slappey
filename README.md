@@ -1,5 +1,3 @@
-# Remaking this project.. use at own risk..
-
 # Slappey
 
 Slap together a Discord Bot project in seconds!
