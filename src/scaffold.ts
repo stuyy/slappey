@@ -27,6 +27,7 @@ import {
   installTypescript,
   installTSNode,
   setupTSConfigTemplate,
+  installTypes,
 } from './filesystem';
 import { getEnvTemplate, getMainFile, getMainFileTS } from './templates/templates';
 import { capitalize } from './utils';
@@ -71,8 +72,10 @@ export async function createNewProject(name: string, language: string) {
           console.log(chalk.yellow.bold(`${symbols.success} Installed TypeScript`));
           await installTSNode(filePath);
           console.log(chalk.yellow.bold(`${symbols.success} Installed ts-node.`));
+          await installTypes(filePath);
+          console.log(chalk.yellow.bold(`${symbols.success} Installed @types/node.`));
           await setupTSConfigTemplate(filePath);
-          console.log(chalk.yellow.bold(`${symbols.success} Setup tsconfig.json`))
+          console.log(chalk.yellow.bold(`${symbols.success} Setup tsconfig.json`));
         }
       }
       console.log(chalk.yellow.bold(`${symbols.success} Success!`));
