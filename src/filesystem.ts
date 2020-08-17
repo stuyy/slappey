@@ -173,6 +173,12 @@ export async function installTSNode(filePath: string) {
     stdio: 'ignore',
   });
 }
+export async function installTypes(filePath: string) {
+  return execSync('npm i -D @types/node', {
+    cwd: filePath,
+    stdio: 'ignore',
+  });
+}
 
 export async function setupTSConfigTemplate(filePath: string) {
   return fs.writeFile(path.join(filePath, 'tsconfig.json'), TSCONFIG);
