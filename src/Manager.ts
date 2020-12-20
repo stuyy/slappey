@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import { Initializer, PackageManagerType, SlappeyConfig } from "./constants";
+import { Initializer, SlappeyConfig } from "./utils/index";
 
 export class PackageManager implements Initializer {
   private static instance: PackageManager;

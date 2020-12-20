@@ -1,20 +1,10 @@
-import { Initializer, Language, SlappeyConfig } from "./constants";
+import { Initializer, Language, SlappeyConfig } from "./utils/index";
+import { getMainFile, getMainFileTS } from "./templates/templates";
+import { FileSystemManager } from "./utils/index";
 import { promises as fs } from "fs";
 import path from "path";
-import { getMainFile, getMainFileTS } from "./templates/templates";
 
-export interface IFileSystem {
-  createProjectDirectory(name: string): Promise<string>;
-  createConfig(config: SlappeyConfig): void;
-  createSourceDirectory(name: string): Promise<string>;
-  createEntryFile(filePath: string): void;
-  createDirectory(dirName: string): Promise<void>;
-  createFile(filePath: string, data: string): Promise<void>;
-  createTsConfig(basePath: string): Promise<void>;
-  updatePackageJson(basePath: string, language: string): Promise<void>;
-}
-
-export class FileSystem implements IFileSystem, Initializer {
+export class FileSystem implements FileSystemManager, Initializer {
   private static instance: FileSystem;
   private language: Language | undefined;
   private config: SlappeyConfig | undefined;
@@ -23,8 +13,6 @@ export class FileSystem implements IFileSystem, Initializer {
   async initialize(language: Language, config: SlappeyConfig) {
     this.language = language;
     this.config = config;
-    await this.createProjectDirectory(config.name);
-    await this.createConfig(config);
   }
 
   createConfig(config: SlappeyConfig): Promise<void> {
@@ -60,6 +48,22 @@ export class FileSystem implements IFileSystem, Initializer {
     return fs.writeFile(filePath, data);
   }
 
+  async findFile(filePath: string): Promise<void> {
+    try {
+      await fs.access(filePath);
+    } catch (err) {
+      throw new Error(
+        `${filePath} was not found. Please make sure you're inside a Slappey project.`
+      );
+    }
+  }
+
+  async getFileToJson(filePath: string): Promise<SlappeyConfig> {
+    const text = await fs.readFile(filePath, "utf8");
+    const json = JSON.parse(text);
+    return json;
+  }
+
   getCurrentDir(): string {
     return this.CURRENT_DIR;
   }
@@ -80,6 +84,15 @@ export class FileSystem implements IFileSystem, Initializer {
 
   async createTsConfig(basePath: string): Promise<void> {
     return;
+  }
+
+  async exists(filePath: string): Promise<boolean> {
+    try {
+      await fs.access(filePath);
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   static getFileSystem(): FileSystem {

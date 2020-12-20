@@ -1,22 +1,15 @@
 import prompts, { PromptObject } from "prompts";
-import { Language, PackageManagerType } from "./constants";
+import { Language, PackageManagerType } from "./utils/index";
 import {
   eventGenerate,
   getCredentials,
   languageSelect,
   packageManager,
-  templateGenerate,
-} from "./questions";
+  getCommandPrompt,
+} from "./utils/questions";
+import { ProjectPrompter } from "./utils/interfaces";
 
-export interface IPrompter {
-  language(prompt: Array<PromptObject>): Promise<Language>;
-  packageManager(prompt: Array<PromptObject>): Promise<PackageManagerType>;
-  command(prompt: Array<PromptObject>): Promise<any>;
-  event(prompt: Array<PromptObject>): Promise<any>;
-  credentials(prompt: Array<PromptObject>): Promise<any>;
-}
-
-export class Prompter implements IPrompter {
+export class Prompter implements ProjectPrompter {
   private static instance: Prompter;
 
   async language(): Promise<Language> {
@@ -30,13 +23,13 @@ export class Prompter implements IPrompter {
   }
 
   async command(): Promise<any> {
-    const { name, category } = await prompts(templateGenerate);
+    const { name, category } = await prompts(getCommandPrompt);
     return { name, category };
   }
 
-  async event(): Promise<any> {
-    const { name, category } = await prompts(eventGenerate);
-    return { name, category };
+  async event(): Promise<[]> {
+    const { events } = await prompts(eventGenerate);
+    return events;
   }
 
   async credentials(): Promise<any> {

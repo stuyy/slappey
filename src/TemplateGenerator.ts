@@ -1,11 +1,19 @@
-import { FileSystem } from "./FileSystem";
 import path from "path";
-import { FileExtension, Initializer, Language } from "./constants";
+import { FileSystem } from "./FileSystem";
+import {
+  FileExtension,
+  getCommandName,
+  Initializer,
+  Language,
+  getEventName,
+} from "./utils/index";
 import {
   getBaseCommand,
   getBaseCommandTS,
   getBaseEvent,
   getBaseEventTS,
+  getCommandTemplate,
+  getCommandTemplateTS,
   getMessageEvent,
   getMessageEventTS,
   getReadyEvent,
@@ -17,24 +25,18 @@ import {
   getTypescriptBotFile,
 } from "./templates/templates";
 import { SimpleLogger } from "./Logger";
+import { ProjectTemplateGenerator } from "./utils/interfaces";
+import eventTemplates from "./templates/events";
+import eventTemplatesTS from "./templates/tsevents";
 
-export interface ITemplateGenerator {
-  generateUtilities(filePath: string): void;
-  generateBaseCommand(filePath: string): void;
-  generateBaseEvent(filePath: string): void;
-  generateRegistry(filePath: string): void;
-  generateDirectories(filePath: string): void;
-  generateTestCommand(filePath: string): void;
-  generateReadyEvent(filePath: string): void;
-  generateMessageEvent(filePath: string): void;
-  generateClient(filePath: string): void;
-}
-
-export class TemplateGenerator implements ITemplateGenerator, Initializer {
+export class TemplateGenerator
+  implements ProjectTemplateGenerator, Initializer {
   private fileSystem: FileSystem = FileSystem.getFileSystem();
+
   private logger: SimpleLogger = SimpleLogger.getSimpleLogger();
 
   private static instance: TemplateGenerator;
+
   private language: Language | undefined;
 
   async initialize(language: Language) {
@@ -78,7 +80,7 @@ export class TemplateGenerator implements ITemplateGenerator, Initializer {
 
   async generateClient(filePath: string) {
     const template = getTypescriptBotFile();
-    const file = path.join(filePath, `client.ts`);
+    const file = path.join(filePath, "client.ts");
     await this.fileSystem.createFile(file, template);
   }
 
@@ -145,6 +147,7 @@ export class TemplateGenerator implements ITemplateGenerator, Initializer {
     const file = path.join(filePath, `TestCommand.${extension}`);
     await this.fileSystem.createFile(file, template);
   }
+
   async generateReadyEvent(filePath: string) {
     const isJs = this.language === "javascript";
     const template = isJs ? getReadyEvent() : getReadyEventTS();
@@ -152,12 +155,45 @@ export class TemplateGenerator implements ITemplateGenerator, Initializer {
     const file = path.join(filePath, `ReadyEvent.${extension}`);
     await this.fileSystem.createFile(file, template);
   }
+
   async generateMessageEvent(filePath: string) {
     const isJs = this.language === "javascript";
     const template = isJs ? getMessageEvent() : getMessageEventTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `MessageEvent.${extension}`);
     await this.fileSystem.createFile(file, template);
+  }
+
+  async generateCommand(categoryPath: string, name: string, category: string) {
+    if (!this.language) throw new Error("Language was not set");
+    const fileName = getCommandName(name, this.language);
+    const filePath = path.join(categoryPath, fileName);
+    const exists = await this.fileSystem.exists(filePath);
+    if (!exists) {
+      const isJs = this.language === "javascript";
+      const template = isJs
+        ? getCommandTemplate(name, category)
+        : getCommandTemplateTS(name, category);
+      return this.fileSystem.createFile(filePath, template);
+    }
+    throw new Error(`${filePath} already exists.`);
+  }
+
+  async generateEvents(events: [], eventsDir: string) {
+    if (!this.language) throw new Error("Language was not set");
+    for (const event of events) {
+      const fileName = getEventName(event, this.language);
+      const filePath = path.join(eventsDir, fileName);
+      const exists = await this.fileSystem.exists(filePath);
+      const template =
+        this.language === "javascript"
+          ? eventTemplates[event]
+          : eventTemplatesTS[event];
+      console.log(template);
+      if (!exists) {
+        await this.fileSystem.createFile(filePath, template);
+      }
+    }
   }
 
   public static getTemplateGenerator(): TemplateGenerator {

@@ -124,7 +124,7 @@ export const getCredentials: Array<PromptObject> = [
   },
 ];
 
-export const templateGenerate: Array<PromptObject> = [
+export const getCommandPrompt: Array<PromptObject> = [
   {
     type: "text",
     name: "name",
