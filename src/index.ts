@@ -1,22 +1,22 @@
 #!/usr/bin/env node
-/* eslint-disable import/no-unresolved */
-import prompts from 'prompts';
-import chalk from 'chalk';
-import { questions } from './questions';
-import { handleOption } from './handler';
+import { CLIArguments } from "./constants";
+import { checkOptionType } from "./utils";
+import { Scaffolder } from "./Scaffolder";
 
-(async () => {
-  try {
-    const args = process.argv.slice(2);
-    if (args.length === 2) {
-      // Check Command Argument
-      const [option, data] = args;
-      await handleOption(option, data);
-    } else {
-      const { option, data } = await prompts(questions);
-      await handleOption(option, data);
-    }
-  } catch (err) {
-    console.log(chalk.red.bold(err));
+const scaffolder = new Scaffolder();
+
+async function main() {
+  const args = process.argv.slice(2);
+  if (args.length === 2) {
+    const [option, data] = <CLIArguments>args;
+    if (checkOptionType(option)) {
+      if (option === "new") await scaffolder.createProject(data);
+    } else throw new Error("Invalid Action");
   }
-})();
+}
+
+async function createNewCommand() {}
+
+async function createNewEvent() {}
+
+main();

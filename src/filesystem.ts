@@ -1,192 +1,91 @@
-import { promises as fs } from 'fs';
-import { execSync } from 'child_process';
-import path from 'path';
-import {
-  getRegistryFile,
-  getBaseCommand,
-  getBaseEvent,
-  getReadyEvent,
-  getMessageEvent,
-  getTestCommand,
-  getCommandTemplate,
-  getRegistryFileTS,
-  getBaseCommandTS,
-  getBaseEventTS,
-  getReadyEventTS,
-  getMessageEventTS,
-  getTestCommandTS,
-  getTypescriptBotFile,
-  getCommandTemplateTS,
-  TSCONFIG,
-} from './templates/templates';
-import { capitalize } from './utils';
+import { Initializer, Language, SlappeyConfig } from "./constants";
+import { promises as fs } from "fs";
+import path from "path";
+import { getMainFile, getMainFileTS } from "./templates/templates";
 
-const dir = process.cwd();
+export interface IFileSystem {
+  createProjectDirectory(name: string): Promise<string>;
+  createConfig(config: SlappeyConfig): void;
+  createSourceDirectory(name: string): Promise<string>;
+  createEntryFile(filePath: string): void;
+  createDirectory(dirName: string): Promise<void>;
+  createFile(filePath: string, data: string): Promise<void>;
+  createTsConfig(basePath: string): Promise<void>;
+  updatePackageJson(basePath: string, language: string): Promise<void>;
+}
 
-export async function exists(filePath: string): Promise<boolean> {
-  try {
-    await fs.access(filePath);
-    return true;
-  } catch (err) {
-    return false;
+export class FileSystem implements IFileSystem, Initializer {
+  private static instance: FileSystem;
+  private language: Language | undefined;
+  private config: SlappeyConfig | undefined;
+  private CURRENT_DIR: string = process.cwd();
+
+  async initialize(language: Language, config: SlappeyConfig) {
+    this.language = language;
+    this.config = config;
+    await this.createProjectDirectory(config.name);
+    await this.createConfig(config);
   }
-}
 
-
-export function createProjectDetailsFile(filePath: string, name: string, language: string) {
-  const slappey = {
-    name,
-    language,
-  };
-  return fs.writeFile(path.join(filePath, 'slappey.json'), JSON.stringify(slappey, null, 2));
-}
-
-export async function createDirectory(filePath: string) {
-  try {
-    return fs.mkdir(filePath);
-  } catch (err) {
-    return err;
+  createConfig(config: SlappeyConfig): Promise<void> {
+    return fs.writeFile(
+      path.join(this.CURRENT_DIR, config.name, "slappey.json"),
+      JSON.stringify(config, null, 2)
+    );
   }
-}
 
-export async function createSrcFolder(filePath: string) {
-  try {
-    return fs.mkdir(path.join(filePath, 'src'));
-  } catch (err) {
-    return err;
+  async createProjectDirectory(name: string): Promise<string> {
+    const filePath = path.join(this.CURRENT_DIR, name);
+    await fs.mkdir(filePath);
+    return filePath;
   }
-}
 
-export async function createEnvironmentFile(filePath: string, data: string) {
-  try {
-    return fs.writeFile(path.join(filePath, '.env'), data);
-  } catch (err) {
-    return err;
+  async createSourceDirectory(name: string): Promise<string> {
+    const filePath = path.join(this.CURRENT_DIR, name, "src");
+    await fs.mkdir(filePath);
+    return filePath;
   }
-}
 
-export async function createMainFile(filePath: string, data: string, language: string) {
-  return language === 'ts' ? fs.writeFile(path.join(filePath, 'src', 'bot.ts'), data) : fs.writeFile(path.join(filePath, 'src', 'bot.js'), data);
-}
-
-export async function getFile(filePath: string) {
-  const text = await fs.readFile(filePath, 'utf8');
-  const json = JSON.parse(text);
-  return json;
-}
-
-export async function generateTemplates(filePath: string) {
-  try {
-    await fs.mkdir(path.join(filePath, 'src', 'utils'));
-    await fs.mkdir(path.join(filePath, 'src', 'utils', 'structures'));
-    await fs.writeFile(path.join(filePath, 'src', 'utils', 'registry.js'), getRegistryFile());
-    await fs.writeFile(path.join(filePath, 'src', 'utils', 'structures', 'BaseCommand.js'), getBaseCommand());
-    await fs.writeFile(path.join(filePath, 'src', 'utils', 'structures', 'BaseEvent.js'), getBaseEvent());
-    await fs.mkdir(path.join(filePath, 'src', 'commands'));
-    await fs.mkdir(path.join(filePath, 'src', 'events'));
-    await fs.mkdir(path.join(filePath, 'src', 'commands', 'test'));
-    await fs.mkdir(path.join(filePath, 'src', 'events', 'ready'));
-    await fs.mkdir(path.join(filePath, 'src', 'events', 'message'));
-    await fs.writeFile(path.join(filePath, 'src', 'events', 'ready', 'ready.js'), getReadyEvent());
-    await fs.writeFile(path.join(filePath, 'src', 'events', 'message', 'message.js'), getMessageEvent());
-    await fs.writeFile(path.join(filePath, 'src', 'commands', 'test', 'TestCommand.js'), getTestCommand());
-  } catch (err) {
-    throw new Error(err);
+  async createEntryFile(filePath: string) {
+    const extension = this.language === "javascript" ? "js" : "ts";
+    const template = extension === "js" ? getMainFile() : getMainFileTS();
+    return fs.writeFile(path.join(filePath, `index.${extension}`), template);
   }
-}
 
-export async function generateTSTemplates(filePath: string) {
-  try {
-    await fs.mkdir(path.join(filePath, 'src', 'utils'));
-    await fs.mkdir(path.join(filePath, 'src', 'utils', 'structures'));
-    await fs.writeFile(path.join(filePath, 'src', 'utils', 'registry.ts'), getRegistryFileTS());
-    await fs.writeFile(path.join(filePath, 'src', 'utils', 'structures', 'BaseCommand.ts'), getBaseCommandTS());
-    await fs.writeFile(path.join(filePath, 'src', 'utils', 'structures', 'BaseEvent.ts'), getBaseEventTS());
-    await fs.mkdir(path.join(filePath, 'src', 'commands'));
-    await fs.mkdir(path.join(filePath, 'src', 'events'));
-    await fs.mkdir(path.join(filePath, 'src', 'client'));
-    await fs.writeFile(path.join(filePath, 'src', 'client', 'client.ts'), getTypescriptBotFile());
-    await fs.mkdir(path.join(filePath, 'src', 'commands', 'test'));
-    await fs.mkdir(path.join(filePath, 'src', 'events', 'ready'));
-    await fs.mkdir(path.join(filePath, 'src', 'events', 'message'));
-    await fs.writeFile(path.join(filePath, 'src', 'events', 'ready', 'ready.ts'), getReadyEventTS());
-    await fs.writeFile(path.join(filePath, 'src', 'events', 'message', 'message.ts'), getMessageEventTS());
-    await fs.writeFile(path.join(filePath, 'src', 'commands', 'test', 'TestCommand.ts'), getTestCommandTS());
-  } catch (err) {
-    throw new Error(err);
+  createDirectory(name: string): Promise<void> {
+    return fs.mkdir(name);
   }
-}
 
-export async function createCommandFile(
-  filePath: string,
-  name: string,
-  category: string,
-  language: string,
-) {
-  return language === 'js'
-    ? fs.writeFile(path.join(filePath, `${capitalize(name)}Command.js`), getCommandTemplate(name, category))
-    : fs.writeFile(path.join(filePath, `${capitalize(name)}Command.ts`), getCommandTemplateTS(name, category));
-}
+  createFile(filePath: string, data: string): Promise<void> {
+    return fs.writeFile(filePath, data);
+  }
 
-export async function createEventFile(filePath: string, template: string) {
-  return fs.writeFile(filePath, template);
-}
+  getCurrentDir(): string {
+    return this.CURRENT_DIR;
+  }
 
-export async function modifyPackageJSONFile(filePath: string, language: string) {
-  const buffer = await fs.readFile(path.join(filePath, 'package.json'), 'utf8');
-  const json = JSON.parse(buffer);
-  json.scripts.dev = language === 'js' ? 'nodemon ./src/bot.js' : 'nodemon --exec ts-node src/bot.ts';
-  json.scripts.start = language === 'js' ? 'node ./src/bot.js' : 'node ./build/bot.js';
-  if (language === 'ts') json.scripts.build = 'tsc --build';
-  return fs.writeFile(path.join(filePath, 'package.json'), JSON.stringify(json, null, 2));
-}
+  async updatePackageJson(basePath: string, language: string) {
+    const packageJson = path.join(basePath, "package.json");
+    const encoding = "utf8";
+    const buffer = await fs.readFile(packageJson, encoding);
+    const json = JSON.parse(buffer);
+    json.scripts = {};
+    json.scripts.dev =
+      language === "js" ? "nodemon ./src/bot.js" : "nodemon  src/bot.ts";
+    json.scripts.start =
+      language === "js" ? "node ./src/bot.js" : "node ./build/bot.js";
+    if (language === "ts") json.scripts.build = "tsc --build";
+    return fs.writeFile(packageJson, JSON.stringify(json, null, 2));
+  }
 
-export async function deleteDirectory(filePath: string) {
-  return fs.rmdir(filePath, {
-    recursive: true,
-  });
-}
+  async createTsConfig(basePath: string): Promise<void> {
+    return;
+  }
 
-export async function initializeNPM(filePath: string) {
-  return execSync('npm init -y', {
-    cwd: filePath,
-  });
-}
-
-export async function installDiscordJS(filePath: string) {
-  return execSync('npm i discord.js@latest', {
-    cwd: filePath,
-    stdio: 'ignore',
-  });
-}
-
-export async function installTypescript(filePath: string) {
-  return execSync('npm i -D typescript', {
-    cwd: filePath,
-    stdio: 'ignore',
-  });
-}
-
-export async function installTSNode(filePath: string) {
-  return execSync('npm i -D ts-node', {
-    cwd: filePath,
-    stdio: 'ignore',
-  });
-}
-export async function installTypes(filePath: string) {
-  return execSync('npm i -D @types/node', {
-    cwd: filePath,
-    stdio: 'ignore',
-  });
-}
-
-export async function setupTSConfigTemplate(filePath: string) {
-  return fs.writeFile(path.join(filePath, 'tsconfig.json'), TSCONFIG);
-}
-
-export async function installDotenv(filePath: string) {
-  return execSync('npm i dotenv', {
-    cwd: filePath,
-    stdio: 'ignore',
-  });
+  static getFileSystem(): FileSystem {
+    if (!FileSystem.instance) {
+      FileSystem.instance = new FileSystem();
+    }
+    return FileSystem.instance;
+  }
 }
