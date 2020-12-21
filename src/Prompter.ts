@@ -1,5 +1,11 @@
-import prompts, { PromptObject } from "prompts";
-import { Language, PackageManagerType } from "./utils/index";
+import prompts from "prompts";
+import {
+  CommandAnswer,
+  Credentials,
+  Language,
+  PackageManagerType,
+  ProjectPrompter,
+} from "./utils/index";
 import {
   eventGenerate,
   getCredentials,
@@ -7,7 +13,6 @@ import {
   packageManager,
   getCommandPrompt,
 } from "./utils/questions";
-import { ProjectPrompter } from "./utils/interfaces";
 
 export class Prompter implements ProjectPrompter {
   private static instance: Prompter;
@@ -22,7 +27,7 @@ export class Prompter implements ProjectPrompter {
     return <PackageManagerType>(<unknown>answer);
   }
 
-  async command(): Promise<any> {
+  async command(): Promise<CommandAnswer> {
     const { name, category } = await prompts(getCommandPrompt);
     return { name, category };
   }
@@ -32,7 +37,7 @@ export class Prompter implements ProjectPrompter {
     return events;
   }
 
-  async credentials(): Promise<any> {
+  async credentials(): Promise<Credentials> {
     const { token, prefix } = await prompts(getCredentials);
     return { token, prefix };
   }

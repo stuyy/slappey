@@ -1,17 +1,24 @@
-import { Initializer, Language, SlappeyConfig } from "./utils/index";
-import { getMainFile, getMainFileTS } from "./templates/templates";
-import { FileSystemManager } from "./utils/index";
 import { promises as fs } from "fs";
 import path from "path";
+import {
+  Initializer,
+  Language,
+  SlappeyConfig,
+  FileSystemManager,
+} from "./utils/index";
+import { getMainFile, getMainFileTS } from "./templates/templates";
 
 export class FileSystem implements FileSystemManager, Initializer {
   private static instance: FileSystem;
+
   private language: Language | undefined;
+
   private config: SlappeyConfig | undefined;
+
   private CURRENT_DIR: string = process.cwd();
 
-  async initialize(language: Language, config: SlappeyConfig) {
-    this.language = language;
+  async initialize(config: SlappeyConfig) {
+    this.language = config.language;
     this.config = config;
   }
 

@@ -28,7 +28,7 @@ export interface ProjectPrompter {
 export interface ProjectTemplateGenerator {
   generateUtilities(filePath: string): void;
   generateCommand(categoryPath: string, name: string, category: string): void;
-  generateEvents(events: [], eventsDir: string): void;
+  generateEvents(events: any[], eventsDir: string): void;
   generateBaseCommand(filePath: string): void;
   generateBaseEvent(filePath: string): void;
   generateRegistry(filePath: string): void;

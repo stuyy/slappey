@@ -25,21 +25,24 @@ import {
   getTypescriptBotFile,
 } from "./templates/templates";
 import { SimpleLogger } from "./Logger";
-import { ProjectTemplateGenerator } from "./utils/interfaces";
+import { Logger, ProjectTemplateGenerator } from "./utils/interfaces";
 import eventTemplates from "./templates/events";
 import eventTemplatesTS from "./templates/tsevents";
 
+const eventsJS: any = eventTemplates;
+const eventsTS: any = eventTemplatesTS;
+
 export class TemplateGenerator
   implements ProjectTemplateGenerator, Initializer {
+  private static instance: TemplateGenerator;
+
   private fileSystem: FileSystem = FileSystem.getFileSystem();
 
   private logger: SimpleLogger = SimpleLogger.getSimpleLogger();
 
-  private static instance: TemplateGenerator;
-
   private language: Language | undefined;
 
-  async initialize(language: Language) {
+  async initialize(language?: Language) {
     this.language = language;
   }
 
@@ -179,27 +182,39 @@ export class TemplateGenerator
     throw new Error(`${filePath} already exists.`);
   }
 
-  async generateEvents(events: [], eventsDir: string) {
+  async generateEvents(events: any[], eventsDir: string) {
     if (!this.language) throw new Error("Language was not set");
     for (const event of events) {
       const fileName = getEventName(event, this.language);
       const filePath = path.join(eventsDir, fileName);
       const exists = await this.fileSystem.exists(filePath);
-      const template =
-        this.language === "javascript"
-          ? eventTemplates[event]
-          : eventTemplatesTS[event];
-      console.log(template);
+      const template = this.getTemplate(event);
       if (!exists) {
         await this.fileSystem.createFile(filePath, template);
       }
     }
   }
 
-  public static getTemplateGenerator(): TemplateGenerator {
+  getTemplate(event: string) {
+    return this.language === "javascript" ? eventsJS[event] : eventsTS[event];
+  }
+
+  static getTemplateGenerator(): TemplateGenerator {
     if (!TemplateGenerator.instance) {
       TemplateGenerator.instance = new TemplateGenerator();
     }
     return TemplateGenerator.instance;
+  }
+
+  public getFileSystem(): FileSystem {
+    return this.fileSystem;
+  }
+
+  public getLogger(): Logger {
+    return this.logger;
+  }
+
+  public getLanguage(): Language | undefined {
+    return this.language;
   }
 }

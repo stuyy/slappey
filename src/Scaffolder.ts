@@ -3,7 +3,7 @@ import { FileSystem } from "./FileSystem";
 import { PackageManager } from "./Manager";
 import { Prompter } from "./Prompter";
 import { TemplateGenerator } from "./TemplateGenerator";
-import { capitalize, getCommandName, StructureType } from "./utils";
+import { StructureType } from "./utils";
 import { ProjectScaffolder } from "./utils/interfaces";
 
 export class Scaffolder implements ProjectScaffolder {
@@ -22,7 +22,7 @@ export class Scaffolder implements ProjectScaffolder {
     const config = { name, language, manager, token, prefix };
     const basePath = path.join(this.fileSystem.getCurrentDir(), name);
 
-    await this.fileSystem.initialize(language, config);
+    await this.fileSystem.initialize(config);
     await this.fileSystem.createProjectDirectory(name);
     await this.fileSystem.createConfig(config);
     await this.manager.initialize(config, basePath);
@@ -69,5 +69,21 @@ export class Scaffolder implements ProjectScaffolder {
     const exists = await this.fileSystem.exists(eventsDir);
     if (!exists) await this.fileSystem.createDirectory(eventsDir);
     return this.generator.generateEvents(events, eventsDir);
+  }
+
+  public getPrompter(): Prompter {
+    return this.prompter;
+  }
+
+  public getFileSystem(): FileSystem {
+    return this.fileSystem;
+  }
+
+  public getManager(): PackageManager {
+    return this.manager;
+  }
+
+  public getGenerator(): TemplateGenerator {
+    return this.generator;
   }
 }

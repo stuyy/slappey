@@ -1,2 +1,4 @@
 lib
+__tests__
+__mocks__
 src
