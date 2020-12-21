@@ -5,6 +5,7 @@ import {
   Language,
   SlappeyConfig,
   FileSystemManager,
+  getPackageScripts,
 } from "./utils/index";
 import { getMainFile, getMainFileTS } from "./templates/templates";
 
@@ -17,8 +18,8 @@ export class FileSystem implements FileSystemManager, Initializer {
 
   private CURRENT_DIR: string = process.cwd();
 
-  async initialize(config: SlappeyConfig) {
-    this.language = config.language;
+  async initialize(config?: SlappeyConfig) {
+    this.language = config?.language;
     this.config = config;
   }
 
@@ -75,22 +76,15 @@ export class FileSystem implements FileSystemManager, Initializer {
     return this.CURRENT_DIR;
   }
 
-  async updatePackageJson(basePath: string, language: string) {
+  async updatePackageJson(basePath: string) {
+    if (!this.config || !this.language)
+      throw new Error("Config not initialized.");
     const packageJson = path.join(basePath, "package.json");
     const encoding = "utf8";
     const buffer = await fs.readFile(packageJson, encoding);
     const json = JSON.parse(buffer);
-    json.scripts = {};
-    json.scripts.dev =
-      language === "js" ? "nodemon ./src/bot.js" : "nodemon  src/bot.ts";
-    json.scripts.start =
-      language === "js" ? "node ./src/bot.js" : "node ./build/bot.js";
-    if (language === "ts") json.scripts.build = "tsc --build";
+    json.scripts = getPackageScripts(this.language);
     return fs.writeFile(packageJson, JSON.stringify(json, null, 2));
-  }
-
-  async createTsConfig(basePath: string): Promise<void> {
-    return;
   }
 
   async exists(filePath: string): Promise<boolean> {

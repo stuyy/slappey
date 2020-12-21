@@ -470,4 +470,9 @@ describe("TemplateGenerator", () => {
       generator.getTemplate("ready");
     });
   });
+
+  it("should return the singleton", () => {
+    const instance = TemplateGenerator.getTemplateGenerator();
+    expect(instance).toBeDefined();
+  });
 });

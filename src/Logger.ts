@@ -10,11 +10,11 @@ export class SimpleLogger implements Logger {
   }
 
   error(message: string): void {
-    throw new Error("Method not implemented.");
+    console.log(`${symbols.error} ${chalk.redBright.bold(message)}`);
   }
 
   warning(message: string): void {
-    throw new Error("Method not implemented.");
+    console.log(`${symbols.warning} ${chalk.gray.bold(message)}`);
   }
 
   info(message: string): void {

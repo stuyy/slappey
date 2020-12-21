@@ -32,7 +32,7 @@ export class Prompter implements ProjectPrompter {
     return { name, category };
   }
 
-  async event(): Promise<[]> {
+  async event(): Promise<any[]> {
     const { events } = await prompts(eventGenerate);
     return events;
   }

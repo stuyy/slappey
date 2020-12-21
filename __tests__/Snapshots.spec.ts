@@ -1,4 +1,25 @@
+import { eventGenerate } from "../src/utils/questions";
+import eventTemplatesJS from "../src/templates/events";
+import eventTemplatesTS from "../src/templates/tsevents";
 import * as templates from "../src/templates/templates";
+
+const eventsJS: any = eventTemplatesJS;
+const eventsTS: any = eventTemplatesTS;
+
+describe("Generating Event Snapshots", () => {
+  it("should generate all Javascript Event Files", () => {
+    const { choices } = eventGenerate[0];
+    for (const { value } of choices!) {
+      expect(eventsJS[value]).toMatchSnapshot();
+    }
+  });
+  it("should generate all Typescript Events", () => {
+    const { choices } = eventGenerate[0];
+    for (const { value } of choices!) {
+      expect(eventsTS[value]).toMatchSnapshot();
+    }
+  });
+});
 
 describe("Templates", () => {
   it("should match envTemplate", () => {

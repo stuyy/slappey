@@ -37,6 +37,7 @@ export interface ProjectTemplateGenerator {
   generateReadyEvent(filePath: string): void;
   generateMessageEvent(filePath: string): void;
   generateClient(filePath: string): void;
+  updatePackageJson(filePath: string): void;
 }
 
 export interface FileSystemManager {
@@ -49,7 +50,6 @@ export interface FileSystemManager {
   getFileToJson(filePath: string): Promise<SlappeyConfig>;
   exists(filePath: string): Promise<boolean>;
   findFile(filePath: string): Promise<void>;
-  createTsConfig(basePath: string): Promise<void>;
   updatePackageJson(basePath: string, language: string): Promise<void>;
 }
 

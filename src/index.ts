@@ -2,15 +2,14 @@
 import { checkStructType, CLIArguments, StructureType } from "./utils/index";
 import { checkOptionType } from "./utils";
 import { Scaffolder } from "./Scaffolder";
-import messages from "./utils/messages";
 
 export async function main() {
   const scaffolder = new Scaffolder();
   const args = process.argv.slice(2);
   if (args.length === 0) {
-    // TO-DO
+    // If no arguments, then prompt the user to select their options
   } else if (args.length === 1) {
-    // TO-DO
+    // Assume the first argument is "gen" or "new". If new, prompt for project name. If gen, prompt for Command or Event
   } else if (args.length === 2) {
     const [option, data] = <CLIArguments>args;
     if (checkOptionType(option)) {

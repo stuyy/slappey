@@ -60,3 +60,13 @@ export const getMockPaths = (srcPath: string) => ({
   events: `${srcPath}\\events`,
   client: `${srcPath}\\client`,
 });
+
+export const getMockScripts = (language: Language) => ({
+  dev:
+    language === "javascript"
+      ? "nodemon ./src/index.js"
+      : "nodemon ./src/index.ts",
+  start:
+    language === "javascript" ? "node ./src/index.js" : "node ./build/index.js",
+  build: language === "javascript" ? "" : "tsc",
+});

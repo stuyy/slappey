@@ -4,16 +4,30 @@ Slap together a Discord Bot project in seconds!
 
 ![slappey-logo](https://i.imgur.com/q4ofLAo.png)
 
-
 ## What is Slappey?
 
-Slappey is a cli tool that lets you generate a Discord.JS project (version 12 or version 11), in a matter of seconds.
+Slappey is a CLI (Command Line Interface) tool that lets you generate a Discord.JS project in a matter of seconds.
+
+## Why Slappey?
+
+Do you use a Command/Event Handler? Are you tired of having to copy & paste the same files over and over again, or cloning a repository? Slappey serves as a purpose to eliminate the annoyance of doing that. Instead, with a simple command, Slappey will generate a base structure for your next Discord Bot Project.
+
+It does so by using the most basic command & event handler. Simplicity is key. And since it works well, why change it? Regardless, if you need to try some things out without needing to re-write the same functions all the time, Slappey is great for that.
+
+It also eliminates the abstraction away from users so they need not worry about how commands and events are registered. It will just work out of the box.
+
+## What Slappey is NOT
+
+- A Framework
+- A Library
+- A Discord Bot (It is a Discord Bot Project **generator**)
+- A replacement for coding
 
 Currently supports only JavaScript, but will support TypeScript soon.
 
 # Instructions
 
-Install slappey by running `npm install -g slappey` on your terminal or Windows CMD. This will install slappey globally.
+Install slappey by running `npm install -g slappey` or `yarn global add slappey` on your terminal or Windows CMD. This will install Slappey globally.
 
 - To create a project, type `slappey`, or simply type `slappey new <name of project>`
 
@@ -35,7 +49,6 @@ Install slappey by running `npm install -g slappey` on your terminal or Windows 
 
 - To select event(s), press space bar and use the up and down arrow keys to navigate. Hit enter when you're done and your event files will be generated in the `src/events` folder.
 
-
 ## Will Slappey support TypeScript?
 
 - ~~Soon~~
@@ -51,4 +64,3 @@ Otherwise, if you have TypeScript installed, you can skip this part and just run
 ## Will Slappey support Python?
 
 - Soon
-

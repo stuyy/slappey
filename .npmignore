@@ -3,3 +3,6 @@ tsconfig.json
 .eslintignore
 .eslintrc.js
 coverage
+__mocks__
+__tests__
+jest.config.js

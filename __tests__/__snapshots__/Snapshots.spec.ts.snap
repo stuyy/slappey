@@ -1,0 +1,1711 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 1`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ChannelCreateEvent extends BaseEvent {
+  constructor() {
+    super('channelCreate');
+  }
+  
+  async run(client, channel) {
+    console.log(channel.name + ' was created.');
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 2`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ChannelDeleteEvent extends BaseEvent {
+  constructor() {
+    super('channelDelete');
+  }
+  
+  async run(client, channel) {
+    
+  }
+}
+"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 3`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelPinsUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ChannelPinsUpdateEvent extends BaseEvent {
+  constructor() {
+    super('channelPinsUpdate');
+  }
+  
+  async run(client, channel) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 4`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ChannelUpdateEvent extends BaseEvent {
+  constructor() {
+    super('channelUpdate');
+  }
+  
+  async run(client, oldChannel, newChannel) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 5`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-debug
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ChannelPinsUpdateEvent extends BaseEvent {
+  constructor() {
+    super('channelPinsUpdate');
+  }
+  
+  async run(client, info) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 6`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class EmojiCreateEvent extends BaseEvent {
+  constructor() {
+    super('emojiCreate');
+  }
+  
+  async run(client, emoji) {
+    
+  }
+}
+"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 7`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class EmojiDeleteEvent extends BaseEvent {
+  constructor() {
+    super('emojiDelete');
+  }
+  
+  async run(client, emoji) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 8`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class EmojiUpdateEvent extends BaseEvent {
+  constructor() {
+    super('emojiUpdate');
+  }
+  
+  async run(client, oldEmoji, newEmoji) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 9`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-error
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ErrorEvent extends BaseEvent {
+  constructor() {
+    super('error');
+  }
+  
+  async run(client, error) {
+    
+  }
+}
+"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 10`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanAdd
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildBanAddEvent extends BaseEvent {
+  constructor() {
+    super('guildBanAdd');
+  }
+  
+  async run(client, guild, user) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 11`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanRemove
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildBanRemoveEvent extends BaseEvent {
+  constructor() {
+    super('guildBanRemove');
+  }
+  
+  async run(client, guild, user) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 12`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildCreateEvent extends BaseEvent {
+  constructor() {
+    super('guildCreate');
+  }
+  
+  async run(client, guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 13`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildDeleteEvent extends BaseEvent {
+  constructor() {
+    super('guildDelete');
+  }
+  
+  async run(client, guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 14`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildIntegrationsUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildIntegrationsUpdateEvent extends BaseEvent {
+  constructor() {
+    super('guildIntegrationsUpdate');
+  }
+  
+  async run(client, guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 15`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAdd
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMemberAddEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberAdd');
+  }
+  
+  async run(client, member) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 16`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberRemove
+  const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMemberRemoveEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberRemove');
+  }
+  
+  async run(client, member) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 17`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
+  const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMembersChunkEvent extends BaseEvent {
+  constructor() {
+    super('guildMembersChunk');
+  }
+  
+  async run(client, members, guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 18`] = `undefined`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 19`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMemberUpdateEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberUpdate');
+  }
+  
+  async run(client, oldMember, newMember) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 20`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUnavailable
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildUnavailableEvent extends BaseEvent {
+  constructor() {
+    super('guildUnavailable');
+  }
+  
+  async run(client, guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 21`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildUpdateEvent extends BaseEvent {
+  constructor() {
+    super('guildUpdate');
+  }
+  
+  async run(client, oldGuild, newGuild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 22`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageEvent extends BaseEvent {
+  constructor() {
+    super('message');
+  }
+  
+  async run(client, message) {
+    console.log(client.usert.tag + ' has logged in.');
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 23`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageDeleteEvent extends BaseEvent {
+  constructor() {
+    super('messageDelete');
+  }
+  
+  async run(client, message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 24`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDeleteBulk
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageDeleteBulkEvent extends BaseEvent {
+  constructor() {
+    super('messageDeleteBulk');
+  }
+  
+  async run(client, messages) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 25`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionAdd
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageReactionAddEvent extends BaseEvent {
+  constructor() {
+    super('messageReactionAdd');
+  }
+  
+  async run(client, reaction, user) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 26`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemove
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageReactionRemoveEvent extends BaseEvent {
+  constructor() {
+    super('messageReactionRemove');
+  }
+  
+  async run(client, reaction, user) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 27`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemoveAll
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageReactionRemoveAllEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  
+  async run(client, message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 28`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemoveEmoji
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageReactionRemoveEmojiEvent extends BaseEvent {
+  constructor() {
+    super('messageReactionRemoveEmoji');
+  }
+  
+  async run(client, reaction) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 29`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class MessageUodateEvent extends BaseEvent {
+  constructor() {
+    super('messageUpdate');
+  }
+  
+  async run(client, oldMessage, newMessage) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 30`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-presenceUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class PresenceUpdateEvent extends BaseEvent {
+  constructor() {
+    super('presenceUpdate');
+  }
+  
+  async run(client, oldPresence, newPresence) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 31`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-rateLimit
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class RateLimitEvent extends BaseEvent {
+  constructor() {
+    super('rateLimit');
+  }
+  
+  async run(client, rateLimitInfo) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 32`] = `
+"// const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ReadyEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  
+  async run(client) {
+    console.log(client.user.tag + ' has logged in.');
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 33`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class RoleCreateEvent extends BaseEvent {
+  constructor() {
+    super('roleCreate');
+  }
+  
+  async run(client, role) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 34`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class RoleDeleteEvent extends BaseEvent {
+  constructor() {
+    super('roleDelete');
+  }
+  
+  async run(client, role) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 35`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class RoleUpdateEvent extends BaseEvent {
+  constructor() {
+    super('roleUpdate');
+  }
+  
+  async run(client, oldRole, newRole) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 36`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ShardDisconnectEvent extends BaseEvent {
+  constructor() {
+    super('shardDisconnect');
+  }
+  
+  async run(client, message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 37`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardError
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ShardErrorEvent extends BaseEvent {
+  constructor() {
+    super('shardError');
+  }
+  
+  async run(client, message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 38`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class EmojiDeleteEvent extends BaseEvent {
+  constructor() {
+    super('shardReady');
+  }
+  
+  async run(client, id, unavailableGuilds) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 39`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardReconnecting
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ShardReconnectingEvent extends BaseEvent {
+  constructor() {
+    super('shardReconnecting');
+  }
+  
+  async run(client, id) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 40`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardResume
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ShardResumeEvent extends BaseEvent {
+  constructor() {
+    super('shardResume');
+  }
+  
+  async run(client, id, replayedEvents) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 41`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-typingStart
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class TypingStartEvent extends BaseEvent {
+  constructor() {
+    super('typingStart');
+  }
+  
+  async run(client, channel, user) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 42`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-userUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class UserUpdateEvent extends BaseEvent {
+  constructor() {
+    super('userUpdate');
+  }
+  
+  async run(client, oldUser, newUser) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 43`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-voiceStateUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class WoiceStateUpdateEvent extends BaseEvent {
+  constructor() {
+    super('voiceStateUpdate');
+  }
+  
+  async run(client, oldState, newState) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 44`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-warn
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class WarnEvent extends BaseEvent {
+  constructor() {
+    super('warn');
+  }
+  
+  async run(client, info) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Javascript Event Files 45`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-webhookUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class WebhookUpdateEvent extends BaseEvent {
+  constructor() {
+    super('webhookUpdate');
+  }
+  
+  async run(client, channel) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 1`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelCreate
+import { DMChannel, GuildChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ChannelCreateEvent extends BaseEvent {
+  constructor() {
+    super('channelCreate');
+  }
+  
+  async run(client: DiscordClient, channel: DMChannel | GuildChannel) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 2`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelDelete
+import { DMChannel, GuildChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ChannelDeleteEvent extends BaseEvent {
+  constructor() {
+    super('channelDelete');
+  }
+  
+  async run(client: DiscordClient, channel: DMChannel | GuildChannel) {
+    
+  }
+}
+"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 3`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelPinsUpdate
+import { DMChannel, TextChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ChannelPinsUpdateEvent extends BaseEvent {
+  constructor() {
+    super('channelPinsUpdate');
+  }
+  
+  async run(client: DiscordClient, channel: DMChannel | TextChannel, time: Date) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 4`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelUpdate
+import { DMChannel, GuildChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ChannelUpdateEvent extends BaseEvent {
+  constructor() {
+    super('channelUpdate');
+  }
+  
+  async run(client: DiscordClient, oldChannel: DMChannel | TextChannel, newChannel: DMChannel | TextChannel) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 5`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-debug
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+  export default class ChannelPinsUpdateEvent extends BaseEvent {
+    constructor() {
+      super('channelPinsUpdate');
+    }
+    
+    async run(client: DiscordClient, info: string) {
+      
+    }
+  }"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 6`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiCreate
+import { GuildEmoji } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class EmojiCreateEvent extends BaseEvent {
+  constructor() {
+    super('emojiCreate');
+  }
+  
+  async run(client: DiscordClient, emoji: GuildEmoji) {
+    
+  }
+}
+"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 7`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiDelete
+import { GuildEmoji } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class EmojiDeleteEvent extends BaseEvent {
+  constructor() {
+    super('emojiDelete');
+  }
+  
+  async run(client: DiscordClient, emoji: GuildEmoji) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 8`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+import { GuildEmoji } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class EmojiUpdateEvent extends BaseEvent {
+  constructor() {
+    super('emojiUpdate');
+  }
+  
+  async run(client: DiscordClient, oldEmoji: GuildEmoji, newEmoji: GuildEmoji) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 9`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-error
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ErrorEvent extends BaseEvent {
+  constructor() {
+    super('error');
+  }
+  
+  async run(client: DiscordClient, error: Error) {
+    console.log(error);
+  }
+}
+"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 10`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanAdd
+import { Guild, User } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildBanAddEvent extends BaseEvent {
+  constructor() {
+    super('guildBanAdd');
+  }
+  
+  async run(client: DiscordClient, guild: Guild, user: User) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 11`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanRemove
+import { Guild, User } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildBanRemoveEvent extends BaseEvent {
+  constructor() {
+    super('guildBanRemove');
+  }
+  
+  async run(client: DiscordClient, guild: Guild, user: User) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 12`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildCreate
+import { Guild } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildCreateEvent extends BaseEvent {
+  constructor() {
+    super('guildCreate');
+  }
+  
+  async run(client: DiscordClient, guild: Guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 13`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildDelete
+import { Guild } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildDeleteEvent extends BaseEvent {
+  constructor() {
+    super('guildDelete');
+  }
+  
+  async run(client: DiscordClient, guild: Guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 14`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildIntegrationsUpdate
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+import { Guild } from 'discord.js';
+
+export default class GuildIntegrationsUpdateEvent extends BaseEvent {
+  constructor() {
+    super('guildIntegrationsUpdate');
+  }
+  
+  async run(client: DiscordClient, guild: Guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 15`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAdd
+import { GuildMember } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildMemberAddEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberAdd');
+  }
+  
+  async run(client: DiscordClient, member: GuildMember) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 16`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberRemove
+import { GuildMember } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildMemberRemoveEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberRemove');
+  }
+  
+  async run(client: DiscordClient, member: GuildMember) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 17`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
+import { Snowflake, GuildMember, Guild } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildMembersChunkEvent extends BaseEvent {
+  constructor() {
+    super('guildMembersChunk');
+  }
+  
+  async run(client: DiscordClient, members: Collection<Snowflake, GuildMember>, guild: Guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 18`] = `undefined`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 19`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberUpdate
+import { GuildMember } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildMemberUpdateEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberUpdate');
+  }
+  
+  async run(client: DiscordClient, oldMember: GuildMember, newMember: GuildMember) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 20`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUnavailable
+import { Guild } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildUnavailableEvent extends BaseEvent {
+  constructor() {
+    super('guildUnavailable');
+  }
+  
+  async run(client: DiscordClient, guild: Guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 21`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUpdate
+import { Guild } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildUpdateEvent extends BaseEvent {
+  constructor() {
+    super('guildUpdate');
+  }
+  
+  async run(client: DiscordClient, oldGuild: Guild, newGuild: Guild) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 22`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
+import { Message } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageEvent extends BaseEvent {
+  constructor() {
+    super('message');
+  }
+  
+  async run(client: DiscordClient, message: Message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 23`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
+import { Message } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageDeleteEvent extends BaseEvent {
+  constructor() {
+    super('messageDelete');
+  }
+  
+  async run(client: DiscordClient, message: Message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 24`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDeleteBulk
+import { Collection, Message, Snowflake } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageDeleteBulkEvent extends BaseEvent {
+  constructor() {
+    super('messageDeleteBulk');
+  }
+  
+  async run(client: DiscordClient, messages: Collection<Snowflake, Message>) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 25`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionAdd
+import { MessageReaction, User } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageReactionAddEvent extends BaseEvent {
+  constructor() {
+    super('messageReactionAdd');
+  }
+  
+  async run(client: DiscordClient, reaction: MessageReaction, user: User) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 26`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemove
+import { MessageReaction, User } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageReactionRemoveEvent extends BaseEvent {
+  constructor() {
+    super('messageReactionRemove');
+  }
+  
+  async run(client: DiscordClient, reaction: MessageReaction, user: User) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 27`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemoveAll
+import { Message } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageReactionRemoveAllEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  
+  async run(client: DiscordClient, message: Message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 28`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageReactionRemoveEmoji
+import { MessageReaction } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageReactionRemoveEmojiEvent extends BaseEvent {
+  constructor() {
+    super('messageReactionRemoveEmoji');
+  }
+  
+  async run(client: DiscordClient, reaction: MessageReaction) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 29`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageUpdate
+import { Message } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class MessageUodateEvent extends BaseEvent {
+  constructor() {
+    super('messageUpdate');
+  }
+  
+  async run(client: DiscordClient, oldMessage: Message, newMessage: Message) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 30`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-presenceUpdate
+import { Presence } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class PresenceUpdateEvent extends BaseEvent {
+  constructor() {
+    super('presenceUpdate');
+  }
+  
+  async run(client: DiscordClient, oldPresence: Presence | null | undefined, newPresence: Presence) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 31`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-rateLimit
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+interface RateLimitInfo {
+  readonly timeout: number;
+  readonly limit: number;
+  readonly method: string;
+  readonly path: string;
+  readonly route: string;
+}
+
+export default class RateLimitEvent extends BaseEvent {
+  constructor() {
+    super('rateLimit');
+  }
+  
+  async run(client: DiscordClient, rateLimitInfo: RateLimitInfo) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 32`] = `
+"// import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ReadyEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  
+  async run(client: DiscordClient) {
+    console.log(client: DiscordClient.user.tag + ' has logged in.');
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 33`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleCreate
+import { Role } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class RoleCreateEvent extends BaseEvent {
+  constructor() {
+    super('roleCreate');
+  }
+  
+  async run(client: DiscordClient, role: Role) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 34`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleDelete
+import { Role } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class RoleDeleteEvent extends BaseEvent {
+  constructor() {
+    super('roleDelete');
+  }
+  
+  async run(client: DiscordClient, role: Role) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 35`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleUpdate
+import { Role } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class RoleUpdateEvent extends BaseEvent {
+  constructor() {
+    super('roleUpdate');
+  }
+  
+  async run(client: DiscordClient, oldRole: Role, newRole: Role) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 36`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ShardDisconnectEvent extends BaseEvent {
+  constructor() {
+    super('shardDisconnect');
+  }
+  
+  async run(client: DiscordClient, event: CloseEvent, id: number) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 37`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardError
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ShardErrorEvent extends BaseEvent {
+  constructor() {
+    super('shardError');
+  }
+  
+  async run(client: DiscordClient, error: Error, shardID: number) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 38`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class EmojiDeleteEvent extends BaseEvent {
+  constructor() {
+    super('shardReady');
+  }
+  
+  async run(client: DiscordClient, id: number, unavailableGuilds?: Set<string>) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 39`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardReconnecting
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ShardReconnectingEvent extends BaseEvent {
+  constructor() {
+    super('shardReconnecting');
+  }
+  
+  async run(client: DiscordClient, id: number) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 40`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardResume
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ShardResumeEvent extends BaseEvent {
+  constructor() {
+    super('shardResume');
+  }
+  
+  async run(client: DiscordClient, id: number, replayedEvents: number) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 41`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-typingStart
+import { Channel, User } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class TypingStartEvent extends BaseEvent {
+  constructor() {
+    super('typingStart');
+  }
+  
+  async run(client: DiscordClient, channel: Channel, user: User) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 42`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-userUpdate
+import { User } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class UserUpdateEvent extends BaseEvent {
+  constructor() {
+    super('userUpdate');
+  }
+  
+  async run(client: DiscordClient, oldUser: User, newUser: User) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 43`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-voiceStateUpdate
+import { VoiceState } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class WoiceStateUpdateEvent extends BaseEvent {
+  constructor() {
+    super('voiceStateUpdate');
+  }
+  
+  async run(client: DiscordClient, oldState: VoiceState, newState: VoiceState) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 44`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-warn
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class WarnEvent extends BaseEvent {
+  constructor() {
+    super('warn');
+  }
+  
+  async run(client: DiscordClient, info: string) {
+    
+  }
+}"
+`;
+
+exports[`Generating Event Snapshots should generate all Typescript Events 45`] = `
+"// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-webhookUpdate
+import { TextChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class WebhookUpdateEvent extends BaseEvent {
+  constructor() {
+    super('webhookUpdate');
+  }
+  
+  async run(client: DiscordClient, channel: TextChannel) {
+    
+  }
+}"
+`;
+
+exports[`Templates should match envTemplate 1`] = `
+"DISCORD_BOT_TOKEN=123
+DISCORD_BOT_PREFIX=123"
+`;
+
+exports[`Templates should match getBaseCommand 1`] = `
+"module.exports = class BaseCommand {
+  constructor(name, category, aliases) {
+    this.name = name;
+    this.category = category;
+    this.aliases = aliases;
+  }
+}"
+`;
+
+exports[`Templates should match getBaseCommandTS 1`] = `
+"
+import { Message } from 'discord.js';
+import DiscordClient from '../../client/client';
+
+export default abstract class BaseCommand {
+  constructor(private name: string, private category: string, private aliases: Array<string>) {}
+
+  getName(): string { return this.name; }
+  getCategory(): string { return this.category; }
+  getAliases(): Array<string> { return this.aliases; }
+
+  abstract run(client: DiscordClient, message: Message, args: Array<string> | null): Promise<void>;
+}"
+`;
+
+exports[`Templates should match getBaseEvent 1`] = `
+"module.exports = class BaseEvent {
+  constructor(name) {
+    this.name = name;
+  }
+}"
+`;
+
+exports[`Templates should match getBaseEventTS 1`] = `
+"
+import DiscordClient from '../../client/client';
+
+export default abstract class BaseEvent {
+  constructor(private name: string) { }
+
+  getName(): string { return this.name; }
+  abstract run(client: DiscordClient, ...args: any): void;
+}
+"
+`;
+
+exports[`Templates should match getCommandTemplate 1`] = `
+"const BaseCommand = require('../../utils/structures/BaseCommand');
+
+module.exports = class BanCommand extends BaseCommand {
+  constructor() {
+    super('Ban', 'mod', []);
+  }
+
+  run(client, message, args) {
+    message.channel.send('Ban command works');
+  }
+}"
+`;
+
+exports[`Templates should match getCommandTemplateTS 1`] = `
+"import { Message } from 'discord.js';
+import BaseCommand from '../../utils/structures/BaseCommand';
+import DiscordClient from '../../client/client';
+
+export default class KickCommand extends BaseCommand {
+  constructor() {
+    super('Kick', 'mod', []);
+  }
+
+  async run(client: DiscordClient, message: Message, args: Array<string>) {
+    message.channel.send('Kick command works');
+  }
+}"
+`;
+
+exports[`Templates should match getMainFile 1`] = `
+"require('dotenv').config();
+const { Client } = require('discord.js');
+const { registerCommands, registerEvents } = require('./utils/registry');
+const client = new Client();
+const config = require('../slappey.json');
+
+(async () => {
+  client.commands = new Map();
+  client.events = new Map();
+  client.prefix = process.env.DISCORD_BOT_PREFIX;
+  await registerCommands(client, '../commands');
+  await registerEvents(client, '../events');
+  await client.login(config.token);
+})();
+
+"
+`;
+
+exports[`Templates should match getMainFileTS 1`] = `
+"import { config } from 'dotenv';
+config();
+import { registerCommands, registerEvents } from './utils/registry';
+import DiscordClient from './client/client';
+const client = new DiscordClient({});
+const config = require('../slappey.json');
+
+(async () => {
+  client.prefix = process.env.DISCORD_BOT_PREFIX || client.prefix;
+  await registerCommands(client, '../commands');
+  await registerEvents(client, '../events');
+  await client.login(config.token);
+})();
+
+"
+`;
+
+exports[`Templates should match getMessageEvent 1`] = `
+"const BaseEvent = require('../../utils/structures/BaseEvent');
+
+module.exports = class MessageEvent extends BaseEvent {
+  constructor() {
+    super('message');
+  }
+  
+  async run(client, message) {
+    if (message.author.bot) return;
+    if (message.content.startsWith(client.prefix)) {
+      const [cmdName, ...cmdArgs] = message.content
+      .slice(client.prefix.length)
+      .trim()
+      .split(/\\\\s+/);
+      const command = client.commands.get(cmdName);
+      if (command) {
+        command.run(client, message, cmdArgs);
+      }
+    }
+  }
+}"
+`;
+
+exports[`Templates should match getMessageEventTS 1`] = `
+"import BaseEvent from '../../utils/structures/BaseEvent';
+import { Message } from 'discord.js';
+import DiscordClient from '../../client/client';
+
+export default class MessageEvent extends BaseEvent {
+  constructor() {
+    super('message');
+  }
+
+  async run(client: DiscordClient, message: Message) {
+    if (message.author.bot) return;
+    if (message.content.startsWith(client.prefix)) {
+      const [cmdName, ...cmdArgs] = message.content
+        .slice(client.prefix.length)
+        .trim()
+        .split(/\\\\s+/);
+      const command = client.commands.get(cmdName);
+      if (command) {
+        command.run(client, message, cmdArgs);
+      }
+    }
+  }
+}"
+`;
+
+exports[`Templates should match getReadyEvent 1`] = `
+"const BaseEvent = require('../../utils/structures/BaseEvent');
+
+module.exports = class ReadyEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  async run (client) {
+    console.log(client.user.tag + ' has logged in.');
+  }
+}"
+`;
+
+exports[`Templates should match getReadyEventTS 1`] = `
+"import BaseEvent from '../../utils/structures/BaseEvent';
+import DiscordClient from '../../client/client';
+
+export default class ReadyEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  async run (client: DiscordClient) {
+    console.log('Bot has logged in.');
+  }
+}"
+`;
+
+exports[`Templates should match getRegistryFile 1`] = `
+"
+const path = require('path');
+const fs = require('fs').promises;
+const BaseCommand = require('./structures/BaseCommand');
+const BaseEvent = require('./structures/BaseEvent');
+
+async function registerCommands(client, dir = '') {
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
+    if (file.endsWith('.js')) {
+      const Command = require(path.join(filePath, file));
+      if (Command.prototype instanceof BaseCommand) {
+        const cmd = new Command();
+        client.commands.set(cmd.name, cmd);
+        cmd.aliases.forEach((alias) => {
+          client.commands.set(alias, cmd);
+        });
+      }
+    }
+  }
+}
+
+async function registerEvents(client, dir = '') {
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerEvents(client, path.join(dir, file));
+    if (file.endsWith('.js')) {
+      const Event = require(path.join(filePath, file));
+      if (Event.prototype instanceof BaseEvent) {
+        const event = new Event();
+        client.events.set(event.name, event);
+        client.on(event.name, event.run.bind(event, client));
+      }
+    }
+  }
+}
+
+module.exports = { 
+  registerCommands, 
+  registerEvents,
+};"
+`;
+
+exports[`Templates should match getRegistryFileTS 1`] = `
+"
+import path from 'path';
+import { promises as fs } from 'fs';
+import DiscordClient from '../client/client';
+
+export async function registerCommands(client: DiscordClient, dir: string = '') {
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
+    if (file.endsWith('.js') || file.endsWith('.ts')) {
+      const { default: Command } = await import(path.join(dir, file));
+      const command = new Command();
+      client.commands.set(command.getName(), command);
+      command.getAliases().forEach((alias: string) => {
+        client.commands.set(alias, command);
+      });
+    }
+  }
+}
+
+export async function registerEvents(client: DiscordClient, dir: string = '') {
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerEvents(client, path.join(dir, file));
+    if (file.endsWith('.js') || file.endsWith('.ts')) {
+      const { default: Event } = await import(path.join(dir, file));
+      const event = new Event();
+      client.events.set(event.getName(), event);
+      client.on(event.getName(), event.run.bind(event, client));
+    }
+  }
+}
+"
+`;
+
+exports[`Templates should match getTestCommand 1`] = `
+"const BaseCommand = require('../../utils/structures/BaseCommand');
+
+module.exports = class TestCommand extends BaseCommand {
+  constructor() {
+    super('test', 'testing', []);
+  }
+
+  async run(client, message, args) {
+    message.channel.send('Test command works');
+  }
+}"
+`;
+
+exports[`Templates should match getTestCommandTS 1`] = `
+"import { Message } from 'discord.js';
+import BaseCommand from '../../utils/structures/BaseCommand';
+import DiscordClient from '../../client/client';
+
+export default class TestCommand extends BaseCommand {
+  constructor() {
+    super('test', 'testing', []);
+  }
+
+  async run(client: DiscordClient, message: Message, args: Array<string>) {
+    message.channel.send('Test command works');
+  }
+}"
+`;
+
+exports[`Templates should match getTypescriptBotFile 1`] = `
+"import { Client, ClientOptions, Collection } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import BaseCommand from '../utils/structures/BaseCommand';
+
+export default class DiscordClient extends Client {
+
+  private _commands = new Collection<string, BaseCommand>();
+  private _events = new Collection<string, BaseEvent>();
+  private _prefix: string = '!';
+
+  constructor(options?: ClientOptions) {
+    super(options);
+  }
+
+  get commands(): Collection<string, BaseCommand> { return this._commands; }
+  get events(): Collection<string, BaseEvent> { return this._events; }
+  get prefix(): string { return this._prefix; }
+
+  set prefix(prefix: string) { this._prefix = prefix; }
+
+}
+"
+`;

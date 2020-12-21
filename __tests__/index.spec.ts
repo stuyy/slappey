@@ -12,6 +12,14 @@ describe("index.ts", () => {
 
   beforeEach(() => jest.clearAllMocks());
   describe("successful calls", () => {
+    it("should do something when 0 args are provided", async () => {
+      process.argv = ["node", "index.js"];
+      await main();
+    });
+    it("should do something when 1 args are provided", async () => {
+      process.argv = ["node", "index.js", "new"];
+      await main();
+    });
     it("should call createProject when 'new' is passed as an argument", async () => {
       process.argv = ["node", "index.js", "new", "project_name"];
       await main();

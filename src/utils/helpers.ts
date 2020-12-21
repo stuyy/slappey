@@ -19,3 +19,16 @@ export const getEventName = (name: string, language: Language) =>
   language === "javascript"
     ? `${capitalize(name)}Event.js`
     : `${capitalize(name)}Event.ts`;
+
+export const getPackageScripts = (language: Language) => {
+  const scripts = { dev: "", start: "", build: "" };
+  scripts.dev =
+    language === "typescript"
+      ? "nodemon ./src/index.ts"
+      : "nodemon ./src/index.js";
+  scripts.start =
+    language === "typescript" ? "node ./build/index.js" : "node ./src/index.js";
+  scripts.build = language === "typescript" ? "tsc" : "";
+
+  return scripts;
+};
