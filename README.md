@@ -1,6 +1,14 @@
 # Slappey
 
-Slap together a Discord Bot project in seconds!
+<p align="center">
+  <img src="https://img.shields.io/npm/dw/slappey?style=for-the-badge">
+  <img src="https://img.shields.io/npm/v/slappey?style=for-the-badge">
+  <img src="https://img.shields.io/github/forks/stuyy/slappey?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/stuyy/slappey?style=for-the-badge">
+  <img src="https://img.shields.io/discord/582319490122121247?style=for-the-badge">
+</p>
+
+<p align="center">Slap together a Discord Bot project in seconds!</p>
 
 ![slappey-logo](https://i.imgur.com/q4ofLAo.png)
 
@@ -18,35 +26,29 @@ It also eliminates the abstraction away from users so they need not worry about 
 
 ## What Slappey is NOT
 
-- A Framework
-- A Library
-- A Discord Bot (It is a Discord Bot Project **generator**)
-- A replacement for coding
+- Framework
+- Library
+- Discord Bot (It is a Discord Bot Project **generator**)
+- Replacement for coding
 
-Currently supports only JavaScript, but will support TypeScript soon.
-
-# Instructions
+# Getting Started
 
 Install slappey by running `npm install -g slappey` or `yarn global add slappey` on your terminal or Windows CMD. This will install Slappey globally.
 
-- To create a project, type `slappey`, or simply type `slappey new <name of project>`
-
+- To create a project, type `slappey`, or simply type `slappey new <name of project>` in your Terminal or Command Prompt.
 - Follow the steps and enter your Bot Token and Prefix.
-
 - Once done, `cd` into your project by typing `cd <name of project>`
+- To run the bot, type `npm run dev` or `yarn dev`. This will run the bot using `nodemon` which is installed locally.
 
-- To run the bot, type `npm run dev`. This will run the bot using `nodemon`, you MUST have `nodemon` installed, otherwise, use `npm run start`
-
-# Generating Commands
+## Generating Commands
 
 - Slappey allows you to generate commands into categories. You can type `slappey` and select **Generate** to generate a command, or `slappey new command`.
-
 - It will ask you for a name, and then a category. This will generate all commands in the `src/commands` folder, in the correct category.
+- You can also generate a command by typing `slappey gen command`. This will prompt you for a command name and category.
 
-# Generating Events
+## Generating Events
 
 - You can generate events by running `slappey new event`, this will prompt you to select which events you would like to generate.
-
 - To select event(s), press space bar and use the up and down arrow keys to navigate. Hit enter when you're done and your event files will be generated in the `src/events` folder.
 
 ## Will Slappey support TypeScript?
@@ -55,12 +57,44 @@ Install slappey by running `npm install -g slappey` or `yarn global add slappey`
 
 Slappey now supports TypeScript as of 6/1/2020!
 
-You must have TypeScript installed. However, if you don't, during the installation process, if you selected TypeScript, Slappey will ask you if you would like to install TypeScript, ts-node, and setup a basic tsconfig.json file. If you enter n (no), you will have to install these manually.
+~~You must have TypeScript installed. However, if you don't, during the installation process, if you selected TypeScript, Slappey will ask you if you would like to install TypeScript, ts-node, and setup a basic tsconfig.json file. If you enter n (no), you will have to install these manually.~~
 
-ts-node is a TypeScript interpreter for Node.JS, the dev script uses it along with nodemon, so be sure you have nodemon installed.
+~~ts-node is a TypeScript interpreter for Node.JS, the dev script uses it along with nodemon, so be sure you have nodemon installed.~~
 
-Otherwise, if you have TypeScript installed, you can skip this part and just run `npm run build` and then `npm run start`
+~~Otherwise, if you have TypeScript installed, you can skip this part and just run `npm run build` and then `npm run start`~~
 
 ## Will Slappey support Python?
 
 - Soon
+
+# Recipes
+
+### Integrating with Sequelize
+
+```
+Implementation Provided Soon
+```
+
+### Integrating with Mongoose
+
+```
+Implementation Provided Soon
+```
+
+### Integrating with MongoDB
+
+```
+Implementation Provided Soon
+```
+
+### Integrating with QuickDB
+
+```
+Implementation Provided Soon
+```
+
+### Integrating with Lavalink
+
+```
+Implementation Provided Soon
+```

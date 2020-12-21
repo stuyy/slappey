@@ -1,7 +1,7 @@
 {
   "name": "slappey",
   "version": "2.0.0",
-  "description": "",
+  "description": "A simple Discord Bot Project Scaffolder",
   "main": "./lib/index.js",
   "bin": {
     "slappey": "./lib/index.js"
@@ -14,8 +14,16 @@
     "test:watch": "jest --watch"
   },
   "repository": "git+https://github.com/stuyy/slappey.git",
-  "keywords": [],
-  "author": "A. Arizona",
+  "keywords": [
+    "discord",
+    "discord.js",
+    "discord project",
+    "discord bot",
+    "command line",
+    "cli tool",
+    "cli"
+  ],
+  "author": "Arizona Arizona",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stuyy/slappey/issues"
