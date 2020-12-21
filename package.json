@@ -10,23 +10,26 @@
     "build": "tsc",
     "dev": "nodemon ./src/index.ts",
     "start": "node ./lib/index.js",
-    "tsc": "tsc",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ansonfoong/slappey.git"
-  },
+  "repository": "git+https://github.com/stuyy/slappey.git",
   "keywords": [],
-  "author": "",
+  "author": "A. Arizona",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ansonfoong/slappey/issues"
+    "url": "https://github.com/stuyy/slappey/issues"
   },
-  "homepage": "https://github.com/ansonfoong/slappey#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test && yarn build",
+      "pre-push": "yarn test"
+    }
+  },
+  "homepage": "https://github.com/stuyy/slappey#readme",
   "dependencies": {
     "chalk": "^4.0.0",
+    "discord.js": "^12.5.1",
     "log-symbols": "^4.0.0",
     "prompts": "^2.3.2"
   },
@@ -34,17 +37,18 @@
     "@types/chalk": "^2.2.0",
     "@types/jest": "^26.0.19",
     "@types/log-symbols": "^3.0.0",
-    "@types/node": "^13.13.9",
+    "@types/node": "^14.14.14",
     "@types/prompts": "^2.0.6",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.3.6",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
     "ts-jest": "^26.4.4",
     "ts-node": "^8.9.1",
-    "typescript": "^4.1.3",
-    "watch": "^1.0.2"
+    "typescript": "^4.1.3"
   }
 }

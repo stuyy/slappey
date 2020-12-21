@@ -39,6 +39,7 @@ export const getMockTemplateGenerator = () => ({
 
 export const getMockPackageManager = () => ({
   initialize: jest.fn(),
+  setup: jest.fn(),
 });
 
 export const getMockPrompter = () => ({

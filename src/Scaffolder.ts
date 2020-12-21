@@ -1,10 +1,10 @@
 import path from "path";
-import { FileSystem } from "./FileSystem";
 import { PackageManager } from "./Manager";
 import { Prompter } from "./Prompter";
 import { TemplateGenerator } from "./TemplateGenerator";
 import { StructureType } from "./utils";
 import { ProjectScaffolder } from "./utils/interfaces";
+import { FileSystem } from "./FileSystem";
 
 export class Scaffolder implements ProjectScaffolder {
   private prompter: Prompter = Prompter.getPrompter();
@@ -26,6 +26,7 @@ export class Scaffolder implements ProjectScaffolder {
     await this.fileSystem.createProjectDirectory(name);
     await this.fileSystem.createConfig(config);
     await this.manager.initialize(config, basePath);
+    await this.manager.setup();
     await this.generator.initialize(language);
 
     const srcPath = await this.fileSystem.createSourceDirectory(name);

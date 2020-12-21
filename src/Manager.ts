@@ -11,22 +11,26 @@ export class PackageManager implements Initializer {
     this.config = config;
     this.filePath = filePath;
     this.prefix = this.config.manager === "npm" ? "npm i" : "yarn add";
+  }
+
+  async setup() {
+    if (!this.config) throw new Error("Config Not Initialized.");
     return this.config.manager === "npm"
       ? this.initializeNPM()
       : this.initializeYarn();
   }
 
-  private initializeNPM() {
+  public initializeNPM() {
     execSync(`${this.config?.manager} init -y`, { cwd: this.filePath });
     return this.installDependencies();
   }
 
-  private initializeYarn() {
+  public initializeYarn() {
     execSync(`${this.config?.manager} init -y`, { cwd: this.filePath });
     return this.installDependencies();
   }
 
-  private installDependencies() {
+  public installDependencies() {
     this.installDiscordJS();
     this.installNodemon();
     if (this.config?.language === "typescript") {
@@ -34,40 +38,39 @@ export class PackageManager implements Initializer {
     }
   }
 
-  private installTypes() {
+  public installTypes() {
     this.installTypescript();
     this.installNodeTypes();
   }
 
-  private installTypescript() {
+  public installTypescript() {
     return execSync(`${this.prefix} -D typescript`, {
       cwd: this.filePath,
       stdio: "ignore",
     });
   }
 
-  private installNodeTypes() {
+  public installNodeTypes() {
     return execSync(`${this.prefix} -D @types/node`, {
       cwd: this.filePath,
       stdio: "ignore",
     });
   }
 
-  private installDiscordJS() {
+  public installDiscordJS() {
     return execSync(`${this.prefix} discord.js@latest`, {
       cwd: this.filePath,
       stdio: "ignore",
     });
   }
 
-  private installNodemon() {
+  public installNodemon() {
     return execSync(`${this.prefix} -D nodemon`, {
       cwd: this.filePath,
       stdio: "ignore",
     });
   }
 
-  private installDotEnv(prefix: string) {}
   static getPackageManager(): PackageManager {
     if (!PackageManager.instance) {
       PackageManager.instance = new PackageManager();
