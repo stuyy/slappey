@@ -93,10 +93,7 @@ describe("Scaffolder", () => {
       expect(fileSystem.createSourceDirectory).toHaveBeenCalledWith("app");
       expect(fileSystem.createEntryFile).toHaveBeenCalledWith(srcPath);
       expect(generator.generateUtilities).toHaveBeenCalledWith(srcPath);
-      expect(fileSystem.updatePackageJson).toHaveBeenCalledWith(
-        baseDir,
-        language
-      );
+      expect(fileSystem.updatePackageJson).toHaveBeenCalledWith(baseDir);
     });
   });
 

@@ -32,7 +32,7 @@ export class Scaffolder implements ProjectScaffolder {
     const srcPath = await this.fileSystem.createSourceDirectory(name);
     await this.fileSystem.createEntryFile(srcPath);
     await this.generator.generateUtilities(srcPath);
-    await this.fileSystem.updatePackageJson(basePath, language);
+    await this.fileSystem.updatePackageJson(basePath);
   }
 
   async createStructure(structure: StructureType) {
