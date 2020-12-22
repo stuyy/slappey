@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/github/forks/stuyy/slappey?style=for-the-badge">
   <img src="https://img.shields.io/github/stars/stuyy/slappey?style=for-the-badge">
   <img src="https://img.shields.io/discord/582319490122121247?style=for-the-badge">
+  <br/>
   <p>Slap together a Discord Bot project in seconds!</p>
   <img src="https://i.imgur.com/q4ofLAo.png" alt="slappey-logo">
 </div>
