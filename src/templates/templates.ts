@@ -5,16 +5,16 @@ export function getEnvTemplate(token: string, prefix: string) {
 }
 
 export function getMainFile() {
-  return `require('dotenv').config();
+  return `
 const { Client } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
-const client = new Client();
 const config = require('../slappey.json');
+const client = new Client();
 
 (async () => {
   client.commands = new Map();
   client.events = new Map();
-  client.prefix = process.env.DISCORD_BOT_PREFIX;
+  client.prefix = config.prefix;
   await registerCommands(client, '../commands');
   await registerEvents(client, '../events');
   await client.login(config.token);
@@ -23,15 +23,14 @@ const config = require('../slappey.json');
 }
 
 export function getMainFileTS() {
-  return `import { config } from 'dotenv';
-config();
+  return `
 import { registerCommands, registerEvents } from './utils/registry';
+import config from '../slappey.json';
 import DiscordClient from './client/client';
 const client = new DiscordClient({});
-const config = require('../slappey.json');
 
 (async () => {
-  client.prefix = process.env.DISCORD_BOT_PREFIX || client.prefix;
+  client.prefix = config.prefix || client.prefix;
   await registerCommands(client, '../commands');
   await registerEvents(client, '../events');
   await client.login(config.token);
