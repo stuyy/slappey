@@ -1,16 +1,17 @@
 # Slappey
 
-<p align="center">
+<div align="center">
   <img src="https://img.shields.io/npm/dw/slappey?style=for-the-badge">
   <img src="https://img.shields.io/npm/v/slappey?style=for-the-badge">
   <img src="https://img.shields.io/github/forks/stuyy/slappey?style=for-the-badge">
   <img src="https://img.shields.io/github/stars/stuyy/slappey?style=for-the-badge">
   <img src="https://img.shields.io/discord/582319490122121247?style=for-the-badge">
-</p>
+  <p>Slap together a Discord Bot project in seconds!</p>
+  <img src="https://i.imgur.com/q4ofLAo.png" alt="slappey-logo">
+</div>
 
-<p align="center">Slap together a Discord Bot project in seconds!</p>
 
-![slappey-logo](https://i.imgur.com/q4ofLAo.png)
+
 
 ## What is Slappey?
 
@@ -51,50 +52,37 @@ Install slappey by running `npm install -g slappey` or `yarn global add slappey`
 - You can generate events by running `slappey gen event`, this will prompt you to select which events you would like to generate.
 - To select event(s), press space bar and use the up and down arrow keys to navigate. Hit enter when you're done and your event files will be generated in the `src/events` folder.
 
-## Will Slappey support TypeScript?
+# Language Support
 
-- ~~Soon~~
+Supported:
+- Javascript ([Discord.js](https://discord.js.org))
+- Typescript ([Discord.js](https://discord.js.org))
 
-Slappey now supports TypeScript as of 6/1/2020!
+Soon:
+- Python ([Discord.py](https://discordpy.readthedocs.io/latest/en))
 
-~~You must have TypeScript installed. However, if you don't, during the installation process, if you selected TypeScript, Slappey will ask you if you would like to install TypeScript, ts-node, and setup a basic tsconfig.json file. If you enter n (no), you will have to install these manually.~~
-
-~~ts-node is a TypeScript interpreter for Node.JS, the dev script uses it along with nodemon, so be sure you have nodemon installed.~~
-
-~~Otherwise, if you have TypeScript installed, you can skip this part and just run `npm run build` and then `npm run start`~~
-
-## Will Slappey support Python?
-
-- Soon
 
 # Recipes
 
-### Integrating with Sequelize
+| Recipe    | Status   | Details              |
+|:---------:|:--------:|:--------------------:|
+| Sequelize | &#10233; | More Details Soon    |
+| Mongoose  | &#10233; | More Details Soon    |
+| QuickDB   | &#10233; | More Details Soon    |
+| Lavalink  | &#10233; | More Details Soon    |
 
-```
-Implementation Provided Soon
-```
+<br/>
 
-### Integrating with Mongoose
+### Legend
 
-```
-Implementation Provided Soon
-```
+<hr/>
 
-### Integrating with MongoDB
+| Index    | Description               |
+|:--------:|:-------------------------:|
+| &#10003; | Implemented               |
+| &#9938;  | Will Not Be Implemented   |
+| &#10233; | Work In Progress          |
 
-```
-Implementation Provided Soon
-```
+<br>
 
-### Integrating with QuickDB
-
-```
-Implementation Provided Soon
-```
-
-### Integrating with Lavalink
-
-```
-Implementation Provided Soon
-```
+Note: Recipes Development Are Not The Current Focus Of Slappey

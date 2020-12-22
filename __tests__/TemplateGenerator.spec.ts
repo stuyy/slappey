@@ -4,7 +4,8 @@ import {
   getMockPaths,
   getMockTemplateGenerator,
 } from "../__mocks__";
-import path from "path";
+import path, { win32 } from "path";
+import os from "os";
 import * as templates from "../src/templates/templates";
 import * as helpers from "../src/utils/helpers";
 
@@ -18,7 +19,7 @@ describe("TemplateGenerator", () => {
   const generator = new TemplateGenerator();
   const logger = generator.getLogger();
   const fileSystem = generator.getFileSystem();
-  const srcPath = "C:\\Fake\\Directory\\app\\src";
+  const srcPath = os.platform() === "win32" ? "C:\\Fake\\Directory\\app\\src": "/home/fake/directory/app/src";
   const mockPaths = getMockPaths(srcPath);
   const {
     utils,
@@ -132,7 +133,7 @@ describe("TemplateGenerator", () => {
         .spyOn(templates, "getTypescriptBotFile")
         .mockReturnValue(mockTemplate);
       const { client } = mockPaths;
-      const clientFile = `${client}\\client.ts`;
+      const clientFile = path.join(client, "client.ts");
       await generator.generateClient(client);
       expect(path.join).toHaveBeenCalledWith(client, "client.ts");
       expect(templates.getTypescriptBotFile).toHaveBeenCalledTimes(1);
@@ -185,7 +186,7 @@ describe("TemplateGenerator", () => {
     it("should generate a registry.js file", async () => {
       jest.spyOn(templates, "getRegistryFile").mockReturnValue("template");
       jest.spyOn(path, "join");
-      const registry = `${utils}\\registry.js`;
+      const registry = path.join(utils,"registry.js");
       await generator.initialize("javascript");
       await generator.generateRegistry(utils);
       expect(templates.getRegistryFile).toHaveBeenCalledTimes(1);
@@ -195,7 +196,7 @@ describe("TemplateGenerator", () => {
     it("should generate a registry.ts file", async () => {
       jest.spyOn(templates, "getRegistryFileTS").mockReturnValue("template");
       jest.spyOn(path, "join");
-      const registry = `${utils}\\registry.ts`;
+      const registry = path.join(utils, "registry.ts");
       await generator.initialize("typescript");
       await generator.generateRegistry(utils);
       expect(templates.getRegistryFileTS).toHaveBeenCalledTimes(1);
@@ -209,7 +210,7 @@ describe("TemplateGenerator", () => {
     it("should generate a BaseCommand.js file", async () => {
       jest.spyOn(templates, "getBaseCommand").mockReturnValue("command");
       jest.spyOn(path, "join");
-      const commandFile = `${commands}\\BaseCommand.js`;
+      const commandFile = path.join(commands, "BaseCommand.js");
       await generator.initialize("javascript");
       await generator.generateBaseCommand(commands);
       expect(templates.getBaseCommand).toHaveBeenCalledTimes(1);
@@ -222,7 +223,7 @@ describe("TemplateGenerator", () => {
     it("should generate a BaseCommand.ts file", async () => {
       jest.spyOn(templates, "getBaseCommandTS").mockReturnValue("command");
       jest.spyOn(path, "join");
-      const commandFile = `${commands}\\BaseCommand.ts`;
+      const commandFile = path.join(commands, "BaseCommand.ts");
       await generator.initialize("typescript");
       await generator.generateBaseCommand(commands);
       expect(templates.getBaseCommandTS).toHaveBeenCalledTimes(1);
@@ -238,7 +239,7 @@ describe("TemplateGenerator", () => {
     it("should generate a BaseEvent.js file", async () => {
       jest.spyOn(templates, "getBaseEvent").mockReturnValue("event");
       jest.spyOn(path, "join");
-      const eventsFile = `${events}\\BaseEvent.js`;
+      const eventsFile = path.join(events, "BaseEvent.js");
       await generator.initialize("javascript");
       await generator.generateBaseEvent(events);
       expect(templates.getBaseEvent).toHaveBeenCalledTimes(1);
@@ -248,7 +249,7 @@ describe("TemplateGenerator", () => {
     it("should generate a BaseEvent.ts file", async () => {
       jest.spyOn(templates, "getBaseEventTS").mockReturnValue("event");
       jest.spyOn(path, "join");
-      const eventsFile = `${events}\\BaseEvent.ts`;
+      const eventsFile = path.join(events, "BaseEvent.ts");
       await generator.initialize("typescript");
       await generator.generateBaseEvent(events);
       expect(templates.getBaseEventTS).toHaveBeenCalledTimes(1);
@@ -261,7 +262,7 @@ describe("TemplateGenerator", () => {
     it("should generate a TestCommand.js file", async () => {
       jest.spyOn(templates, "getTestCommand").mockReturnValue("test-command");
       jest.spyOn(path, "join");
-      const file = `${test}\\TestCommand.js`;
+      const file = path.join(test, "TestCommand.js");
       await generator.initialize("javascript");
       await generator.generateTestCommand(test);
       expect(templates.getTestCommand).toHaveBeenCalledTimes(1);
@@ -271,7 +272,7 @@ describe("TemplateGenerator", () => {
     it("should generate a TestCommand.ts file", async () => {
       jest.spyOn(templates, "getTestCommandTS").mockReturnValue("test-command");
       jest.spyOn(path, "join");
-      const file = `${test}\\TestCommand.ts`;
+      const file = path.join(test, "TestCommand.ts");
       await generator.initialize("typescript");
       await generator.generateTestCommand(test);
       expect(templates.getTestCommandTS).toHaveBeenCalledTimes(1);
@@ -284,7 +285,7 @@ describe("TemplateGenerator", () => {
     it("should generate a ReadyEvent.js file", async () => {
       jest.spyOn(templates, "getReadyEvent").mockReturnValue("ready");
       jest.spyOn(path, "join");
-      const file = `${ready}\\ReadyEvent.js`;
+      const file = path.join(ready, "ReadyEvent.js");
       await generator.initialize("javascript");
       await generator.generateReadyEvent(ready);
       expect(templates.getReadyEvent).toHaveBeenCalledTimes(1);
@@ -294,7 +295,7 @@ describe("TemplateGenerator", () => {
     it("should generate a ReadyEvent.ts file", async () => {
       jest.spyOn(templates, "getReadyEventTS").mockReturnValue("ready");
       jest.spyOn(path, "join");
-      const file = `${ready}\\ReadyEvent.ts`;
+      const file = path.join(ready, "ReadyEvent.ts");
       await generator.initialize("typescript");
       await generator.generateReadyEvent(ready);
       expect(templates.getReadyEventTS).toHaveBeenCalledTimes(1);
@@ -307,7 +308,7 @@ describe("TemplateGenerator", () => {
     it("should generate a MessageEvent.js file", async () => {
       jest.spyOn(templates, "getMessageEvent").mockReturnValue("message");
       jest.spyOn(path, "join");
-      const file = `${message}\\MessageEvent.js`;
+      const file = path.join(message, "MessageEvent.js");
       await generator.initialize("javascript");
       await generator.generateMessageEvent(message);
       expect(templates.getMessageEvent).toHaveBeenCalledTimes(1);
@@ -317,7 +318,7 @@ describe("TemplateGenerator", () => {
     it("should generate a MessageEvent.ts file", async () => {
       jest.spyOn(templates, "getMessageEventTS").mockReturnValue("message");
       jest.spyOn(path, "join");
-      const file = `${message}\\MessageEvent.ts`;
+      const file = path.join(message, "MessageEvent.ts");
       await generator.initialize("typescript");
       await generator.generateMessageEvent(message);
       expect(templates.getMessageEventTS).toHaveBeenCalledTimes(1);
@@ -329,7 +330,7 @@ describe("TemplateGenerator", () => {
   describe("generateCommand", () => {
     const name = "kick";
     const category = "mod";
-    const categoryPath = `${commands}\\${category}`;
+    const categoryPath = path.join(commands, category);
     beforeEach(() => jest.clearAllMocks());
 
     it("should throw an error when the language is not set", async () => {
@@ -352,7 +353,7 @@ describe("TemplateGenerator", () => {
     });
 
     it("should generate a typescript command if it does not exist", async () => {
-      const file = `${categoryPath}\\${name}.ts`;
+      const file = path.join(categoryPath, `${name}.ts`);
       generator.initialize("typescript");
       jest.spyOn(fileSystem, "exists").mockResolvedValue(false);
       jest.spyOn(path, "join").mockReturnValue(file);
@@ -371,7 +372,7 @@ describe("TemplateGenerator", () => {
     });
     it("should generate a javascript command if it does not exist", async () => {
       generator.initialize("javascript");
-      const file = `${categoryPath}\\${name}.js`;
+      const file = path.join(categoryPath, `${name}.js`);
       jest.spyOn(fileSystem, "exists").mockResolvedValue(false);
       jest.spyOn(path, "join").mockReturnValue(file);
       jest
@@ -401,8 +402,8 @@ describe("TemplateGenerator", () => {
       }
     });
     it("should generate events for javascript", async () => {
-      const msgPath = `${events}\\MessageEvent.js`;
-      const readyPath = `${events}\\ReadyEvent.js`;
+      const msgPath = path.join(events, "MessageEvent.js");
+      const readyPath = path.join(events, "ReadyEvent.js");
       jest.spyOn(helpers, "getEventName");
       jest.spyOn(fileSystem, "exists").mockResolvedValue(false);
       jest.spyOn(generator, "getTemplate").mockReturnValue("template");
