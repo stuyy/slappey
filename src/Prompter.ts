@@ -1,5 +1,6 @@
 import prompts from "prompts";
 import {
+  CLIArguments,
   CommandAnswer,
   Credentials,
   Language,
@@ -12,6 +13,7 @@ import {
   languageSelect,
   packageManager,
   getCommandPrompt,
+  questions,
 } from "./utils/questions";
 
 export class Prompter implements ProjectPrompter {
@@ -40,6 +42,11 @@ export class Prompter implements ProjectPrompter {
   async credentials(): Promise<Credentials> {
     const { token, prefix } = await prompts(getCredentials);
     return { token, prefix };
+  }
+
+  async getChoice(): Promise<CLIArguments> {
+    const { option, data } = await prompts(questions);
+    return [option, data];
   }
 
   static getPrompter(): Prompter {
