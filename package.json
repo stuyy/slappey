@@ -1,6 +1,6 @@
 {
   "name": "slappey",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "A simple Discord Bot Project Scaffolder",
   "main": "./lib/index.js",
   "bin": {

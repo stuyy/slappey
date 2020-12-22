@@ -42,13 +42,13 @@ Install slappey by running `npm install -g slappey` or `yarn global add slappey`
 
 ## Generating Commands
 
-- Slappey allows you to generate commands into categories. You can type `slappey` and select **Generate** to generate a command, or `slappey new command`.
+- Slappey allows you to generate commands into categories. You can type `slappey` and select **Generate** to generate a command, or `slappey gen command`.
 - It will ask you for a name, and then a category. This will generate all commands in the `src/commands` folder, in the correct category.
 - You can also generate a command by typing `slappey gen command`. This will prompt you for a command name and category.
 
 ## Generating Events
 
-- You can generate events by running `slappey new event`, this will prompt you to select which events you would like to generate.
+- You can generate events by running `slappey gen event`, this will prompt you to select which events you would like to generate.
 - To select event(s), press space bar and use the up and down arrow keys to navigate. Hit enter when you're done and your event files will be generated in the `src/events` folder.
 
 ## Will Slappey support TypeScript?
