@@ -120,7 +120,7 @@ export class TemplateGenerator
   }
 
   async generateRegistry(filePath: string) {
-    const isJs = this.language === "javascript";
+    const isJs = ["javascript", "js"].includes(this.language!)
     const template = isJs ? getRegistryFile() : getRegistryFileTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `registry.${extension}`);
@@ -128,7 +128,7 @@ export class TemplateGenerator
   }
 
   async generateBaseCommand(filePath: string) {
-    const isJs = this.language === "javascript";
+    const isJs = ["javascript", "js"].includes(this.language!)
     const template = isJs ? getBaseCommand() : getBaseCommandTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `BaseCommand.${extension}`);
@@ -136,7 +136,7 @@ export class TemplateGenerator
   }
 
   async generateBaseEvent(filePath: string) {
-    const isJs = this.language === "javascript";
+    const isJs = ["javascript", "js"].includes(this.language!)
     const template = isJs ? getBaseEvent() : getBaseEventTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `BaseEvent.${extension}`);
@@ -144,7 +144,7 @@ export class TemplateGenerator
   }
 
   async generateTestCommand(filePath: string) {
-    const isJs = this.language === "javascript";
+    const isJs = ["javascript", "js"].includes(this.language!)
     const template = isJs ? getTestCommand() : getTestCommandTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `TestCommand.${extension}`);
@@ -152,7 +152,7 @@ export class TemplateGenerator
   }
 
   async generateReadyEvent(filePath: string) {
-    const isJs = this.language === "javascript";
+    const isJs = ["javascript", "js"].includes(this.language!)
     const template = isJs ? getReadyEvent() : getReadyEventTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `ReadyEvent.${extension}`);
@@ -160,7 +160,7 @@ export class TemplateGenerator
   }
 
   async generateMessageEvent(filePath: string) {
-    const isJs = this.language === "javascript";
+    const isJs = ["javascript", "js"].includes(this.language!)
     const template = isJs ? getMessageEvent() : getMessageEventTS();
     const extension: FileExtension = isJs ? "js" : "ts";
     const file = path.join(filePath, `MessageEvent.${extension}`);
@@ -173,7 +173,7 @@ export class TemplateGenerator
     const filePath = path.join(categoryPath, fileName);
     const exists = await this.fileSystem.exists(filePath);
     if (!exists) {
-      const isJs = this.language === "javascript";
+      const isJs = ["javascript", "js"].includes(this.language!)
       const template = isJs
         ? getCommandTemplate(name, category)
         : getCommandTemplateTS(name, category);
@@ -196,7 +196,7 @@ export class TemplateGenerator
   }
 
   getTemplate(event: string) {
-    return this.language === "javascript" ? eventsJS[event] : eventsTS[event];
+    return ["javascript", "js"].includes(this.language!) ? eventsJS[event] : eventsTS[event];
   }
 
   static getTemplateGenerator(): TemplateGenerator {

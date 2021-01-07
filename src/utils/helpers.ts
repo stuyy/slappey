@@ -11,12 +11,12 @@ export const checkStructType = (arg: any) =>
   ["command", "event"].some((element) => element === arg);
 
 export const getCommandName = (name: string, language: Language) =>
-  language === "javascript"
+  ["javascript", "js"].includes(language)
     ? `${capitalize(name)}Command.js`
     : `${capitalize(name)}Command.ts`;
 
 export const getEventName = (name: string, language: Language) =>
-  language === "javascript"
+  ["javascript", "js"].includes(language)
     ? `${capitalize(name)}Event.js`
     : `${capitalize(name)}Event.ts`;
 
