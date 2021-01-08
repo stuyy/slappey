@@ -355,7 +355,7 @@ module.exports = class MessageReactionRemoveEmojiEvent extends BaseEvent {
 }`,
   messageUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageUpdate
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class MessageUodateEvent extends BaseEvent {
+module.exports = class MessageUpdateEvent extends BaseEvent {
   constructor() {
     super('messageUpdate');
   }
