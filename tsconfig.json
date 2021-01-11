@@ -2,6 +2,10 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "lib": [
+      "dom",
+      "es7"
+   ],
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */,
     "outDir": "./lib" /* Redirect output structure to the directory. */,

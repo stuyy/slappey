@@ -43,7 +43,7 @@ export class FileSystem implements FileSystemManager, Initializer {
   }
 
   async createEntryFile(filePath: string) {
-    const extension = this.language === "javascript" ? "js" : "ts";
+    const extension = ["javascript", "js"].includes(this.language!) ? "js" : "ts";
     const template = extension === "js" ? getMainFile() : getMainFileTS();
     return fs.writeFile(path.join(filePath, `index.${extension}`), template);
   }
