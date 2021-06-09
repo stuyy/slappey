@@ -284,7 +284,7 @@ module.exports = class MessageEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    console.log(client.usert.tag + ' has logged in.');
+    
   }
 }`,
   messageDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
@@ -335,7 +335,7 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class MessageReactionRemoveAllEvent extends BaseEvent {
   constructor() {
-    super('ready');
+    super('messageReactionRemoveAll');
   }
   
   async run(client, message) {
@@ -419,7 +419,7 @@ module.exports = class RoleUpdateEvent extends BaseEvent {
     
   }
 }`,
-  shardDisconnect: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+  shardDisconnect: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardDisconnect
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class ShardDisconnectEvent extends BaseEvent {
   constructor() {
@@ -441,9 +441,9 @@ module.exports = class ShardErrorEvent extends BaseEvent {
     
   }
 }`,
-  shardReady: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+  shardReady: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardReady
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class EmojiDeleteEvent extends BaseEvent {
+module.exports = class ShardReadyEvent extends BaseEvent {
   constructor() {
     super('shardReady');
   }
