@@ -63,14 +63,7 @@ export class PackageManager implements Initializer {
       stdio: "ignore",
     });
   }
-  
-  public installDiscordJS() {
-    return execSync(`${this.prefix} mongoose@latest`, {
-      cwd: this.filePath,
-      stdio: "ignore",
-    });
-  }
-  
+
   public installNodemon() {
     return execSync(`${this.prefix} -D nodemon`, {
       cwd: this.filePath,
