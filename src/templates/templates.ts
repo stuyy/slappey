@@ -27,7 +27,7 @@ export function getMainFileTS() {
 import { registerCommands, registerEvents } from './utils/registry';
 import config from '../slappey.json';
 import DiscordClient from './client/client';
-const client = new DiscordClient({});
+const client = new DiscordClient({ intents: [] });
 
 (async () => {
   client.prefix = config.prefix || client.prefix;
