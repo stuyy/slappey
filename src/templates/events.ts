@@ -284,7 +284,7 @@ module.exports = class MessageEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    console.log(client.usert.tag + ' has logged in.');
+    console.log(client.user.tag + ' has logged in.');
   }
 }`,
   messageDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
