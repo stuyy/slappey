@@ -6,7 +6,8 @@ export function getEnvTemplate(token: string, prefix: string) {
 
 export function getMainFile() {
   return `
-  const { Client, Intents } = require('discord.js');
+  const { Client } = require('discord.js');
+  const mongoose = require("mongoose")
   const { registerCommands, registerEvents } = require('./utils/registry');
   const config = require('../slappey.json');
   const client = new Client({
@@ -14,6 +15,12 @@ export function getMainFile() {
     partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
     restTimeOffset: 0,
   });
+
+  mongoose.connect(\`mongodb://localhost:27017/\${config.name}\`,
+    console.log(
+      "MongoDB Connected"
+    )
+  );
 
   (async () => {
     client.commands = new Map();
@@ -158,18 +165,30 @@ module.exports = {
 
 export function getBaseCommand() {
   return `module.exports = class BaseCommand {
-    constructor({ name, category, aliases, description, usage, examples, permissions, guildOnly, cooldown }) {
+    constructor({
+      name,
+      category,
+      aliases,
+      description,
+      usage,
+      examples,
+      permissions,
+      guildOnly,
+      devOnly,
+      cooldown,
+    }) {
       this.name = name;
       this.category = category;
       this.aliases = aliases || [];
-      this.description = description;
-      this.usage = usage;
-      this.examples = examples;
-      this.permissions = permissions;
+      this.description = description || "";
+      this.usage = usage || [];
+      this.examples = examples || [];
+      this.permissions = permissions || [];
       this.guildOnly = guildOnly || true;
-      this.cooldown = cooldown;
+      this.devOnly = devOnly || false;
+      this.cooldown = cooldown || 0;
     }
-}`;
+  }`;
 }
 
 export function getBaseCommandTS() {
@@ -256,22 +275,23 @@ export function getMessageEvent() {
         const [cmdName, ...cmdArgs] = message.content
           .slice(client.prefix.length)
           .trim()
-          .split(/\s+/);
+          .split(/\\s+/);
         const command = client.commands.get(cmdName);
   
         if (command) {
           
-          if(command.guildOnly && message.channel.type === "DM" ) {
+            
+          if (command.guildOnly && message.channel.type === "DM") {
             return;
           }
-          
+  
           if (!message.member.permissions.has(command.permissions)) {
             return;
           }
   
           if (
             !message.guild.members.cache
-            .get(client.user)
+              .get(client.user.id)
               .permissions.has(command.permissions || "SEND_MESSAGES")
           ) {
             return;
@@ -282,13 +302,7 @@ export function getMessageEvent() {
               .get(client.user.id)
               .permissions.has(command.permissions)
           ) {
-            return message.channel.send(
-              \`I couldn't. Please check my permissions.\`
-            );
-          }
-
-          if (!cooldowns.has(command.name)) {
-            cooldowns.set(command.name, new Collection());
+            return message.channel.send(\`I couldn't. Please check my permissions.\`);
           }
   
           const current_time = Date.now();
