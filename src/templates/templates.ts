@@ -1,4 +1,4 @@
-import { capitalize } from "../utils";
+import { capitalize } from '../utils';
 
 export function getEnvTemplate(token: string, prefix: string) {
   return `DISCORD_BOT_TOKEN=${token}\nDISCORD_BOT_PREFIX=${prefix}`;
@@ -6,10 +6,10 @@ export function getEnvTemplate(token: string, prefix: string) {
 
 export function getMainFile() {
   return `
-const { Client } = require('discord.js');
+const { Client, Intents } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('../slappey.json');
-const client = new Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
 
 (async () => {
   client.commands = new Map();
@@ -27,7 +27,8 @@ export function getMainFileTS() {
 import { registerCommands, registerEvents } from './utils/registry';
 import config from '../slappey.json';
 import DiscordClient from './client/client';
-const client = new DiscordClient({});
+import { Intents } from 'discord.js';
+const client = new DiscordClient({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
 
 (async () => {
   client.prefix = config.prefix || client.prefix;
@@ -49,7 +50,7 @@ export default class DiscordClient extends Client {
   private _events = new Collection<string, BaseEvent>();
   private _prefix: string = '!';
 
-  constructor(options?: ClientOptions) {
+  constructor(options: ClientOptions) {
     super(options);
   }
 

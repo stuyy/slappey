@@ -1,4 +1,88 @@
 const eventTemplates = {
+  applicationCommandCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ApplicationCommandCreateEvent extends BaseEvent {
+  constructor() {
+    super('applicationCommandCreate');
+  }
+
+  async run(client, command) {
+
+  }
+}
+  `,
+  applicationCommandDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ApplicationCommandDeleteEvent extends BaseEvent {
+  constructor() {
+    super('applicationCommandDelete');
+  }
+
+  async run(client, command) {
+
+  }
+}
+  `,
+  applicationCommandUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ApplicationCommandUpdateEvent extends BaseEvent {
+  constructor() {
+    super('applicationCommandUpdate');
+  }
+
+  async run(client, oldCommand, newCommand) {
+
+  }
+}
+  `,
+  guildMemberAvailable: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAvailable
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMemberAvailableEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberAvailable');
+  }
+
+  async run(client, member) {
+
+  }
+}
+  `,
+  guildMembersChunk: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMemberChunksEvent extends BaseEvent {
+  constructor() {
+    super('guildMembersChunk');
+  }
+
+  async run(client, members, guild, chunk) {
+
+  }
+}
+  `,
+  interactionCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-interactionCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class InteractionCreateEvent extends BaseEvent {
+  constructor() {
+    super('interactionCreate');
+  }
+
+  async run(client, interaction) {
+
+  }
+}
+  `,
+  invalidRequestWarning: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidRequestWarning
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class InvalidRequestWarningEvent extends BaseEvent {
+  constructor() {
+    super('invalidRequestWarning');
+  }
+
+  async run(client, invalidRequestWarningData) {
+
+  }
+}
+  `,
   channelCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelCreate
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class ChannelCreateEvent extends BaseEvent {
@@ -29,7 +113,7 @@ module.exports = class ChannelPinsUpdateEvent extends BaseEvent {
     super('channelPinsUpdate');
   }
   
-  async run(client, channel) {
+  async run(client, channel, time) {
     
   }
 }`,
@@ -108,7 +192,7 @@ module.exports = class GuildBanAddEvent extends BaseEvent {
     super('guildBanAdd');
   }
   
-  async run(client, guild, user) {
+  async run(client, guildBan) {
     
   }
 }`,
@@ -119,7 +203,7 @@ module.exports = class GuildBanRemoveEvent extends BaseEvent {
     super('guildBanRemove');
   }
   
-  async run(client, guild, user) {
+  async run(client, guildBan) {
     
   }
 }`,
@@ -175,17 +259,6 @@ module.exports = class GuildMemberRemoveEvent extends BaseEvent {
   }
   
   async run(client, member) {
-    
-  }
-}`,
-  guildMembersChunk: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
-  const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class GuildMembersChunkEvent extends BaseEvent {
-  constructor() {
-    super('guildMembersChunk');
-  }
-  
-  async run(client, members, guild) {
     
   }
 }`,
@@ -276,15 +349,15 @@ module.exports = class ReadyEvent extends BaseEvent {
     console.log(client.user.tag + ' has logged in.');
   }
 }`,
-  message: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
+  messageCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class MessageEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client, message) {
-    console.log(client.usert.tag + ' has logged in.');
+    console.log(client.user.tag + ' has logged in.');
   }
 }`,
   messageDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
@@ -426,7 +499,7 @@ module.exports = class ShardDisconnectEvent extends BaseEvent {
     super('shardDisconnect');
   }
   
-  async run(client, message) {
+  async run(client, event, id) {
     
   }
 }`,
@@ -437,7 +510,7 @@ module.exports = class ShardErrorEvent extends BaseEvent {
     super('shardError');
   }
   
-  async run(client, message) {
+  async run(client, error, shardId) {
     
   }
 }`,
@@ -474,6 +547,139 @@ module.exports = class ShardResumeEvent extends BaseEvent {
     
   }
 }`,
+  stageInstanceCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stageInstanceCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class StageInstanceCreateEvent extends BaseEvent {
+  constructor() {
+    super('stageInstanceCreate');
+  }
+
+  async run(client, stageInstance) {
+
+  }
+}`,
+  stageInstanceDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stageInstanceDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class StageInstanceDeleteEvent extends BaseEvent {
+  constructor() {
+    super('stageInstanceDelete');
+  }
+
+  async run(client, stageInstance) {
+
+  }
+}
+  `,
+  stageInstanceUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stageInstanceUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class StageInstanceUpdateEvent extends BaseEvent {
+  constructor() {
+    super('stageInstanceUpdate');
+  }
+
+  async run(client, oldStageInstance, newStageInstance) {
+
+  }
+}`,
+  stickerCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stickerCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class StickerCreateEvent extends BaseEvent {
+  constructor() {
+    super('stickerCreate');
+  }
+
+  async run(client, sticker) {
+
+  }
+}`,
+  stickerDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stickerDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class StickerDeleteEvent extends BaseEvent {
+  constructor() {
+    super('stickerDelete');
+  }
+
+  async run(client, sticker) {
+
+  }
+}`,
+  stickerUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stickerUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class StickerUpdateEvent extends BaseEvent {
+  constructor() {
+    super('stickerUpdate');
+  }
+
+  async run(client, oldSticker, newSticker) {
+
+  }
+}`,
+  threadCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadCreate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ThreadCreateEvent extends BaseEvent {
+  constructor() {
+    super('threadCreate');
+  }
+
+  async run(client, thread) {
+
+  }
+}`,
+  threadDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadDelete
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ThreadDeleteEvent extends BaseEvent {
+  constructor() {
+    super('threadDelete');
+  }
+
+  async run(client, thread) {
+
+  }
+}`,
+  threadListSync: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadListSync
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ThreadListSyncEvent extends BaseEvent {
+  constructor() {
+    super('threadListSync');
+  }
+
+  async run(client, threads) {
+
+  }
+}`,
+  threadMembersUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadMembersUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ThreadMembersUpdateEvent extends BaseEvent {
+  constructor() {
+    super('threadMembersUpdate');
+  }
+
+  async run(client, oldMembers, newMembers) {
+
+  }
+}`,
+  threadMemberUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadMemberUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ThreadMemberUpdateEvent extends BaseEvent {
+  constructor() {
+    super('threadMemberUpdate');
+  }
+
+  async run(client, oldMember, newMember) {
+
+  }
+}`,
+  threadUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadUpdate
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ThreadUpdateEvent extends BaseEvent {
+  constructor() {
+    super('threadUpdate');
+  }
+
+  async run(client, oldMembers, newMembers) {
+
+  }
+}`,
   typingStart: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-typingStart
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class TypingStartEvent extends BaseEvent {
@@ -481,7 +687,7 @@ module.exports = class TypingStartEvent extends BaseEvent {
     super('typingStart');
   }
   
-  async run(client, channel, user) {
+  async run(client, typing) {
     
   }
 }`,

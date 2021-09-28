@@ -1,4 +1,4 @@
-import prompts from "prompts";
+import prompts from 'prompts';
 import {
   CLIArguments,
   CommandAnswer,
@@ -6,7 +6,7 @@ import {
   Language,
   PackageManagerType,
   ProjectPrompter,
-} from "./utils/index";
+} from './utils/index';
 import {
   eventGenerate,
   getCredentials,
@@ -14,7 +14,7 @@ import {
   packageManager,
   getCommandPrompt,
   questions,
-} from "./utils/questions";
+} from './utils/questions';
 
 export class Prompter implements ProjectPrompter {
   private static instance: Prompter;
