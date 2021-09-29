@@ -232,7 +232,7 @@ export function getMessageEvent() {
 
 module.exports = class MessageEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client, message) {
@@ -258,7 +258,7 @@ import DiscordClient from '../../client/client';
 
 export default class MessageEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
 
   async run(client: DiscordClient, message: Message) {
