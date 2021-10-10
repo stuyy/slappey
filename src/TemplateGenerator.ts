@@ -159,7 +159,7 @@ export class TemplateGenerator
     await this.fileSys.createFile(file, template);
   }
 
-  async generateMessageEvent(filePath: string) {
+  async generateMessageCreateEvent(filePath: string) {
     const isJs = this.language === 'javascript';
     const template = isJs ? getMessageCreateEvent() : getMessageCreateEventTS();
     const extension: FileExtension = isJs ? 'js' : 'ts';

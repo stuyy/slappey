@@ -23,7 +23,7 @@ module.exports = class ChannelDeleteEvent extends BaseEvent {
   }
   
   async run(client, channel) {
-    
+    console.log(channel.name + ' was deleted.');
   }
 }
 "
@@ -288,13 +288,13 @@ module.exports = class GuildUpdateEvent extends BaseEvent {
 exports[`Generating Event Snapshots should generate all Javascript Event Files 22`] = `
 "// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class MessageEvent extends BaseEvent {
+module.exports = class MessageCreateEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client, message) {
-    console.log(client.usert.tag + ' has logged in.');
+    
   }
 }"
 `;
@@ -1250,9 +1250,9 @@ import { Message } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
-export default class MessageEvent extends BaseEvent {
+export default class MessageCreateEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client: DiscordClient, message: Message) {
@@ -2047,7 +2047,7 @@ module.exports = class BanCommand extends BaseCommand {
     super('Ban', 'mod', []);
   }
 
-  run(client, message, args) {
+  asnyc run(client, message, args) {
     message.channel.send('Ban command works');
   }
 }"
@@ -2108,9 +2108,9 @@ const client = new DiscordClient({});
 exports[`Templates should match getMessageEvent 1`] = `
 "const BaseEvent = require('../../utils/structures/BaseEvent');
 
-module.exports = class MessageEvent extends BaseEvent {
+module.exports = class MessageCreateEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client, message) {
@@ -2134,9 +2134,9 @@ exports[`Templates should match getMessageEventTS 1`] = `
 import { Message } from 'discord.js';
 import DiscordClient from '../../client/client';
 
-export default class MessageEvent extends BaseEvent {
+export default class MessageCreateEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
 
   async run(client: DiscordClient, message: Message) {

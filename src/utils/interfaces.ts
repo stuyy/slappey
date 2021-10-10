@@ -35,7 +35,7 @@ export interface ProjectTemplateGenerator {
   generateDirectories(filePath: string): void;
   generateTestCommand(filePath: string): void;
   generateReadyEvent(filePath: string): void;
-  generateMessageEvent(filePath: string): void;
+  generateMessageCreateEvent(filePath: string): void;
   generateClient(filePath: string): void;
 }
 
