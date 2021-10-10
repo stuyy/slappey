@@ -351,7 +351,7 @@ module.exports = class ReadyEvent extends BaseEvent {
 }`,
   messageCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class MessageEvent extends BaseEvent {
+module.exports = class MessageCreateEvent extends BaseEvent {
   constructor() {
     super('messageCreate');
   }
