@@ -521,7 +521,7 @@ import { Message } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
-export default class MessageUodateEvent extends BaseEvent {
+export default class MessageUpdateEvent extends BaseEvent {
   constructor() {
     super('messageUpdate');
   }
