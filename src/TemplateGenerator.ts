@@ -14,8 +14,8 @@ import {
   getBaseEventTS,
   getCommandTemplate,
   getCommandTemplateTS,
-  getMessageEvent,
-  getMessageEventTS,
+  getMessageCreateEvent,
+  getMessageCreateEventTS,
   getReadyEvent,
   getReadyEventTS,
   getRegistryFile,
@@ -57,7 +57,7 @@ export class TemplateGenerator
     await this.generateBaseEvent(structures);
     await this.generateTestCommand(test);
     await this.generateReadyEvent(ready);
-    await this.generateMessageEvent(message);
+    await this.generateMessageCreateEvent(message);
   }
 
   getPaths(srcPath: string) {
@@ -68,7 +68,7 @@ export class TemplateGenerator
     const client = path.join(srcPath, 'client');
     const test = path.join(commands, 'test');
     const ready = path.join(events, 'ready');
-    const message = path.join(events, 'message');
+    const message = path.join(events, 'messageCreate');
     return {
       commands,
       utils,
@@ -116,7 +116,7 @@ export class TemplateGenerator
     await this.fileSys.createDirectory(ready);
     this.logger.success('Created ReadyEvent Directory');
     await this.fileSys.createDirectory(message);
-    this.logger.success('Created MessageEvent Directory');
+    this.logger.success('Created MessageCreateEvent Directory');
   }
 
   async generateRegistry(filePath: string) {
@@ -161,9 +161,9 @@ export class TemplateGenerator
 
   async generateMessageEvent(filePath: string) {
     const isJs = this.language === 'javascript';
-    const template = isJs ? getMessageEvent() : getMessageEventTS();
+    const template = isJs ? getMessageCreateEvent() : getMessageCreateEventTS();
     const extension: FileExtension = isJs ? 'js' : 'ts';
-    const file = path.join(filePath, `MessageEvent.${extension}`);
+    const file = path.join(filePath, `MessageCreateEvent.${extension}`);
     await this.fileSys.createFile(file, template);
   }
 

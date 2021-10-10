@@ -227,12 +227,12 @@ export default class ReadyEvent extends BaseEvent {
 }`;
 }
 
-export function getMessageEvent() {
+export function getMessageCreateEvent() {
   return `const BaseEvent = require('../../utils/structures/BaseEvent');
 
-module.exports = class MessageEvent extends BaseEvent {
+module.exports = class MessageCreateEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client, message) {
@@ -251,14 +251,14 @@ module.exports = class MessageEvent extends BaseEvent {
 }`;
 }
 
-export function getMessageEventTS() {
+export function getMessageCreateEventTS() {
   return `import BaseEvent from '../../utils/structures/BaseEvent';
 import { Message } from 'discord.js';
 import DiscordClient from '../../client/client';
 
-export default class MessageEvent extends BaseEvent {
+export default class MessageCreateEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
 
   async run(client: DiscordClient, message: Message) {
