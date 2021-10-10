@@ -195,7 +195,7 @@ export default abstract class BaseEvent {
   constructor(private name: string) { }
 
   getName(): string { return this.name; }
-  abstract run(client: DiscordClient, ...args: any): void;
+  abstract async run(client: DiscordClient, ...args: any): void;
 }
 `;
 }
@@ -315,7 +315,7 @@ module.exports = class ${capitalize(name)}Command extends BaseCommand {
     super('${name}', '${category}', []);
   }
 
-  run(client, message, args) {
+  async run(client, message, args) {
     message.channel.send('${name} command works');
   }
 }`;
