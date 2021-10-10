@@ -35,54 +35,6 @@ module.exports = class ApplicationCommandUpdateEvent extends BaseEvent {
   }
 }
   `,
-  guildMemberAvailable: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAvailable
-const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class GuildMemberAvailableEvent extends BaseEvent {
-  constructor() {
-    super('guildMemberAvailable');
-  }
-
-  async run(client, member) {
-
-  }
-}
-  `,
-  guildMembersChunk: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
-const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class GuildMemberChunksEvent extends BaseEvent {
-  constructor() {
-    super('guildMembersChunk');
-  }
-
-  async run(client, members, guild, chunk) {
-
-  }
-}
-  `,
-  interactionCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-interactionCreate
-const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class InteractionCreateEvent extends BaseEvent {
-  constructor() {
-    super('interactionCreate');
-  }
-
-  async run(client, interaction) {
-
-  }
-}
-  `,
-  invalidRequestWarning: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidRequestWarning
-const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class InvalidRequestWarningEvent extends BaseEvent {
-  constructor() {
-    super('invalidRequestWarning');
-  }
-
-  async run(client, invalidRequestWarningData) {
-
-  }
-}
-  `,
   channelCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelCreate
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class ChannelCreateEvent extends BaseEvent {
@@ -102,7 +54,7 @@ module.exports = class ChannelDeleteEvent extends BaseEvent {
   }
   
   async run(client, channel) {
-    
+    console.log(channel.name + ' was deleted.');
   }
 }
 `,
@@ -192,7 +144,7 @@ module.exports = class GuildBanAddEvent extends BaseEvent {
     super('guildBanAdd');
   }
   
-  async run(client, guildBan) {
+  async run(client, ban) {
     
   }
 }`,
@@ -203,7 +155,7 @@ module.exports = class GuildBanRemoveEvent extends BaseEvent {
     super('guildBanRemove');
   }
   
-  async run(client, guildBan) {
+  async run(client, ban) {
     
   }
 }`,
@@ -251,6 +203,18 @@ module.exports = class GuildMemberAddEvent extends BaseEvent {
     
   }
 }`,
+  guildMemberAvailable: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAvailable
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class GuildMemberAvailableEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberAvailable');
+  }
+
+  async run(client, member) {
+
+  }
+}
+  `,
   guildMemberRemove: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberRemove
   const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class GuildMemberRemoveEvent extends BaseEvent {
@@ -273,17 +237,29 @@ module.exports = class GuildMemberSpeakingEvent extends BaseEvent {
     
   }
 }`,
-  guildMemberUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberUpdate
+  guildMembersChunk: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class GuildMemberUpdateEvent extends BaseEvent {
+module.exports = class GuildMemberChunksEvent extends BaseEvent {
   constructor() {
-    super('guildMemberUpdate');
+    super('guildMembersChunk');
   }
-  
-  async run(client, oldMember, newMember) {
+
+  async run(client, members, guild, chunk) {
+
+  }
+}
+  `,
+  guildMemberUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberUpdate
+  const BaseEvent = require('../utils/structures/BaseEvent');
+  module.exports = class GuildMemberUpdateEvent extends BaseEvent {
+    constructor() {
+      super('guildMemberUpdate');
+    }
     
-  }
-}`,
+    async run(client, oldMember, newMember) {
+      
+    }
+  }`,
   guildUnavailable: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildUnavailable
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class GuildUnavailableEvent extends BaseEvent {
@@ -306,17 +282,41 @@ module.exports = class GuildUpdateEvent extends BaseEvent {
     
   }
 }`,
-  invalidated: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidated
+  interactionCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-interactionCreate
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class InvalidatedEvent extends BaseEvent {
+module.exports = class InteractionCreateEvent extends BaseEvent {
   constructor() {
-    super('invalidated');
+    super('interactionCreate');
   }
-  
-  async run(client) {
+
+  async run(client, interaction) {
+
+  }
+}
+  `,
+  invalidated: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidated
+  const BaseEvent = require('../utils/structures/BaseEvent');
+  module.exports = class InvalidatedEvent extends BaseEvent {
+    constructor() {
+      super('invalidated');
+    }
     
+    async run(client) {
+      
+    }
+  }`,
+  invalidRequestWarning: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidRequestWarning
+const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class InvalidRequestWarningEvent extends BaseEvent {
+  constructor() {
+    super('invalidRequestWarning');
   }
-}`,
+
+  async run(client, invalidRequestWarningData) {
+
+  }
+}
+  `,
   inviteCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-inviteCreate
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class EmojiDeleteEvent extends BaseEvent {
@@ -339,16 +339,6 @@ module.exports = class InviteDeleteEvent extends BaseEvent {
     
   }
 }`,
-  ready: `// const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class ReadyEvent extends BaseEvent {
-  constructor() {
-    super('ready');
-  }
-  
-  async run(client) {
-    console.log(client.user.tag + ' has logged in.');
-  }
-}`,
   messageCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class MessageCreateEvent extends BaseEvent {
@@ -357,7 +347,7 @@ module.exports = class MessageCreateEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    console.log(client.user.tag + ' has logged in.');
+    
   }
 }`,
   messageDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
@@ -400,7 +390,7 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
     super('messageReactionRemove');
   }
   
-  async run(client, reaction, user) {
+  async run(client, message, reaction, user) {
     
   }
 }`,
@@ -408,10 +398,10 @@ module.exports = class MessageReactionRemoveEvent extends BaseEvent {
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class MessageReactionRemoveAllEvent extends BaseEvent {
   constructor() {
-    super('ready');
+    super('messageReactionRemoveAll');
   }
   
-  async run(client, message) {
+  async run(client, message, reaction, user) {
     
   }
 }`,
@@ -459,6 +449,16 @@ module.exports = class RateLimitEvent extends BaseEvent {
     
   }
 }`,
+  ready: `// const BaseEvent = require('../utils/structures/BaseEvent');
+module.exports = class ReadyEvent extends BaseEvent {
+  constructor() {
+    super('ready');
+  }
+  
+  async run(client) {
+    console.log(client.user.tag + ' has logged in.');
+  }
+}`,
   roleCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-roleCreate
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class RoleCreateEvent extends BaseEvent {
@@ -492,7 +492,7 @@ module.exports = class RoleUpdateEvent extends BaseEvent {
     
   }
 }`,
-  shardDisconnect: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-emojiUpdate
+  shardDisconnect: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-shardDisconnect
 const BaseEvent = require('../utils/structures/BaseEvent');
 module.exports = class ShardDisconnectEvent extends BaseEvent {
   constructor() {
@@ -676,7 +676,7 @@ module.exports = class ThreadUpdateEvent extends BaseEvent {
     super('threadUpdate');
   }
 
-  async run(client, oldMembers, newMembers) {
+  async run(client, oldThread, newThread) {
 
   }
 }`,
