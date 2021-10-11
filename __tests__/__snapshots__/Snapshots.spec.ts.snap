@@ -386,7 +386,7 @@ module.exports = class MessageReactionRemoveEmojiEvent extends BaseEvent {
 exports[`Generating Event Snapshots should generate all Javascript Event Files 29`] = `
 "// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageUpdate
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class MessageUodateEvent extends BaseEvent {
+module.exports = class MessageUpdateEvent extends BaseEvent {
   constructor() {
     super('messageUpdate');
   }
