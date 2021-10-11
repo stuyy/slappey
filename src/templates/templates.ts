@@ -76,7 +76,7 @@ export async function registerCommands(client: DiscordClient, dir: string = '') 
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
     if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
-    if (file.endsWith('.js') || file.endsWith('.ts')) {
+    if (file.endsWith('Command.js') || file.endsWith('Command.ts')) {
       const { default: Command } = await import(path.join(dir, file));
       const command = new Command();
       client.commands.set(command.getName(), command);
@@ -93,7 +93,7 @@ export async function registerEvents(client: DiscordClient, dir: string = '') {
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
     if (stat.isDirectory()) registerEvents(client, path.join(dir, file));
-    if (file.endsWith('.js') || file.endsWith('.ts')) {
+    if (file.endsWith('Event.js') || file.endsWith('Event.ts')) {
       const { default: Event } = await import(path.join(dir, file));
       const event = new Event();
       client.events.set(event.getName(), event);
