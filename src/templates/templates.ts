@@ -155,10 +155,11 @@ module.exports = {
 
 export function getBaseCommand() {
   return `module.exports = class BaseCommand {
-  constructor(name, category, aliases) {
+  constructor(name, category, aliases, permission) {
     this.name = name;
     this.category = category;
     this.aliases = aliases;
+    this.permission = permission;
   }
 }`;
 }
@@ -169,11 +170,12 @@ import { Message } from 'discord.js';
 import DiscordClient from '../../client/client';
 
 export default abstract class BaseCommand {
-  constructor(private name: string, private category: string, private aliases: Array<string>) {}
+  constructor(private name: string, private category: string, private aliases: Array<string>, private permission: string) {}
 
   getName(): string { return this.name; }
   getCategory(): string { return this.category; }
   getAliases(): Array<string> { return this.aliases; }
+  getPermission(): string { return this.permission; }
 
   abstract run(client: DiscordClient, message: Message, args: Array<string> | null): Promise<void>;
 }`;
@@ -244,7 +246,11 @@ module.exports = class MessageEvent extends BaseEvent {
       .split(/\\s+/);
       const command = client.commands.get(cmdName);
       if (command) {
-        command.run(client, message, cmdArgs);
+        if(command.permission === '') command.run(client, message, cmdArgs);
+        let permission = command.permission;
+        if(message.member.permissions.has(permission)){
+          command.run(client, message, cmdArgs);
+        }
       }
     }
   }
@@ -270,8 +276,12 @@ export default class MessageEvent extends BaseEvent {
         .split(/\\s+/);
       const command = client.commands.get(cmdName);
       if (command) {
-        command.run(client, message, cmdArgs);
-      }
+        if (command.permission === '') command.run(client, message, cmdArgs);
+        let permission = command.permission;
+        if (message.member.permissions.has(permission)) {
+            command.run(client, message, cmdArgs);
+        }
+    }
     }
   }
 }`;
@@ -282,7 +292,7 @@ export function getTestCommand() {
 
 module.exports = class TestCommand extends BaseCommand {
   constructor() {
-    super('test', 'testing', []);
+    super('test', 'testing', [], 'SEND_MESSAGES');
   }
 
   async run(client, message, args) {
@@ -298,7 +308,7 @@ import DiscordClient from '../../client/client';
 
 export default class TestCommand extends BaseCommand {
   constructor() {
-    super('test', 'testing', []);
+    super('test', 'testing', [], 'SEND_MESSAGES');
   }
 
   async run(client: DiscordClient, message: Message, args: Array<string>) {
