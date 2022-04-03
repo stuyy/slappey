@@ -10,7 +10,7 @@ export class PackageManager implements Initializer {
   async initialize(config: SlappeyConfig, filePath: string): Promise<void> {
     this.config = config;
     this.filePath = filePath;
-    this.prefix = this.config.manager === 'npm' ? 'npm i' : 'yarn add';
+    this.prefix = `${this.config.manager} add`;
   }
 
   async setup() {
