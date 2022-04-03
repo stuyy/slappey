@@ -32,7 +32,7 @@ export class PackageManager implements Initializer {
 
   public createTsconfig() {
     return execSync(
-      `${this.config?.manager} run tsc --init --resolveJsonModule --target es6`,
+      `${this.config?.manager === 'npm' ? 'npx' : this.config?.manager} tsc --init --resolveJsonModule --target es6`,
       { cwd: this.filePath }
     );
   }
