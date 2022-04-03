@@ -76,6 +76,10 @@ export const packageManager: Array<PromptObject> = [
         value: 'yarn',
       },
       {
+        title: 'pnpm',
+        value: 'pnpm',
+      },
+      {
         title: 'npm',
         value: 'npm',
       },
