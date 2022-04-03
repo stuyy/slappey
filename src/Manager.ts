@@ -15,9 +15,12 @@ export class PackageManager implements Initializer {
 
   async setup() {
     if (!this.config) throw new Error('Config Not Initialized.');
-    return this.config.manager === 'npm'
-      ? this.initializeNPM()
-      : this.initializeYarn();
+    const initialize = {
+      npm: this.initializeNPM(),
+      yarn: this.initializeYarn(),
+      pnpm: this.initializePNPM(),
+    }
+    return initialize[this.config.manager];
   }
 
   public initializeNPM() {
