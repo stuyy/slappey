@@ -30,6 +30,11 @@ export class PackageManager implements Initializer {
     return this.installDependencies();
   }
 
+  public initializePNPM() {
+    execSync(`${this.config?.manager} init -y`, { cwd: this.filePath });
+    return this.installDependencies();
+  }
+
   public createTsconfig() {
     return execSync(
       `${this.config?.manager === 'npm' ? 'npx' : this.config?.manager} tsc --init --resolveJsonModule --target es6`,
