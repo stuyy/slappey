@@ -31,19 +31,23 @@ describe("PackageManager", () => {
   it("should call setup when manager is set with yarn", async () => {
     jest.spyOn(manager, "initializeYarn").mockImplementation(() => {});
     jest.spyOn(manager, "initializeNPM").mockImplementation(() => {});
+    jest.spyOn(manager, "initializePNPM").mockImplementation(() => {});
     await manager.setup();
     expect(manager.initializeYarn).toHaveBeenCalled();
     expect(manager.initializeNPM).not.toHaveBeenCalled();
+    expect(manager.initializePNPM).not.toHaveBeenCalled();
   });
 
   it("should call setup with initializeNPM", async () => {
     jest.spyOn(manager, "initializeNPM").mockImplementation(() => {});
+    jest.spyOn(manager, "initializePNPM").mockImplementation(() => {});
     jest.spyOn(manager, "initializeYarn").mockImplementation(() => {});
     config.manager = "npm";
     manager.initialize(config, fakePath);
     await manager.setup();
     expect(manager.initializeNPM).toHaveBeenCalled();
     expect(manager.initializeYarn).not.toHaveBeenCalled();
+    expect(manager.initializePNPM).not.toHaveBeenCalled();
   });
 
   it("call initializeNPM", () => {
@@ -63,6 +67,18 @@ describe("PackageManager", () => {
     manager.initializeYarn();
     expect(child_process.execSync).toHaveBeenCalledTimes(1);
     expect(child_process.execSync).toHaveBeenCalledWith("yarn init -y", {
+      cwd: fakePath,
+    });
+    expect(manager.installDependencies).toHaveBeenCalledTimes(1);
+  });
+
+  it("call initializePNPM", () => {
+    jest.spyOn(manager, "installDependencies").mockImplementation(() => {});
+    config.manager = "pnpm";
+    manager.initialize(config, fakePath);
+    manager.initializePNPM();
+    expect(child_process.execSync).toHaveBeenCalledTimes(1);
+    expect(child_process.execSync).toHaveBeenCalledWith("pnpm init -y", {
       cwd: fakePath,
     });
     expect(manager.installDependencies).toHaveBeenCalledTimes(1);
@@ -108,8 +124,18 @@ describe("PackageManager", () => {
     });
   });
 
+  it("should call installTypescript with pnpm", async () => {
+    const cmd = "pnpm add  -D typescript";
+    manager.installTypescript();
+    expect(child_process.execSync).toHaveBeenCalledTimes(1);
+    expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
+      cwd: fakePath,
+      stdio: "ignore",
+    });
+  });
+
   it("should call installTypescript with npm", async () => {
-    const cmd = "npm i -D typescript";
+    const cmd = "npm add -D typescript";
     config.manager = "npm";
     manager.initialize(config, fakePath);
     manager.installTypescript();
@@ -121,7 +147,7 @@ describe("PackageManager", () => {
   });
 
   it("should call installDiscordJS with npm", async () => {
-    const cmd = "npm i discord.js@latest";
+    const cmd = "npm add discord.js@latest";
     manager.installDiscordJS();
     expect(child_process.execSync).toHaveBeenCalledTimes(1);
     expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
@@ -129,6 +155,7 @@ describe("PackageManager", () => {
       stdio: "ignore",
     });
   });
+
   it("should call installDiscordJS with yarn", async () => {
     const cmd = "yarn add discord.js@latest";
     config.manager = "yarn";
@@ -140,6 +167,19 @@ describe("PackageManager", () => {
       stdio: "ignore",
     });
   });
+
+  it("should call installDiscordJS with pnpm", async () => {
+    const cmd = "pnpm add  discord.js@latest";
+    config.manager = "pnpm";
+    manager.initialize(config, fakePath);
+    manager.installDiscordJS();
+    expect(child_process.execSync).toHaveBeenCalledTimes(1);
+    expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
+      cwd: fakePath,
+      stdio: "ignore",
+    });
+  });
+
   it("should call installNodemon with yarn", async () => {
     const cmd = "yarn add -D nodemon";
     manager.installNodemon();
@@ -149,8 +189,19 @@ describe("PackageManager", () => {
       stdio: "ignore",
     });
   });
+
+  it("should call installNodemon with pnpm", async () => {
+    const cmd = "pnpm add  -D nodemon";
+    manager.installNodemon();
+    expect(child_process.execSync).toHaveBeenCalledTimes(1);
+    expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
+      cwd: fakePath,
+      stdio: "ignore",
+    });
+  });
+
   it("should call installNodemon with npm", async () => {
-    const cmd = "npm i -D nodemon";
+    const cmd = "npm add -D nodemon";
     config.manager = "npm";
     manager.initialize(config, fakePath);
     manager.installNodemon();
@@ -160,8 +211,9 @@ describe("PackageManager", () => {
       stdio: "ignore",
     });
   });
+
   it("should call installNodeTypes with npm", async () => {
-    const cmd = "npm i -D @types/node";
+    const cmd = "npm add -D @types/node";
     manager.installNodeTypes();
     expect(child_process.execSync).toHaveBeenCalledTimes(1);
     expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
@@ -169,9 +221,22 @@ describe("PackageManager", () => {
       stdio: "ignore",
     });
   });
+
   it("should call installNodeTypes with yarn", async () => {
     const cmd = "yarn add -D @types/node";
     config.manager = "yarn";
+    manager.initialize(config, fakePath);
+    manager.installNodeTypes();
+    expect(child_process.execSync).toHaveBeenCalledTimes(1);
+    expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
+      cwd: fakePath,
+      stdio: "ignore",
+    });
+  });
+
+  it("should call installNodeTypes with pnpm", async () => {
+    const cmd = "pnpm add  -D @types/node";
+    config.manager = "pnpm";
     manager.initialize(config, fakePath);
     manager.installNodeTypes();
     expect(child_process.execSync).toHaveBeenCalledTimes(1);

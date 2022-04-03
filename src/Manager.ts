@@ -10,14 +10,17 @@ export class PackageManager implements Initializer {
   async initialize(config: SlappeyConfig, filePath: string): Promise<void> {
     this.config = config;
     this.filePath = filePath;
-    this.prefix = this.config.manager === 'npm' ? 'npm i' : 'yarn add';
+    this.prefix = `${this.config.manager} add`;
   }
 
   async setup() {
     if (!this.config) throw new Error('Config Not Initialized.');
-    return this.config.manager === 'npm'
-      ? this.initializeNPM()
-      : this.initializeYarn();
+    const initialize = {
+      npm: this.initializeNPM(),
+      yarn: this.initializeYarn(),
+      pnpm: this.initializePNPM(),
+    }
+    return initialize[this.config.manager];
   }
 
   public initializeNPM() {
@@ -30,9 +33,14 @@ export class PackageManager implements Initializer {
     return this.installDependencies();
   }
 
+  public initializePNPM() {
+    execSync(`${this.config?.manager} init -y`, { cwd: this.filePath });
+    return this.installDependencies();
+  }
+
   public createTsconfig() {
     return execSync(
-      `${this.config?.manager} run tsc --init --resolveJsonModule --target es6`,
+      `${this.config?.manager === 'npm' ? 'npx' : this.config?.manager} tsc --init --resolveJsonModule --target es6`,
       { cwd: this.filePath }
     );
   }
