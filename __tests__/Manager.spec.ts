@@ -109,7 +109,7 @@ describe("PackageManager", () => {
   });
 
   it("should call installTypescript with npm", async () => {
-    const cmd = "npm i -D typescript";
+    const cmd = "npm add -D typescript";
     config.manager = "npm";
     manager.initialize(config, fakePath);
     manager.installTypescript();
@@ -121,7 +121,7 @@ describe("PackageManager", () => {
   });
 
   it("should call installDiscordJS with npm", async () => {
-    const cmd = "npm i discord.js@latest";
+    const cmd = "npm add discord.js@latest";
     manager.installDiscordJS();
     expect(child_process.execSync).toHaveBeenCalledTimes(1);
     expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
@@ -150,7 +150,7 @@ describe("PackageManager", () => {
     });
   });
   it("should call installNodemon with npm", async () => {
-    const cmd = "npm i -D nodemon";
+    const cmd = "npm add -D nodemon";
     config.manager = "npm";
     manager.initialize(config, fakePath);
     manager.installNodemon();
@@ -161,7 +161,7 @@ describe("PackageManager", () => {
     });
   });
   it("should call installNodeTypes with npm", async () => {
-    const cmd = "npm i -D @types/node";
+    const cmd = "npm add -D @types/node";
     manager.installNodeTypes();
     expect(child_process.execSync).toHaveBeenCalledTimes(1);
     expect(child_process.execSync).toHaveBeenCalledWith(cmd, {
