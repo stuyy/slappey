@@ -6,10 +6,10 @@ export function getEnvTemplate(token: string, prefix: string) {
 
 export function getMainFile() {
   return `
-const { Client, Intents } = require('discord.js');
+const { Client, IntentsBitField } = require('discord.js');
 const { registerCommands, registerEvents } = require('./utils/registry');
 const config = require('../slappey.json');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
+const client = new Client({ intents: [Intents.Flags.Guilds, Intents.Flags.GuildMessages ] });
 
 (async () => {
   client.commands = new Map();
@@ -27,8 +27,8 @@ export function getMainFileTS() {
 import { registerCommands, registerEvents } from './utils/registry';
 import config from '../slappey.json';
 import DiscordClient from './client/client';
-import { Intents } from 'discord.js';
-const client = new DiscordClient({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
+import { IntentsBitField } from 'discord.js';
+const client = new DiscordClient({ intents: [Intents.Flags.Guilds, Intents.Flags.GuildMessages ] });
 
 (async () => {
   client.prefix = config.prefix || client.prefix;
