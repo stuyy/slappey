@@ -6,12 +6,12 @@ export function getEnvTemplate(token: string, prefix: string) {
 
 export function getMainFile() {
   return `
-  const { Client } = require('discord.js');
+  const { Client, Intents } = require('discord.js');
   const mongoose = require("mongoose")
   const { registerCommands, registerEvents } = require('./utils/registry');
   const config = require('../slappey.json');
   const client = new Client({
-    intents: 32767,
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ],
     partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
     restTimeOffset: 0,
   });
@@ -38,7 +38,8 @@ export function getMainFileTS() {
 import { registerCommands, registerEvents } from './utils/registry';
 import config from '../slappey.json';
 import DiscordClient from './client/client';
-const client = new DiscordClient({});
+import { Intents } from "discord.js";
+const client = new DiscordClient({ [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
 
 (async () => {
   client.prefix = config.prefix || client.prefix;
