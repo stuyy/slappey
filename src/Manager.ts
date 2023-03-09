@@ -1,5 +1,5 @@
-import { execSync } from "child_process";
-import { Initializer, SlappeyConfig } from "./utils/index";
+import { execSync } from 'child_process';
+import { Initializer, SlappeyConfig } from './utils/index';
 
 export class PackageManager implements Initializer {
   private static instance: PackageManager;
@@ -10,12 +10,12 @@ export class PackageManager implements Initializer {
   async initialize(config: SlappeyConfig, filePath: string): Promise<void> {
     this.config = config;
     this.filePath = filePath;
-    this.prefix = this.config.manager === "npm" ? "npm i" : "yarn add";
+    this.prefix = this.config.manager === 'npm' ? 'npm i' : 'yarn add';
   }
 
   async setup() {
-    if (!this.config) throw new Error("Config Not Initialized.");
-    return this.config.manager === "npm"
+    if (!this.config) throw new Error('Config Not Initialized.');
+    return this.config.manager === 'npm'
       ? this.initializeNPM()
       : this.initializeYarn();
   }
@@ -30,12 +30,20 @@ export class PackageManager implements Initializer {
     return this.installDependencies();
   }
 
+  public createTsconfig() {
+    return execSync(
+      `${this.config?.manager} run tsc --init --resolveJsonModule --target es6`,
+      { cwd: this.filePath }
+    );
+  }
+
   public installDependencies() {
     this.installDiscordJS();
     this.installMongoose();
     this.installNodemon();
-    if (this.config?.language === "typescript") {
+    if (this.config?.language === 'typescript') {
       this.installTypes();
+      return this.createTsconfig();
     }
   }
 
@@ -47,21 +55,21 @@ export class PackageManager implements Initializer {
   public installTypescript() {
     return execSync(`${this.prefix} -D typescript`, {
       cwd: this.filePath,
-      stdio: "ignore",
+      stdio: 'ignore',
     });
   }
 
   public installNodeTypes() {
     return execSync(`${this.prefix} -D @types/node`, {
       cwd: this.filePath,
-      stdio: "ignore",
+      stdio: 'ignore',
     });
   }
 
   public installDiscordJS() {
     return execSync(`${this.prefix} discord.js@latest`, {
       cwd: this.filePath,
-      stdio: "ignore",
+      stdio: 'ignore',
     });
   }
   public installMongoose() {
@@ -74,7 +82,7 @@ export class PackageManager implements Initializer {
   public installNodemon() {
     return execSync(`${this.prefix} -D nodemon`, {
       cwd: this.filePath,
-      stdio: "ignore",
+      stdio: 'ignore',
     });
   }
 

@@ -4,10 +4,10 @@ import {
   checkStructType,
   CLIArguments,
   StructureType,
-} from "./utils/index";
-import { checkOptionType } from "./utils";
-import { Scaffolder } from "./Scaffolder";
-import { Prompter } from "./Prompter";
+} from './utils/index';
+import { checkOptionType } from './utils';
+import { Scaffolder } from './Scaffolder';
+import { Prompter } from './Prompter';
 
 export async function main(scaffolder: Scaffolder, prompter: Prompter) {
   const args = process.argv.slice(2);
@@ -24,13 +24,13 @@ export function handleChoice(
   data: string
 ) {
   if (checkOptionType(action)) {
-    if (action === "new") return scaffolder.createProject(data);
+    if (action === 'new') return scaffolder.createProject(data);
     if (checkStructType(data)) {
       const structure = <StructureType>data;
       return scaffolder.createStructure(structure);
     }
-    throw new Error("Invalid Structure");
-  } else throw new Error("Invalid Action");
+    throw new Error('Invalid Structure');
+  } else throw new Error('Invalid Action');
 }
 
 main(new Scaffolder(), new Prompter());

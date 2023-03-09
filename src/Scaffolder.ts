@@ -1,19 +1,20 @@
-import path from "path";
-import { PackageManager } from "./Manager";
-import { Prompter } from "./Prompter";
-import { TemplateGenerator } from "./TemplateGenerator";
-import { StructureType } from "./utils";
-import { ProjectScaffolder } from "./utils/interfaces";
-import { FileSystem } from "./FileSystem";
+import path from 'path';
+import { PackageManager } from './Manager';
+import { Prompter } from './Prompter';
+import { TemplateGenerator } from './TemplateGenerator';
+import { StructureType } from './utils';
+import { ProjectScaffolder } from './utils/interfaces';
+import { FileSys } from './FileSys';
 
 export class Scaffolder implements ProjectScaffolder {
   private prompter: Prompter = Prompter.getPrompter();
 
-  private fileSystem: FileSystem = FileSystem.getFileSystem();
+  private fileSystem: FileSys = FileSys.getFileSystem();
 
   private manager: PackageManager = PackageManager.getPackageManager();
 
-  private generator: TemplateGenerator = TemplateGenerator.getTemplateGenerator();
+  private generator: TemplateGenerator =
+    TemplateGenerator.getTemplateGenerator();
 
   async createProject(name: string): Promise<void> {
     const language = await this.prompter.language();
@@ -37,9 +38,9 @@ export class Scaffolder implements ProjectScaffolder {
 
   async createStructure(structure: StructureType) {
     const dir = this.fileSystem.getCurrentDir();
-    const file = path.join(dir, "slappey.json");
+    const file = path.join(dir, 'slappey.json');
     await this.fileSystem.findFile(file);
-    return structure === "command"
+    return structure === 'command'
       ? this.createCommand(file)
       : this.createEvent(file);
   }
@@ -47,7 +48,7 @@ export class Scaffolder implements ProjectScaffolder {
   async createCommand(file: string): Promise<void> {
     const dir = this.fileSystem.getCurrentDir();
     const { name, category } = await this.prompter.command();
-    const categoryDir = path.join(dir, "src", "commands", category);
+    const categoryDir = path.join(dir, 'src', 'commands', category);
     const { language } = await this.fileSystem.getFileToJson(file);
     await this.generator.initialize(language);
     const exists = await this.fileSystem.exists(categoryDir);
@@ -64,7 +65,7 @@ export class Scaffolder implements ProjectScaffolder {
   async createEvent(slappeyFile: string): Promise<void> {
     const dir = this.fileSystem.getCurrentDir();
     const events = await this.prompter.event();
-    const eventsDir = path.join(dir, "src", "events");
+    const eventsDir = path.join(dir, 'src', 'events');
     const { language } = await this.fileSystem.getFileToJson(slappeyFile);
     await this.generator.initialize(language);
     const exists = await this.fileSystem.exists(eventsDir);
@@ -76,7 +77,7 @@ export class Scaffolder implements ProjectScaffolder {
     return this.prompter;
   }
 
-  public getFileSystem(): FileSystem {
+  public getFileSystem(): FileSys {
     return this.fileSystem;
   }
 

@@ -1,4 +1,46 @@
 const eventTemplatesTS = {
+  applicationCommandCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandCreate
+import { ApplicationCommand } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ApplicationCommandCreateEvent extends BaseEvent {
+  constructor() {
+    super('applicationCommandCreate');
+  }
+  
+  async run(client: DiscordClient, command: ApplicationCommand) {
+    
+  }
+}`,
+  applicationCommandDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandDelete
+import { ApplicationCommand } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ApplicationCommandDeleteEvent extends BaseEvent {
+  constructor() {
+    super('applicationCommandDelete');
+  }
+  
+  async run(client: DiscordClient, command: ApplicationCommand) {
+    
+  }
+}`,
+  applicationCommandUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-applicationCommandUpdate
+import { ApplicationCommand } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ApplicationCommandUpdateEvent extends BaseEvent {
+  constructor() {
+    super('applicationCommandUpdate');
+  }
+  
+  async run(client: DiscordClient, oldCommand: ApplicationCommand, newCommand: ApplicationCommand) {
+    
+  }
+}`,
   channelCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-channelCreate
 import { DMChannel, GuildChannel } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
@@ -127,7 +169,7 @@ export default class ErrorEvent extends BaseEvent {
 }
 `,
   guildBanAdd: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanAdd
-import { Guild, User } from 'discord.js';
+import { GuildBan } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
@@ -136,12 +178,12 @@ export default class GuildBanAddEvent extends BaseEvent {
     super('guildBanAdd');
   }
   
-  async run(client: DiscordClient, guild: Guild, user: User) {
+  async run(client: DiscordClient, ban: GuildBan) {
     
   }
 }`,
   guildBanRemove: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildBanRemove
-import { Guild, User } from 'discord.js';
+import { GuildBan } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
@@ -150,10 +192,25 @@ export default class GuildBanRemoveEvent extends BaseEvent {
     super('guildBanRemove');
   }
   
-  async run(client: DiscordClient, guild: Guild, user: User) {
+  async run(client: DiscordClient, ban: GuildBan) {
     
   }
 }`,
+  guildMemberAvailable: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberAvailable
+import { GuildMember } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class GuildMemberAvailableEvent extends BaseEvent {
+  constructor() {
+    super('guildMemberAvailable');
+  }
+  
+  async run(client: DiscordClient, member: GuildMember) {
+    
+  }
+}
+  `,
   guildCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildCreate
 import { Guild } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
@@ -225,7 +282,7 @@ export default class GuildMemberRemoveEvent extends BaseEvent {
   }
 }`,
   guildMembersChunk: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMembersChunk
-import { Snowflake, GuildMember, Guild } from 'discord.js';
+import { Snowflake, GuildMember, Guild, GuildMembersChunk, Collection } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
@@ -234,21 +291,7 @@ export default class GuildMembersChunkEvent extends BaseEvent {
     super('guildMembersChunk');
   }
   
-  async run(client: DiscordClient, members: Collection<Snowflake, GuildMember>, guild: Guild) {
-    
-  }
-}`,
-  guildMemberSpeaking: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildMemberSpeaking
-import { GuildMember, Speaking } from 'discord.js';
-import BaseEvent from '../utils/structures/BaseEvent';
-import DiscordClient from '../client/client';
-
-export default class GuildMemberSpeakingEvent extends BaseEvent {
-  constructor() {
-    super('guildMemberSpeaking');
-  }
-  
-  async run(client: DiscordClient, member: GuildMember, speaking: Readonly<Speaking>) {
+  async run(client: DiscordClient, members: Collection<Snowflake, GuildMember>, guild: Guild, chunk: GuildMembersChunk) {
     
   }
 }`,
@@ -294,6 +337,20 @@ export default class GuildUpdateEvent extends BaseEvent {
     
   }
 }`,
+  interactionCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-interactionCreate
+import { Interaction } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class InteractionCreateEvent extends BaseEvent {
+  constructor() {
+    super('interactionCreate');
+  }
+  
+  async run(client: DiscordClient, interaction: Interaction) {
+    
+  }
+}`,
   invalidated: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidated
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
@@ -304,6 +361,20 @@ export default class InvalidatedEvent extends BaseEvent {
   }
   
   async run(client: DiscordClient) {
+    
+  }
+}`,
+  invalidatedRequestWarning: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-invalidatedRequestWarning
+import { InvalidRequestWarningData } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class InvalidatedRequestWarningEvent extends BaseEvent {
+  constructor() {
+    super('invalidatedRequestWarning');
+  }
+  
+  async run(client: DiscordClient, invalidatedRequestWarningData: InvalidRequestWarningData) {
     
   }
 }`,
@@ -347,14 +418,14 @@ export default class ReadyEvent extends BaseEvent {
     console.log(client: DiscordClient.user.tag + ' has logged in.');
   }
 }`,
-  message: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-message
+  messageCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageCreate
 import { Message } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
-export default class MessageEvent extends BaseEvent {
+export default class CreateMessageEvent extends BaseEvent {
   constructor() {
-    super('message');
+    super('messageCreate');
   }
   
   async run(client: DiscordClient, message: Message) {
@@ -450,7 +521,7 @@ import { Message } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
-export default class MessageUodateEvent extends BaseEvent {
+export default class MessageUpdateEvent extends BaseEvent {
   constructor() {
     super('messageUpdate');
   }
@@ -601,8 +672,176 @@ export default class ShardResumeEvent extends BaseEvent {
     
   }
 }`,
+  stageInstanceCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stageInstanceCreate
+import { StageInstance } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class StageInstanceCreateEvent extends BaseEvent {
+  constructor() {
+    super('stageInstanceCreate');
+  }
+  
+  async run(client: DiscordClient, stageInstance: StageInstance) {
+    
+  }
+}`,
+  stageInstanceDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stageInstanceDelete
+import { StageInstance } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class StageInstanceDeleteEvent extends BaseEvent {
+  constructor() {
+    super('stageInstanceDelete');
+  }
+  
+  async run(client: DiscordClient, stageInstance: StageInstance) {
+    
+  }
+}`,
+  stageInstanceUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stageInstanceUpdate
+import { StageInstance } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class StageInstanceUpdateEvent extends BaseEvent {
+  constructor() {
+    super('stageInstanceUpdate');
+  }
+  
+  async run(client: DiscordClient, oldStageInstance: StageInstance, newStageInstance: StageInstance) {
+    
+  }
+}`,
+  stickerCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stickerCreate
+import { Sticker } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class StickerCreateEvent extends BaseEvent {
+  constructor() {
+    super('stickerCreate');
+  }
+  
+  async run(client: DiscordClient, sticker: Sticker) {
+    
+  }
+}`,
+  stickerDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stickerDelete
+import { Sticker } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class StickerDeleteEvent extends BaseEvent {
+  constructor() {
+    super('stickerDelete');
+  }
+  
+  async run(client: DiscordClient, sticker: Sticker) {
+    
+  }
+}`,
+  stickerUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-stickerUpdate
+import { Sticker } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class StickerUpdateEvent extends BaseEvent {
+  constructor() {
+    super('stickerUpdate');
+  }
+  
+  async run(client: DiscordClient, oldSticker: Sticker, newSticker: Sticker) {
+    
+  }
+}`,
+  threadCreate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadCreate
+import { ThreadChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ThreadCreateEvent extends BaseEvent {
+  constructor() {
+    super('threadCreate');
+  }
+  
+  async run(client: DiscordClient, thread: ThreadChannel) {
+    
+  }
+}`,
+  threadDelete: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadDelete
+import { ThreadChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ThreadDeleteEvent extends BaseEvent {
+  constructor() {
+    super('threadDelete');
+  }
+  
+  async run(client: DiscordClient, thread: ThreadChannel) {
+    
+  }
+}`,
+  threadListSync: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadListSync
+import { Collection, Snowflake, ThreadChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ThreadListSyncEvent extends BaseEvent {
+  constructor() {
+    super('threadListSync');
+  }
+  
+  async run(client: DiscordClient, threads: Collection<Snowflake, ThreadChannel>) {
+    
+  }
+}`,
+  threadMembersUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadMembersUpdate
+import { Collection, Snowflake, ThreadMember } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ThreadMembersUpdateEvent extends BaseEvent {
+  constructor() {
+    super('threadMembersUpdate');
+  }
+  
+  async run(client: DiscordClient, oldMembers: Collection<Snowflake, ThreadMember>, newMembers: Collection<Snowflake, ThreadMember>) {
+    
+  }
+}`,
+  threadMemberUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadMemberUpdate
+import { ThreadMember } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ThreadMemberUpdateEvent extends BaseEvent {
+  constructor() {
+    super('threadMemberUpdate');
+  }
+  
+  async run(client: DiscordClient, oldMember: ThreadMember, newMember: ThreadMember) {
+    
+  }
+}`,
+  threadUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-threadUpdate
+import { ThreadChannel } from 'discord.js';
+import BaseEvent from '../utils/structures/BaseEvent';
+import DiscordClient from '../client/client';
+
+export default class ThreadUpdateEvent extends BaseEvent {
+  constructor() {
+    super('threadUpdate');
+  }
+  
+  async run(client: DiscordClient, oldThread: ThreadChannel, newThread: ThreadChannel) {
+    
+  }
+}`,
   typingStart: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-typingStart
-import { Channel, User } from 'discord.js';
+import { Typing } from 'discord.js';
 import BaseEvent from '../utils/structures/BaseEvent';
 import DiscordClient from '../client/client';
 
@@ -611,7 +850,7 @@ export default class TypingStartEvent extends BaseEvent {
     super('typingStart');
   }
   
-  async run(client: DiscordClient, channel: Channel, user: User) {
+  async run(client: DiscordClient, typing: Typing) {
     
   }
 }`,
