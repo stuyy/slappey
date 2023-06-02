@@ -1,4 +1,4 @@
-import { capitalize } from '../utils';
+import { capitalize } from "../utils";
 
 export function getEnvTemplate(token: string, prefix: string) {
   return `DISCORD_BOT_TOKEN=${token}\nDISCORD_BOT_PREFIX=${prefix}`;
@@ -6,19 +6,32 @@ export function getEnvTemplate(token: string, prefix: string) {
 
 export function getMainFile() {
   return `
-const { Client, Intents } = require('discord.js');
-const { registerCommands, registerEvents } = require('./utils/registry');
-const config = require('../slappey.json');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
+  const { Client, GatewayIntentBits, Partials } = require('discord.js');
+  const { Guilds, GuildMessages, MessageContent, GuildMembers } = GatewayIntentBits;
+  const { User, Message, Reaction } = Partials
+  const mongoose = require("mongoose")
+  const { registerCommands, registerEvents } = require('./utils/registry');
+  const config = require('../slappey.json');
+  const client = new Client({
+    intents: [ Guilds, GuildMessages, MessageContent, GuildMembers ],
+    partials: [ User, Message, Reaction ],
+    restTimeOffset: 0,
+  });
 
-(async () => {
-  client.commands = new Map();
-  client.events = new Map();
-  client.prefix = config.prefix;
-  await registerCommands(client, '../commands');
-  await registerEvents(client, '../events');
-  await client.login(config.token);
-})();\n
+  mongoose.connect(\`mongodb://localhost:27017/\${config.name}\`,
+    console.log(
+      "MongoDB Connected"
+    )
+  );
+
+  (async () => {
+    client.commands = new Map();
+    client.events = new Map();
+    client.prefix = config.prefix;
+    await registerCommands(client, '../commands');
+    await registerEvents(client, '../events');
+    await client.login(config.token);
+  })();\n
 `;
 }
 
@@ -27,8 +40,8 @@ export function getMainFileTS() {
 import { registerCommands, registerEvents } from './utils/registry';
 import config from '../slappey.json';
 import DiscordClient from './client/client';
-import { Intents } from 'discord.js';
-const client = new DiscordClient({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
+import { Intents } from "discord.js";
+const client = new DiscordClient({ [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ] });
 
 (async () => {
   client.prefix = config.prefix || client.prefix;
@@ -155,12 +168,30 @@ module.exports = {
 
 export function getBaseCommand() {
   return `module.exports = class BaseCommand {
-  constructor(name, category, aliases) {
-    this.name = name;
-    this.category = category;
-    this.aliases = aliases;
-  }
-}`;
+    constructor({
+      name,
+      category,
+      aliases,
+      description,
+      usage,
+      examples,
+      permissions,
+      guildOnly,
+      devOnly,
+      cooldown,
+    }) {
+      this.name = name;
+      this.category = category;
+      this.aliases = aliases || [];
+      this.description = description || "";
+      this.usage = usage || [];
+      this.examples = examples || [];
+      this.permissions = permissions || [];
+      this.guildOnly = guildOnly || true;
+      this.devOnly = devOnly || false;
+      this.cooldown = cooldown || 0;
+    }
+  }`;
 }
 
 export function getBaseCommandTS() {
@@ -203,13 +234,17 @@ export default abstract class BaseEvent {
 export function getReadyEvent() {
   return `const BaseEvent = require('../../utils/structures/BaseEvent');
 
-module.exports = class ReadyEvent extends BaseEvent {
-  constructor() {
-    super('ready');
-  }
-  async run (client) {
-    console.log(client.user.tag + ' has logged in.');
-  }
+  module.exports = class ReadyEvent extends BaseEvent {
+    constructor() {
+      super('ready');
+    }
+    async run (client) {
+      await client.user.setPresence({
+        activity: { name: "Loading...", type: "PLAYING" },
+        status: "dnd",
+      });
+      return console.log(client.user.tag + " has logged in.");
+    }
 }`;
 }
 
@@ -228,26 +263,77 @@ export default class ReadyEvent extends BaseEvent {
 }
 
 export function getMessageEvent() {
-  return `const BaseEvent = require('../../utils/structures/BaseEvent');
-
-module.exports = class MessageEvent extends BaseEvent {
-  constructor() {
-    super('message');
-  }
+  return `const BaseEvent = require("../../utils/structures/BaseEvent");
+  const cooldowns = new Map();
+  const { Collection } = require("discord.js");
   
-  async run(client, message) {
-    if (message.author.bot) return;
-    if (message.content.startsWith(client.prefix)) {
-      const [cmdName, ...cmdArgs] = message.content
-      .slice(client.prefix.length)
-      .trim()
-      .split(/\\s+/);
-      const command = client.commands.get(cmdName);
-      if (command) {
-        command.run(client, message, cmdArgs);
+  module.exports = class MessageEvent extends BaseEvent {
+    constructor() {
+      super("messageCreate");
+    }
+  
+    async run(client, message) {
+      if (message.author.bot) return;
+      if (message.content.startsWith(client.prefix)) {
+        const [cmdName, ...cmdArgs] = message.content
+          .slice(client.prefix.length)
+          .trim()
+          .split(/\\s+/);
+        const command = client.commands.get(cmdName);
+  
+        if (command) {
+          
+            
+          if (command.guildOnly && message.channel.type === "DM") {
+            return;
+          }
+  
+          if (!message.member.permissions.has(command.permissions)) {
+            return;
+          }
+  
+          if (
+            !message.guild.members.cache
+              .get(client.user.id)
+              .permissions.has(command.permissions || "SEND_MESSAGES")
+          ) {
+            return;
+          }
+  
+          if (
+            !message.guild.members.cache
+              .get(client.user.id)
+              .permissions.has(command.permissions)
+          ) {
+            return message.channel.send(\`I couldn't. Please check my permissions.\`);
+          }
+  
+          const current_time = Date.now();
+          const time_stamps = cooldowns.get(command.name);
+          const cooldown_amount = command.cooldown * 1000;
+  
+          if (time_stamps.has(message.author.id)) {
+            const expiration_time =
+              time_stamps.get(message.author.id) + cooldown_amount;
+  
+            if (current_time < expiration_time) {
+              const time_left = (expiration_time - current_time) / 1000;
+  
+              return message.channel.send(
+                \`Cooldown (\${time_left.toFixed(0)}) Seconds\`
+              );
+            }
+          }
+  
+          time_stamps.set(message.author.id, current_time);
+          setTimeout(() => {
+            time_stamps.delete(message.author.id);
+          }, cooldown_amount);
+  
+          command.run(client, message, cmdArgs);
+        }
       }
     }
-  }
 }`;
 }
 
@@ -280,14 +366,24 @@ export default class MessageEvent extends BaseEvent {
 export function getTestCommand() {
   return `const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class TestCommand extends BaseCommand {
-  constructor() {
-    super('test', 'testing', []);
-  }
-
-  async run(client, message, args) {
-    message.channel.send('Test command works');
-  }
+  module.exports = class TestCommand extends BaseCommand {
+    constructor() {
+      super({
+        name: 'test',
+        category: 'testing', 
+        aliases: [], 
+        description: "",
+        usage: [],
+        examples: [],
+        permissions: [],
+        guildOnly: true,
+        cooldown: 0,
+      });
+    }
+  
+    async run(client, message, args) {
+      message.channel.send('Test command works');
+    }
 }`;
 }
 
@@ -310,14 +406,24 @@ export default class TestCommand extends BaseCommand {
 export function getCommandTemplate(name: string, category: string) {
   return `const BaseCommand = require('../../utils/structures/BaseCommand');
 
-module.exports = class ${capitalize(name)}Command extends BaseCommand {
-  constructor() {
-    super('${name}', '${category}', []);
-  }
-
-  run(client, message, args) {
-    message.channel.send('${name} command works');
-  }
+  module.exports = class ${capitalize(name)}Command extends BaseCommand {
+    constructor() {
+      super({
+        name: '${name}',
+        category: '${category}', 
+        aliases: [], 
+        description: "",
+        usage: [],
+        examples: [],
+        permissions: [],
+        guildOnly: true,
+        cooldown: 15,  
+    });
+    }
+  
+   async run(client, message, args) {
+      message.channel.send('${name} command works');
+    }
 }`;
 }
 

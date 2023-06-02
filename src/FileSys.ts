@@ -1,13 +1,13 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from "fs";
+import path from "path";
 import {
   Initializer,
   Language,
   SlappeyConfig,
   FileSystemManager,
   getPackageScripts,
-} from './utils/index';
-import { getMainFile, getMainFileTS } from './templates/templates';
+} from "./utils/index";
+import { getMainFile, getMainFileTS } from "./templates/templates";
 
 export class FileSys implements FileSystemManager, Initializer {
   private static instance: FileSys;
@@ -25,7 +25,7 @@ export class FileSys implements FileSystemManager, Initializer {
 
   createConfig(config: SlappeyConfig): Promise<void> {
     return fs.writeFile(
-      path.join(this.CURRENT_DIR, config.name, 'slappey.json'),
+      path.join(this.CURRENT_DIR, config.name, "slappey.json"),
       JSON.stringify(config, null, 2)
     );
   }
@@ -37,14 +37,14 @@ export class FileSys implements FileSystemManager, Initializer {
   }
 
   async createSourceDirectory(name: string): Promise<string> {
-    const filePath = path.join(this.CURRENT_DIR, name, 'src');
+    const filePath = path.join(this.CURRENT_DIR, name, "src");
     await fs.mkdir(filePath);
     return filePath;
   }
 
   async createEntryFile(filePath: string) {
-    const extension = this.language === 'javascript' ? 'js' : 'ts';
-    const template = extension === 'js' ? getMainFile() : getMainFileTS();
+    const extension = this.language === "javascript" ? "js" : "ts";
+    const template = extension === "js" ? getMainFile() : getMainFileTS();
     return fs.writeFile(path.join(filePath, `index.${extension}`), template);
   }
 
@@ -67,7 +67,7 @@ export class FileSys implements FileSystemManager, Initializer {
   }
 
   async getFileToJson(filePath: string): Promise<SlappeyConfig> {
-    const text = await fs.readFile(filePath, 'utf8');
+    const text = await fs.readFile(filePath, "utf8");
     const json = JSON.parse(text);
     return json;
   }
@@ -78,9 +78,9 @@ export class FileSys implements FileSystemManager, Initializer {
 
   async updatePackageJson(basePath: string) {
     if (!this.config || !this.language)
-      throw new Error('Config not initialized.');
-    const packageJson = path.join(basePath, 'package.json');
-    const encoding = 'utf8';
+      throw new Error("Config not initialized.");
+    const packageJson = path.join(basePath, "package.json");
+    const encoding = "utf8";
     const buffer = await fs.readFile(packageJson, encoding);
     const json = JSON.parse(buffer);
     json.scripts = getPackageScripts(this.language);

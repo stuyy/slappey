@@ -704,7 +704,7 @@ module.exports = class UserUpdateEvent extends BaseEvent {
 }`,
   voiceStateUpdate: `// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-voiceStateUpdate
 const BaseEvent = require('../utils/structures/BaseEvent');
-module.exports = class WoiceStateUpdateEvent extends BaseEvent {
+module.exports = class VoiceStateUpdateEvent extends BaseEvent {
   constructor() {
     super('voiceStateUpdate');
   }

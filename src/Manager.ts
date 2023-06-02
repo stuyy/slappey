@@ -39,6 +39,7 @@ export class PackageManager implements Initializer {
 
   public installDependencies() {
     this.installDiscordJS();
+    this.installMongoose();
     this.installNodemon();
     if (this.config?.language === 'typescript') {
       this.installTypes();
@@ -69,6 +70,12 @@ export class PackageManager implements Initializer {
     return execSync(`${this.prefix} discord.js@latest`, {
       cwd: this.filePath,
       stdio: 'ignore',
+    });
+  }
+  public installMongoose() {
+    return execSync(`${this.prefix} mongoose@latest`, {
+      cwd: this.filePath,
+      stdio: "ignore",
     });
   }
 
