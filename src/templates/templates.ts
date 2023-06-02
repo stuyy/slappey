@@ -6,13 +6,15 @@ export function getEnvTemplate(token: string, prefix: string) {
 
 export function getMainFile() {
   return `
-  const { Client, Intents } = require('discord.js');
+  const { Client, GatewayIntentBits, Partials } = require('discord.js');
+  const { Guilds, GuildMessages, MessageContent, GuildMembers } = GatewayIntentBits;
+  const { User, Message, Reaction } = Partials
   const mongoose = require("mongoose")
   const { registerCommands, registerEvents } = require('./utils/registry');
   const config = require('../slappey.json');
   const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES ],
-    partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
+    intents: [ Guilds, GuildMessages, MessageContent, GuildMembers ],
+    partials: [ User, Message, Reaction ],
     restTimeOffset: 0,
   });
 
